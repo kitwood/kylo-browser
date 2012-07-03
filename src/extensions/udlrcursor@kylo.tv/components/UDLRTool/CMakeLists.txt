@@ -1,9 +1,9 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
-# You can obtain one at http://mozilla.org/MPL/2.0/. 
-# 
-# Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-# Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+# Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
 # trademarks of Hillcrest Laboratories, Inc.
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
@@ -18,7 +18,7 @@ FILE(TO_NATIVE_PATH ${XULRUNNER_SDK_PATH}/sdk/bin/header.py HEADER_PY)
 FILE(TO_NATIVE_PATH ${XULRUNNER_SDK_PATH}/sdk/bin/typelib.py TYPELIB_PY)
 
 FILE(TO_NATIVE_PATH ${XULRUNNER_SDK_PATH}/idl IDL_INCLUDE_PATH)
-FILE(TO_NATIVE_PATH ${XULRUNNER_SDK_PATH}/include XULRUNNER_SDK_INCLUDE) 
+FILE(TO_NATIVE_PATH ${XULRUNNER_SDK_PATH}/include XULRUNNER_SDK_INCLUDE)
 FILE(TO_NATIVE_PATH ${CMAKE_SOURCE_DIR} UDLRTOOL_SRC_NATIVE)
 
 INCLUDE_DIRECTORIES(
@@ -33,28 +33,28 @@ MATH(EXPR MAJOR_VER_NUM ${MAJOR_VER})
 IF(MAJOR_VER_NUM EQUAL 9 OR MAJOR_VER_NUM GREATER 9)
     ADD_CUSTOM_COMMAND(
         OUTPUT ${CMAKE_SOURCE_DIR}/IUDLRTool.h ${CMAKE_SOURCE_DIR}/IUDLRTool.xpt
-        
+
         COMMAND ${HEADER_PY} -I \"${IDL_INCLUDE_PATH}\" --cachedir=${BUILD_DIR}/pyxpidl_cache -o IUDLRTool.h IUDLRTool.idl
         COMMAND ${TYPELIB_PY} -I \"${IDL_INCLUDE_PATH}\" --cachedir=${BUILD_DIR}/pyxpidl_cache -o IUDLRTool.xpt IUDLRTool.idl
-    
+
         WORKING_DIRECTORY ${UDLRTOOL_SRC_NATIVE}
     )
 ELSE()
     ADD_CUSTOM_COMMAND(
         OUTPUT ${CMAKE_SOURCE_DIR}/IUDLRTool.h ${CMAKE_SOURCE_DIR}/IUDLRTool.xpt
-        
+
         COMMAND ${XPIDL} -m header -I \"${IDL_INCLUDE_PATH}\" -e IUDLRTool.h IUDLRTool.idl
         COMMAND ${XPIDL} -m typelib -I \"${IDL_INCLUDE_PATH}\" -e IUDLRTool.xpt IUDLRTool.idl
-    
+
         WORKING_DIRECTORY ${UDLRTOOL_SRC_NATIVE}
-    ) 
+    )
 ENDIF()
 
 ADD_LIBRARY(UDLRTool SHARED
     ${CMAKE_SOURCE_DIR}/IUDLRTool.h
     ${CMAKE_SOURCE_DIR}/UDLRTool.h
     ${CMAKE_SOURCE_DIR}/UDLRTool-module.cpp
-    ${CMAKE_SOURCE_DIR}/UDLRTool-win32.cpp 
+    ${CMAKE_SOURCE_DIR}/UDLRTool-win32.cpp
 )
 
 ADD_DEFINITIONS(-DWIN32 -D_WINDOWS -D_USRDLL -DXP_WIN -DXP_WIN32 -DUNICODE -D_UNICODE)
@@ -64,7 +64,7 @@ IF(MAJOR_VER_NUM LESS 10)
     ADD_DEFINITIONS(-DXPCOM_USE_PRBOOL)
 ENDIF()
 
-TARGET_LINK_LIBRARIES(UDLRTool 
+TARGET_LINK_LIBRARIES(UDLRTool
     ${XULRUNNER_SDK_PATH}/lib/xpcomglue_s.lib
     ${XULRUNNER_SDK_PATH}/lib/xpcom.lib
     ${XULRUNNER_SDK_PATH}/lib/nspr4.lib

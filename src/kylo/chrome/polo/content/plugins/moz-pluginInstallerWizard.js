@@ -43,7 +43,7 @@ function nsPluginInstallerWizard(){
   this.mPluginRequestArrayLength = 0;
 
   // create the plugin info array.
-  // a hash indexed by plugin id so we don't install 
+  // a hash indexed by plugin id so we don't install
   // the same plugin more than once.
   this.mPluginInfoArray = new Object();
   this.mPluginInfoArrayLength = 0;
@@ -64,7 +64,7 @@ function nsPluginInstallerWizard(){
 
   // arguments[0] is an array that contains two items:
   //     an array of mimetypes that are missing
-  //     a reference to the browser that needs them, 
+  //     a reference to the browser that needs them,
   //        so we can notify which browser can be reloaded.
 
   if ("arguments" in window) {
@@ -271,12 +271,12 @@ nsPluginInstallerWizard.prototype.showLicense = function (){
   var loadFlags = Components.interfaces.nsIWebNavigation.LOAD_FLAGS_NONE;
   document.getElementById("licenseIFrame").webNavigation.loadURI(pluginInfo.licenseURL, loadFlags, null, null, null);
 
-  document.getElementById("pluginLicenseLabel").firstChild.nodeValue = 
+  document.getElementById("pluginLicenseLabel").firstChild.nodeValue =
     this.getFormattedString("pluginLicenseAgreement.label", [pluginInfo.name]);
 
   document.getElementById("licenseRadioGroup1").disabled = true;
   document.getElementById("licenseRadioGroup2").disabled = true;
-  document.getElementById("licenseRadioGroup").selectedIndex = 
+  document.getElementById("licenseRadioGroup").selectedIndex =
     pluginInfo.licenseAccepted ? 0 : 1;
 }
 
@@ -309,7 +309,7 @@ nsPluginInstallerWizard.prototype.showPreviousLicense = function (){
     this.canRewind(false);
 
   this.showLicense();
-  
+
   // don't allow to return from the license screens
   return false;
 }
@@ -411,7 +411,7 @@ nsPluginInstallerWizard.prototype.pluginInstallationProgressMeter = function (aP
 
   if (progressElm.getAttribute("mode") == "undetermined")
     progressElm.setAttribute("mode", "determined");
-  
+
   progressElm.setAttribute("value", Math.ceil((aValue / aMaxValue) * 100) + "%")
 }
 
@@ -503,10 +503,10 @@ nsPluginInstallerWizard.prototype.showPluginResults = function (){
       }
 
       this.addPluginResultRow(
-          myPluginItem.IconUrl, 
+          myPluginItem.IconUrl,
           myPluginItem.name + " " + (myPluginItem.version ? myPluginItem.version : ""),
           null,
-          statusMsg, 
+          statusMsg,
           statusTooltip,
           manualUrl);
     }
@@ -575,7 +575,7 @@ nsPluginInstallerWizard.prototype.loadURL = function (aUrl){
   // Check if the page where the plugin came from can load aUrl before
   // loading it, and do *not* allow loading URIs that would inherit our
   // principal.
-  
+
   var pluginPagePrincipal =
     window.opener.content.document.nodePrincipal;
 

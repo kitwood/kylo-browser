@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl" xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <binding id="browser-snapshot" extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
         <content class="browser-snapshot-container" orient="horizontal">
@@ -17,12 +17,12 @@
             </xul:vbox>
         </content>
     </binding>
-	
+
   <binding id="setting-bool" extends="chrome://polo/content/bindings/moz-settings.xml#setting-base">
     <content>
-	    <xul:hbox flex="1" class="prefbox" anonid="input-container">
-	      <xul:checkbox anonid="input" xbl:inherits="disabled,label=title" crop="end" oncommand="inputChanged();"/>
-	    </xul:hbox>
+        <xul:hbox flex="1" class="prefbox" anonid="input-container">
+          <xul:checkbox anonid="input" xbl:inherits="disabled,label=title" crop="end" oncommand="inputChanged();"/>
+        </xul:hbox>
     </content>
 
     <implementation>
@@ -51,9 +51,9 @@
 
   <binding id="setting-boolint" extends="chrome://polo/content/bindings/moz-settings.xml#setting-base">
     <content>
-	    <xul:hbox flex="1" class="prefbox" anonid="input-container">
-	      <xul:checkbox anonid="input" xbl:inherits="disabled,label=title" crop="end" oncommand="inputChanged();"/>
-	    </xul:hbox>
+        <xul:hbox flex="1" class="prefbox" anonid="input-container">
+          <xul:checkbox anonid="input" xbl:inherits="disabled,label=title" crop="end" oncommand="inputChanged();"/>
+        </xul:hbox>
     </content>
 
     <implementation>
@@ -78,7 +78,7 @@
       <property name="inverted" readonly="true" onget="return this.getAttribute('inverted');"/>
     </implementation>
   </binding>
-  
+
   <binding id="setting-integer" extends="chrome://polo/content/bindings/moz-settings.xml#setting-base">
     <content>
       <xul:box flex="1" class="prefbox">
@@ -115,5 +115,5 @@
       <property name="type" readonly="true" onget="return this.getAttribute('type');"/>
       <property name="value" onget="return this.input.value;" onset="return this.input.value = val;"/>
     </implementation>
-  </binding>    	
+  </binding>
 </bindings>

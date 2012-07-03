@@ -4,12 +4,12 @@
 <?xml-stylesheet href="chrome://polo/skin/common/aboutPage.css" type="text/css"?>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <!DOCTYPE page [
     <!ENTITY % downloadsOverlayDTD SYSTEM "chrome://polo/locale/downloads.dtd">
     %downloadsOverlayDTD;
@@ -24,16 +24,16 @@ var Cu = Components.utils;
 
 [
     [
-        "chromeWindow", 
-        function () {   
+        "chromeWindow",
+        function () {
             var w = window.QueryInterface(Ci.nsIInterfaceRequestor)
                                 .getInterface(Ci.nsIWebNavigation)
                                 .QueryInterface(Ci.nsIDocShellTreeItem)
                                 .rootTreeItem
                                 .QueryInterface(Ci.nsIInterfaceRequestor)
-                                .getInterface(Ci.nsIDOMWindow); 
-        
-            return w;   
+                                .getInterface(Ci.nsIDOMWindow);
+
+            return w;
         }
     ],
     [
@@ -60,6 +60,6 @@ var Cu = Components.utils;
         <description class="about-title downloads-icon" value="&downloads.pageTitle;" />
         <spacer flex="1" />
         <button id="close-tab-btn" oncommand="gChromePageHelper.closePage(window)" label="Close" />
-    </hbox>    
+    </hbox>
     <iframe class="about-content" src="chrome://mozapps/content/downloads/downloads.xul" flex="1" />
 </page>

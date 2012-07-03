@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -18,7 +18,7 @@
 }
 
 #places-current-action-title[hidden=true] {
-	display: none;
+    display: none;
 }
 
 #places-fldr-location[hidden=true] {
@@ -26,8 +26,8 @@
 }
 
 #places-box {
-	background: url("images/places_bg.jpg") repeat top left;
-	margin: 0;
+    background: url("images/places_bg.jpg") repeat top left;
+    margin: 0;
 }
 
 #places-toolbar-buttonset:not([buttonset~=select]) > #places-select-btn,
@@ -65,13 +65,13 @@
 
 #places-grid {
     overflow-x: auto;
-	margin: 0;
-	padding: 0 32px;
+    margin: 0;
+    padding: 0 32px;
 }
 
 
 #places-grid[state=select] placesgriditem[type=bookmark] .places-grid-item-titleBox {
-	-moz-border-image: url("../common/images/thumbnail_border_edit.png") 10 10 10 10 / 10px 10px 10px 10px;
+    -moz-border-image: url("../common/images/thumbnail_border_edit.png") 10 10 10 10 / 10px 10px 10px 10px;
 }
 
 #places-grid[state=select] placesgriditem[type=bookmark]:hover .places-grid-item-titleBox {
@@ -91,46 +91,46 @@
 }
 
 #places-open-pages-list {
-	overflow-x: hidden;
-	padding: 0px;
-	min-width: 230px;
-	-moz-border-image: url("chrome://polo/skin/common/images/area_bg_light.png") 8 8 8 8 / 8px 8px 8px 8px;
+    overflow-x: hidden;
+    padding: 0px;
+    min-width: 230px;
+    -moz-border-image: url("chrome://polo/skin/common/images/area_bg_light.png") 8 8 8 8 / 8px 8px 8px 8px;
 }
 
 #places-open-pages-list:not([hidden=true]) + spacer + grid + spacer {
-	display: none;
+    display: none;
 }
 
 #places-open-pages-list > * {
-	padding: 0px;
-	margin: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 #places-edit-ui {
-	margin: 15px 35px 40px 35px;
+    margin: 15px 35px 40px 35px;
 }
 
 #places-edit-ui > grid {
-	-moz-border-image: url("chrome://polo/skin/common/images/area_bg.png") 8 8 8 8 / 8px 8px 8px 8px;
+    -moz-border-image: url("chrome://polo/skin/common/images/area_bg.png") 8 8 8 8 / 8px 8px 8px 8px;
 }
 
 #places-edit-ui > grid > rows > row {
     margin: 0;
-	padding: 0 0 8px 0;
+    padding: 0 0 8px 0;
 }
 
 #places-edit-ui > grid > rows > row > label {
-	min-width: 130px;
-	padding: 10px;
+    min-width: 130px;
+    padding: 10px;
 }
 
 #places-edit-ui > grid > rows > row > textbox {
-	-moz-appearance: none;
-	background: none !important;
-	border: none;
+    -moz-appearance: none;
+    background: none !important;
+    border: none;
     -moz-border-image: url("chrome://polo/skin/common/images/area_bg.png") 8 8 8 8 / 8px 8px 8px 8px;
-	color: #efefef;
-	font-size: 23px;
+    color: #efefef;
+    font-size: 23px;
 }
 
 /*
@@ -140,7 +140,7 @@ span.places-grid-dimensions {
     width: 200px;
     margin-left: 32px;
     margin-right: 32px;
-    
+
     display: none;
 }
 

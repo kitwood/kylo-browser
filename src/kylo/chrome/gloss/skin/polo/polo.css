@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -15,8 +15,8 @@ panel {
 }
 
 panel {
-	border: none;
-	background: none;
+    border: none;
+    background: none;
 }
 
 #anchor-top {
@@ -24,8 +24,8 @@ panel {
 }
 
 #zoomVeil:not([os="x11"]) {
-	background: url("images/zoom/pan-zoom_veil.png") repeat;
-	cursor: url("./zoom_cursor.png"), move !important;
+    background: url("images/zoom/pan-zoom_veil.png") repeat;
+    cursor: url("./zoom_cursor.png"), move !important;
 }
 
 #panLeft {
@@ -37,27 +37,27 @@ panel {
 }
 
 #zoomSpacerRight {
-	display: none;
+    display: none;
 }
 
 #zoomWidget {
-	-moz-box-align: center;
+    -moz-box-align: center;
 }
 
 .zoomButton {
-	-moz-appearance: none;
-	-moz-border-image: none;	
+    -moz-appearance: none;
+    -moz-border-image: none;
     width: 100px;
-    height: 100px;	
-	min-width: 100px;
-	min-height: 100px;    
-    padding: 0;    
-	margin: 0 50px 0 0;    
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    padding: 0;
+    margin: 0 50px 0 0;
     cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #zoomIn {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
     background: url("images/zoom/zoom_in.png") no-repeat;
 }
 
@@ -67,11 +67,11 @@ panel {
 
 #zoomIn[disabled=true] {
     background: url("images/zoom/zoom_in_disabled.png") no-repeat;
-	opacity: 1;
+    opacity: 1;
 }
 
 #zoomReset {
-    background: url("images/zoom/zoom_reset.png") no-repeat;	
+    background: url("images/zoom/zoom_reset.png") no-repeat;
 }
 
 #zoomReset:not([disabled=true]):hover {
@@ -80,12 +80,12 @@ panel {
 
 #zoomReset[disabled=true] {
     background: url("images/zoom/zoom_reset_disabled.png") no-repeat;
-	opacity: 1;
+    opacity: 1;
 }
 
 #zoomOut {
-	margin-bottom: 20px;
-    background: url("images/zoom/zoom_out.png") no-repeat;	
+    margin-bottom: 20px;
+    background: url("images/zoom/zoom_out.png") no-repeat;
 }
 
 #zoomOut:not([disabled=true]):hover {
@@ -94,11 +94,11 @@ panel {
 
 #zoomOut[disabled=true] {
     background: url("images/zoom/zoom_out_disabled.png") no-repeat;
-	opacity: 1;
+    opacity: 1;
 }
 
 #overscan-top:not([active=true]), .veiltrigger {
-	opacity: 1;
+    opacity: 1;
 }
 
 #browserDeck {
@@ -117,6 +117,6 @@ panel {
 span.page-preview-dimensions {
     width: 160px;
     height: 90px;
-    
+
     display: none;
 }

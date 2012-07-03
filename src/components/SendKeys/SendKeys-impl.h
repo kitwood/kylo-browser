@@ -23,13 +23,13 @@
 
 class SendKeys : public ISendKeys {
 public:
-	NS_DECL_ISUPPORTS
-	NS_DECL_ISENDKEYS
+    NS_DECL_ISUPPORTS
+    NS_DECL_ISENDKEYS
 
-	SendKeys();
+    SendKeys();
 
 private:
-	~SendKeys();
+    ~SendKeys();
 
 protected:
 };

@@ -1,61 +1,61 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
 #topBar {
-	height: 75px;
-	-moz-border-image: url("images/topbar_shadow.png") 20 0 10 0 / 20px 0 10px 0;
+    height: 75px;
+    -moz-border-image: url("images/topbar_shadow.png") 20 0 10 0 / 20px 0 10px 0;
 }
 
 #bottomBar {
-	height: 114px;
+    height: 114px;
 }
 
 #controlsTrigger {
-	height: 30px;
-	-moz-border-image: url("images/topbar_shadow.png") 20 0 10 0 / 20px 0 0 0;
+    height: 30px;
+    -moz-border-image: url("images/topbar_shadow.png") 20 0 10 0 / 20px 0 0 0;
 }
 
 #titleBox {
-	margin: -20px 0 -10px 0;
+    margin: -20px 0 -10px 0;
 }
 
 #titleBox #icon {
-	background: url("images/favicon_bg.png") no-repeat top;
-	width: 54px;
-	height: 75px;
-	padding: 23px 13px;
+    background: url("images/favicon_bg.png") no-repeat top;
+    width: 54px;
+    height: 75px;
+    padding: 23px 13px;
 }
 
 .titleLabel {
-	padding: 16px 0 0 0;
-	font-size: 36px;
-	text-shadow: 3px 3px 4px #000000, 0 0 10px #000000;
+    padding: 16px 0 0 0;
+    font-size: 36px;
+    text-shadow: 3px 3px 4px #000000, 0 0 10px #000000;
 }
 
 #tabSwitcher {
-	margin: -20px 0 -10px 0;
+    margin: -20px 0 -10px 0;
 }
 
 #tab-listbox {
-	max-height: 449px;
+    max-height: 449px;
 }
 
 richlistitem[type="tabswitch"] {
-	height: 99px;
+    height: 99px;
     -moz-border-image: url("../common/images/listitem_bg.png") 15 15 21 15 / 15px 15px 21px 15px;
 }
 
 richlistitem[type="tabswitch"] > image.item-icon {
     background: url("images/favicon_bg.png") no-repeat bottom;
-	width: 54px;
+    width: 54px;
     max-width: 54px;
-	height: 75px;
+    height: 75px;
     max-height: 75px;
     padding: 23px 13px;
 }
@@ -76,9 +76,9 @@ richlistitem[type="tabswitch"]:not([selected=true]):hover {
 richlistitem[type="tabswitch"] > button.closeBtn {
     width: 75px;
     height: 75px;
-	min-width: 75px;
-	height: 75px;
-	background: url("../common/images/close.png") no-repeat;
+    min-width: 75px;
+    height: 75px;
+    background: url("../common/images/close.png") no-repeat;
 }
 
 richlistitem[type="tabswitch"] > button.closeBtn:not([disabled=true]):hover {
@@ -90,7 +90,7 @@ richlistitem[type="tabswitch"][selected=true] {
 }
 
 #closeBar {
-    height: 81px;    
+    height: 81px;
 }
 
 #newTabButton {
@@ -113,18 +113,18 @@ richlistitem[type="tabswitch"][selected=true] {
 #urlEntryLabel {
     -moz-border-image: url("images/controlbar_field.png") 18 66 18 31 / 18px 66px 18px 31px;
     font-size: 34px;
-	text-shadow: 3px 3px 4px #000000, 0 0 10px #000000;
+    text-shadow: 3px 3px 4px #000000, 0 0 10px #000000;
     height: 114px;
     padding-top: 20px;
 }
 
 #urlEntryLabel:hover {
-	text-shadow: 3px 3px 4px #000000, 0 0 10px #b5dd16;
-    -moz-border-image: url("images/controlbar_field_over.png") 18 66 18 31 / 18px 66px 18px 31px; 
+    text-shadow: 3px 3px 4px #000000, 0 0 10px #b5dd16;
+    -moz-border-image: url("images/controlbar_field_over.png") 18 66 18 31 / 18px 66px 18px 31px;
 }
 
 .controls-button {
-	width: 114px;
+    width: 114px;
     height: 114px;
 }
 
@@ -132,8 +132,8 @@ richlistitem[type="tabswitch"][selected=true] {
  * Top bar buttons
  */
 #showTabsButton {
-	width: 69px;
-	height: 60px;
+    width: 69px;
+    height: 60px;
     background-image: url("images/controlbar_tabs.png");
 }
 
@@ -189,7 +189,7 @@ richlistitem[type="tabswitch"][selected=true] {
 }
 
 #backButton:not([disabled=true]):hover {
-	background-image: url("images/controlbar_back_over.png");
+    background-image: url("images/controlbar_back_over.png");
 }
 
 #backButton[disabled=true] {
@@ -213,7 +213,7 @@ richlistitem[type="tabswitch"][selected=true] {
 }
 
 #reloadButton:not([disabled=true]):hover {
-	background-image: url("images/controlbar_reload_over.png");
+    background-image: url("images/controlbar_reload_over.png");
 }
 
 #stopButton {
@@ -257,11 +257,11 @@ richlistitem[type="tabswitch"][selected=true] {
 }
 
 /**
- * 	Menu
+ * Menu
  */
 
 #menu-chrome {
-	-moz-border-image: url("../images/menu/menu_bg.png") 60 60 60 60 / 60px 60px 60px 60px;	
+    -moz-border-image: url("../images/menu/menu_bg.png") 60 60 60 60 / 60px 60px 60px 60px;
 }
 
 #menu-buttonGroup {
@@ -269,20 +269,20 @@ richlistitem[type="tabswitch"][selected=true] {
     min-height: 300px;
     max-width: 1050px;
     max-height: 705px;
-	margin: -15px -45px;
-	padding: 15px 45px;	
+    margin: -15px -45px;
+    padding: 15px 45px;
 }
 
 
 .menu-button {
-	width: 450px;
-	height: 105px;
-	margin: 7px;
-	-moz-border-image: url("../images/menu/menu_button.png") 23 23 23 23 / 23px 23px 23px 23px;
+    width: 450px;
+    height: 105px;
+    margin: 7px;
+    -moz-border-image: url("../images/menu/menu_button.png") 23 23 23 23 / 23px 23px 23px 23px;
 }
 
 .menu-button > .button-box {
-	margin: -9px 0;
+    margin: -9px 0;
 }
 
 .menu-button > .button-box > .button-text {
@@ -290,7 +290,7 @@ richlistitem[type="tabswitch"][selected=true] {
     text-shadow: 0 0 10px #000000;
 }
 
-.menu-button:hover {    
+.menu-button:hover {
     -moz-border-image: url("../images/menu/menu_button_over.png") 23 23 23 23 / 23px 23px 23px 23px;
 }
 
@@ -324,8 +324,8 @@ richlistitem[type="tabswitch"][selected=true] {
 
 #homepage-chooser-buttonGroup {
     min-width: 480px;
-    min-height: 300px;	
-    max-width: 1050px; 
+    min-height: 300px;
+    max-width: 1050px;
     -moz-border-image: url("../images/menu/menu_bg.png") 60 60 60 60 / 60px 60px 60px 60px;
-	padding: 30px;
+    padding: 30px;
 }

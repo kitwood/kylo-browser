@@ -1,9 +1,9 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
-# You can obtain one at http://mozilla.org/MPL/2.0/. 
-# 
-# Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-# Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+# Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
 # trademarks of Hillcrest Laboratories, Inc.
 
 #
@@ -34,29 +34,29 @@ module_path = os.path.dirname(relPath.func_code.co_filename)
 def main(version, buildId, temp_dir = None, stub_dir = None):
     logger = getLogger()
     logger.info("Begin creating personalized xulrunner stub")
-    
+
     if temp_dir is None:
         temp_dir = module_path
-    
+
     if stub_dir is None:
         polo_exe_path = os.path.join(temp_dir, "Kylo.exe")
     else:
         polo_exe_path = os.path.join(stub_dir, "Kylo.exe")
-        
+
     # executable paths
     rc_exe = os.path.normpath(Settings.config.get("env","RC"))
     reshacker_exe = os.path.normpath(Settings.config.get("env","RESHACKER"))
-    
+
     # source files
     xulrunner_stub_path = os.path.normpath(os.path.join(Settings.prefs.xul_dir, "xulrunner-stub.exe"))
     polo_ico_path = relPath("../resources/Kylo.ico")
-    
+
     #intermediate files
     params_rc_path = os.path.join(temp_dir, "temp.params.rc")
     params_res_path = os.path.join(temp_dir, "temp.params.res")
     reshacker_ini_path  = os.path.join(temp_dir, "temp.reshacker.ini")
     reshacker_log_path  = os.path.join(temp_dir, "temp.reshacker.log")
-    
+
     rc_file_template = """
     1 VERSIONINFO
      FILEVERSION %(FileVersion_Ints)s
@@ -106,7 +106,7 @@ Log=%(reshacker_log_path)s
     while len(versionInts) < 4:
         versionInts.append(0)
     versionInts = ",".join(str(x) for x in versionInts)
-    
+
     fileVersion_ints = version.win.replace(".",",")
 
     params = {
@@ -127,27 +127,27 @@ Log=%(reshacker_log_path)s
 
         "OriginalFilename": r'"Kylo.exe"',
     }
-    
-    
+
+
     # output the rc file
     logger.info("Writing _params.rc [%s]", params_rc_path)
     with file(params_rc_path, "w") as out:
         out.writelines(rc_file_template % params)
 
-    cmd = [rc_exe, "/v", "/l", "0", params_rc_path] 
+    cmd = [rc_exe, "/v", "/l", "0", params_rc_path]
     build_util.runSubprocess(cmd, logger)
 
     logger.info("Writing reshack.ini [%s]", reshacker_ini_path)
     with file(reshacker_ini_path, "w") as out:
         out.writelines(reshack_script_template % locals())
-    
+
     logger.info("Running reshacker; writing stub to [%s]", polo_exe_path)
     cmd = [reshacker_exe, "-script", reshacker_ini_path]
     build_util.runSubprocess(cmd, logger)
-    
+
     assert os.path.exists(polo_exe_path), "Executable not at expected location"
     logger.info("Done creating xulrunner stub .exe [%s]", polo_exe_path)
-    
+
     logger.info("Cleaning up...")
     shutil.rmtree(temp_dir, ignore_errors=False, onerror=build_util.RMFail)
 

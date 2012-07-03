@@ -13,13 +13,13 @@ Sanitizer.prototype = {
   {
     return this.items[aItemName].canClear;
   },
-  
+
   _prefDomain: "privacy.item.",
   getNameFromPreference: function (aPreferenceName)
   {
     return aPreferenceName.substr(this._prefDomain.length);
   },
-  
+
   /**
    * Deletes privacy sensitive data in a batch, according to user preferences
    *
@@ -36,14 +36,14 @@ Sanitizer.prototype = {
       var item = this.items[itemName];
       if ("clear" in item && item.canClear && branch.getBoolPref(itemName)) {
         // Some of these clear() may raise exceptions (see bug #265028)
-        // to sanitize as much as possible, we catch and store them, 
+        // to sanitize as much as possible, we catch and store them,
         // rather than fail fast.
         // Callers should check returned errors and give user feedback
         // about items that could not be sanitized
         try {
           item.clear();
         } catch(er) {
-          if (!errors) 
+          if (!errors)
             errors = {};
           errors[itemName] = er;
           dump("Error sanitizing " + itemName + ": " + er + "\n");
@@ -52,7 +52,7 @@ Sanitizer.prototype = {
     }
     return errors;
   },
-  
+
   items: {
     cache: {
       clear: function ()
@@ -65,13 +65,13 @@ Sanitizer.prototype = {
           cacheService.evictEntries(ci.nsICache.STORE_ANYWHERE);
         } catch(er) {}
       },
-      
+
       get canClear()
       {
         return true;
       }
     },
-    
+
     cookies: {
       clear: function ()
       {
@@ -79,7 +79,7 @@ Sanitizer.prototype = {
                                   .getService(Components.interfaces.nsICookieManager);
         cookieMgr.removeAll();
       },
-      
+
       get canClear()
       {
         return true;
@@ -95,12 +95,12 @@ Sanitizer.prototype = {
         try {
           var branch = psvc.getBranch("geo.wifi.access_token.");
           branch.deleteBranch("");
-          
+
           branch = psvc.getBranch("geo.request.remember.");
           branch.deleteBranch("");
         } catch (e) {dump(e);}
       },
-      
+
       get canClear()
       {
         return true;
@@ -164,14 +164,14 @@ Sanitizer.prototype = {
         var globalHistory = Components.classes["@mozilla.org/browser/global-history;2"]
                                       .getService(Components.interfaces.nsIBrowserHistory);
         globalHistory.removeAllPages();
-        
+
         try {
           var os = Components.classes["@mozilla.org/observer-service;1"]
                              .getService(Components.interfaces.nsIObserverService);
           os.notifyObservers(null, "browser:purge-session-history", "");
         }
         catch (e) { }
-        
+
         // Clear last URL of the Open Web Location dialog
         var prefs = Components.classes["@mozilla.org/preferences-service;1"]
                               .getService(Components.interfaces.nsIPrefBranch2);
@@ -180,7 +180,7 @@ Sanitizer.prototype = {
         }
         catch (e) { }
       },
-      
+
       get canClear()
       {
         // bug 347231: Always allow clearing history due to dependencies on
@@ -188,7 +188,7 @@ Sanitizer.prototype = {
         return true;
       }
     },
-    
+
     formdata: {
       clear: function ()
       {
@@ -208,7 +208,7 @@ Sanitizer.prototype = {
                                     .getService(Components.interfaces.nsIFormHistory2);
         formHistory.removeAllEntries();
       },
-      
+
       get canClear()
       {
         var formHistory = Components.classes["@mozilla.org/satchel/form-history;1"]
@@ -216,7 +216,7 @@ Sanitizer.prototype = {
         return formHistory.hasEntries;
       }
     },
-    
+
     downloads: {
       clear: function ()
       {
@@ -232,7 +232,7 @@ Sanitizer.prototype = {
         return dlMgr.canCleanUp;
       }
     },
-    
+
     passwords: {
       clear: function ()
       {
@@ -240,7 +240,7 @@ Sanitizer.prototype = {
                               .getService(Components.interfaces.nsILoginManager);
         pwmgr.removeAllLogins();
       },
-      
+
       get canClear()
       {
         var pwmgr = Components.classes["@mozilla.org/login-manager;1"]
@@ -249,7 +249,7 @@ Sanitizer.prototype = {
         return (count > 0);
       }
     },
-    
+
     sessions: {
       clear: function ()
       {
@@ -263,7 +263,7 @@ Sanitizer.prototype = {
                                 .getService(Components.interfaces.nsIHttpAuthManager);
         authMgr.clearAll();
       },
-      
+
       get canClear()
       {
         return true;
@@ -281,7 +281,7 @@ Sanitizer.prefShutdown        = "sanitizeOnShutdown";
 Sanitizer.prefDidShutdown     = "didShutdownSanitize";
 
 Sanitizer._prefs = null;
-Sanitizer.__defineGetter__("prefs", function() 
+Sanitizer.__defineGetter__("prefs", function()
 {
   return Sanitizer._prefs ? Sanitizer._prefs
     : Sanitizer._prefs = Components.classes["@mozilla.org/preferences-service;1"]
@@ -290,7 +290,7 @@ Sanitizer.__defineGetter__("prefs", function()
 });
 
 // Shows sanitization UI
-Sanitizer.showUI = function(aParentWindow) 
+Sanitizer.showUI = function(aParentWindow)
 {
   var ww = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
                      .getService(Components.interfaces.nsIWindowWatcher);
@@ -303,15 +303,15 @@ Sanitizer.showUI = function(aParentWindow)
                 null);
 };
 
-/** 
- * Deletes privacy sensitive data in a batch, optionally showing the 
+/**
+ * Deletes privacy sensitive data in a batch, optionally showing the
  * sanitize UI, according to user preferences
  *
  * @returns  null if everything's fine (no error or displayed UI,  which
- *           should handle errors);  
+ *           should handle errors);
  *           an object in the form { itemName: error, ... } on (partial) failure
  */
-Sanitizer.sanitize = function(aParentWindow) 
+Sanitizer.sanitize = function(aParentWindow)
 {
   if (Sanitizer.prefs.getBoolPref(Sanitizer.prefPrompt)) {
     Sanitizer.showUI(aParentWindow);
@@ -320,23 +320,23 @@ Sanitizer.sanitize = function(aParentWindow)
   return new Sanitizer().sanitize();
 };
 
-Sanitizer.onStartup = function() 
+Sanitizer.onStartup = function()
 {
   // we check for unclean exit with pending sanitization
   Sanitizer._checkAndSanitize();
 };
 
-Sanitizer.onShutdown = function() 
+Sanitizer.onShutdown = function()
 {
   // we check if sanitization is needed and perform it
   Sanitizer._checkAndSanitize();
 };
 
 // this is called on startup and shutdown, to perform pending sanitizations
-Sanitizer._checkAndSanitize = function() 
+Sanitizer._checkAndSanitize = function()
 {
   const prefs = Sanitizer.prefs;
-  if (prefs.getBoolPref(Sanitizer.prefShutdown) && 
+  if (prefs.getBoolPref(Sanitizer.prefShutdown) &&
       !prefs.prefHasUserValue(Sanitizer.prefDidShutdown)) {
     // this is a shutdown or a startup after an unclean exit
     Sanitizer.sanitize(null) || // sanitize() returns null on full success

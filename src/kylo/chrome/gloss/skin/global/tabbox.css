@@ -44,9 +44,9 @@
 
 /* ::::: spacers ::::: */
 
-tabbox {	
-	background: none;
-	margin: 5px;
+tabbox {
+    background: none;
+    margin: 5px;
 }
 
 .tabs-left,
@@ -54,15 +54,15 @@ tabbox {
   background: none;
   border: none;
   -moz-border-bottom-colors: none;
-  
+
 }
 
 /* ::::: tabpanels ::::: */
 
 tabpanels {
-  -moz-appearance: none; 
-  border: 8px solid black;  
-  padding: 8px;  
+  -moz-appearance: none;
+  border: 8px solid black;
+  padding: 8px;
   background: none;
   color: white;
 }
@@ -78,7 +78,7 @@ tabbox[orient="horizontal"] > tabpanels {
 /* ::::: tab ::::: */
 
 tabs {
-	background: none;
+    background: none;
 }
 
 .tab-text {
@@ -107,15 +107,15 @@ tabs > tab[selected=true] {
 }
 
 tabs > tab:first-child {
-    -moz-border-image: url("chrome://global/skin/images/tabs/tab_h_first.png") 5 8 33 8 / 5px 8px 33px 8px; 
+    -moz-border-image: url("chrome://global/skin/images/tabs/tab_h_first.png") 5 8 33 8 / 5px 8px 33px 8px;
 }
 
 tabs > tab[selected=true]:first-child {
-    -moz-border-image: url("chrome://global/skin/images/tabs/tab_h_first_selected.png") 5 8 33 8 / 5px 8px 33px 8px; 
+    -moz-border-image: url("chrome://global/skin/images/tabs/tab_h_first_selected.png") 5 8 33 8 / 5px 8px 33px 8px;
 }
 
 tabs > spacer.tabs-right {
-    -moz-appearance: none;  
+    -moz-appearance: none;
     background: none;
     -moz-border-image: url("chrome://global/skin/images/tabs/tabs_h_end.png") 5 8 33 8 / 5px 8px 33px 8px;
 }
@@ -133,15 +133,15 @@ tabs[orient="vertical"] > tab[selected=true] {
 }
 
 tabs[orient="vertical"] > tab:first-child {
-    -moz-border-image: url("chrome://global/skin/images/tabs/tab_v_first.png") 5 33 5 8 / 5px 33px 5px 8px; 
+    -moz-border-image: url("chrome://global/skin/images/tabs/tab_v_first.png") 5 33 5 8 / 5px 33px 5px 8px;
 }
 
 tabs[orient="vertical"] > tab[selected=true]:first-child {
-    -moz-border-image: url("chrome://global/skin/images/tabs/tab_v_first_selected.png") 5 33 5 8 / 5px 33px 5px 8px; 
+    -moz-border-image: url("chrome://global/skin/images/tabs/tab_v_first_selected.png") 5 33 5 8 / 5px 33px 5px 8px;
 }
 
 tabs[orient="vertical"] > spacer.tabs-right {
-    -moz-appearance: none;  
+    -moz-appearance: none;
     background: none;
     -moz-border-image: url("chrome://global/skin/images/tabs/tabs_v_end.png") 5 33 5 8 / 5px 33px 5px 8px;
 }
@@ -156,7 +156,7 @@ tab:-moz-locale-dir(rtl) {
 
 .tab-text {
   margin: 0 !important;
-  color: white;  
+  color: white;
 }
 
 

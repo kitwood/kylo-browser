@@ -24,7 +24,7 @@
 #include <tlhelp32.h>
 
 
-static HINSTANCE hinstDLL; 
+static HINSTANCE hinstDLL;
 static HHOOK hhook;
 static MouseEventTool* myself;
 static HWND mainHWND;
@@ -222,7 +222,7 @@ NS_IMETHODIMP MouseEventTool::UnmapButton(const char *processName, PRInt16 input
 {
     // get vector for input event
     AppSignalPairVec* aspv = getVecFromInputValue(inputEvent);
-    
+
     // if process name exists in vector, remove it
     for (AppSignalPairVec::iterator i = aspv->begin(); i != aspv->end();)
     {
@@ -395,7 +395,7 @@ bool MouseEventTool::HandleMouseEvent(WPARAM wParam, LPARAM lParam)
 
 
 AppSignalPairVec* MouseEventTool::getVecFromInputValue(short input) {
-    switch (input) 
+    switch (input)
     {
     case WM_LBUTTONDOWN:
         return &remapping_[ENUM_LBUTTONDOWN];

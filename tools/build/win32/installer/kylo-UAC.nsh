@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -18,7 +18,7 @@
 
     !ifdef CALL_SIGN_UNINSTALLER
         !insertmacro SIGN_UNINSTALLER ${UNINSTEXE}.exe.un
-    !endif    
+    !endif
     File "/oname=${extractTo}" "${UNINSTEXE}.exe.un"
     !delfile "${UNINSTEXE}.exe"
     !delfile "${UNINSTEXE}.exe.un"
@@ -42,11 +42,11 @@ Var InstMode ;0=current,1=all users
         SetErrorLevel 0x666666 ;special return value for outer instance so it knows we did not have admin rights
         Quit
     ${EndIf}
-    
+
     StrCpy $InstMode 0
     ${IfThen} ${UAC_IsAdmin} ${|} StrCpy $InstMode 1 ${|}
     call UAC_InstModeChanged
-    
+
     ${If} ${Silent}
     ${AndIf} $InstDir == "" ;defaults (for silent installs)
         SetSilent normal
@@ -64,7 +64,7 @@ FunctionEnd
 
 !macro UAC_InsertDualModeInstallPage
     Page custom UAC_InstModeSelectionPage_Create UAC_InstModeSelectionPage_Leave
-    
+
     Function UAC_InstModeChanged
         SetShellVarContext CURRENT
         ${IfNotThen} ${Silent} ${|} StrCpy $InstDir "${S_DEFINSTDIR_USER}" ${|}
@@ -73,12 +73,12 @@ FunctionEnd
             ${IfNotThen} ${Silent} ${|} StrCpy $InstDir "${S_DEFINSTDIR_ADMIN}" ${|}
         ${EndIf}
     FunctionEnd
-    
+
     Function UAC_RemoveNextBtnShield
     GetDlgItem $0 $hwndParent 1
     SendMessage $0 ${BCM_SETSHIELD} 0 0
     FunctionEnd
-    
+
     Function UAC_InstModeSelectionPage_Create
         !insertmacro MUI_HEADER_TEXT_PAGE "$(UAC_DualMode_PageHeader)" "$(UAC_DualMode_PageSubHeader)"
         GetFunctionAddress $8 UAC_InstModeSelectionPage_OnClick
@@ -99,9 +99,9 @@ FunctionEnd
         nsDialogs::SetUserData $2 1
         ${IfThen} $InstMode <> 0 ${|} SendMessage $2 ${BM_CLICK} 0 0 ${|}
         push $2 ;store allusers radio hwnd on stack
-        
+
         !ifdef UAC_DUALMODE_ALLUSER_TEST_REGKEY & UAC_DUALMODE_ALLUSER_TEST_REGVALUE
-            ReadRegStr $R0 HKLM "${UAC_DUALMODE_ALLUSER_TEST_REGKEY}" "${UAC_DUALMODE_ALLUSER_TEST_REGVALUE}"                
+            ReadRegStr $R0 HKLM "${UAC_DUALMODE_ALLUSER_TEST_REGKEY}" "${UAC_DUALMODE_ALLUSER_TEST_REGVALUE}"
             ${IfNot} $R0 == ""
                 SendMessage $2 ${BM_CLICK} 0 0
             ${EndIf}
@@ -109,7 +109,7 @@ FunctionEnd
         nsDialogs::Show
         pop $2
     FunctionEnd
-    
+
     Function UAC_InstModeSelectionPage_OnClick
         pop $1
         nsDialogs::GetUserData $1
@@ -117,7 +117,7 @@ FunctionEnd
         GetDlgItem $0 $hwndParent 1
         SendMessage $0 ${BCM_SETSHIELD} 0 $1
     FunctionEnd
-    
+
     Function UAC_InstModeSelectionPage_Leave
         pop $0  ;get hwnd
         push $0 ;and put it back
@@ -133,31 +133,31 @@ FunctionEnd
                 !insertmacro UAC_RunElevated
                 EnableWindow $9 1
                 System::Call user32::SetFocus(is) ;Do we need WM_NEXTDLGCTL or can we get away with this hack?
-                ${If} $2 = 0x666666 ;our special return, the new process was not admin after all 
+                ${If} $2 = 0x666666 ;our special return, the new process was not admin after all
                     MessageBox mb_iconExclamation "$(UAC_DualMode_ReqAdmin)"
-                    Abort 
+                    Abort
                 ${ElseIf} $0 = 1223 ;cancel
                     Abort
                 ${Else}
                     ${If} $0 <> 0
                         ${If} $0 = 1062
-                            MessageBox mb_iconstop "$(UAC_DualMode_ErrLoginSvc)" 
+                            MessageBox mb_iconstop "$(UAC_DualMode_ErrLoginSvc)"
                         ${Else}
                             MessageBox mb_iconstop "$(UAC_DualMode_Err)"
-                        ${EndIf} 
+                        ${EndIf}
                         Abort
                     ${EndIf}
-                ${EndIf} 
+                ${EndIf}
                 Quit ;We now have a new process, the install will continue there, we have nothing left to do here
             ${EndIf}
         ${EndIf}
-    FunctionEnd    
+    FunctionEnd
 !macroend
 
 !else
 
 !macro un.UAC_DualMode_OnInit
-    !if ${BUILDUNINST} > 0        
+    !if ${BUILDUNINST} > 0
         SetShellVarContext ALL
         !insertmacro UAC_RunElevated
         ${Switch} $0
@@ -175,8 +175,8 @@ FunctionEnd
             MessageBox mb_IconStop|mb_TopMost|mb_SetForeground "$(UAC_DualMode_UnErr)"
             Quit
         ${EndSwitch}
-        
-        StrCpy $InstMode 1 
+
+        StrCpy $InstMode 1
     !else
         StrCpy $InstMode 0
     !endif

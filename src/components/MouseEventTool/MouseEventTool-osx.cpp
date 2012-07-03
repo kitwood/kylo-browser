@@ -103,28 +103,28 @@ int macEventToEnum(CGEventType macEvent) {
 ////        {kEventClassWindow, kEventWindowDeactivated},
 ////        {kEventClassWindow, kEventWindowClose}
 ////    };
-////    
+////
 ////    if (gWinEventHandlerUPP != NULL)
 ////        InstallWindowEventHandler(windowRef, gWinEventHandlerUPP, GetEventTypeCount(myEventSpec), myEventSpec, this, NULL);
-////    
+////
 //}
 //
 //void printWindowRefs() {
 //    WindowRef wind = GetFrontWindowOfClass(kAllWindowClasses, true);
-//    
+//
 //    WindowRef userFocux = GetUserFocusWindow();
 //    while (IsValidWindowPtr(wind)) {
 //        WindowAttributes attrs;
 //        OSStatus err = GetWindowAttributes(wind, &attrs);
-//      
-//    
+//
+//
 //        if (IsWindowActive(wind)) {
 //        }
-//        
+//
 //        CFStringRef title;
-//        
+//
 //        err = CopyWindowTitleAsCFString (wind, &title);
-//    
+//
 //        wind = GetNextWindow(wind);
 //    }
 //}
@@ -134,14 +134,14 @@ MouseEventTool::MouseEventTool() {
     isFullScreen_ = false;
    // printWindowRefs();
 
-    
+
     for (int i = 0; i < NUM_WM_MESSAGES; ++i) {
         buttonMapping_[i] = -1;
     }
     prevX_ = -1;
     prevY_ = -1;
-    
-	windowNumber_ = NULL;
+
+    windowNumber_ = NULL;
     AddHook();
 }
 
@@ -153,15 +153,15 @@ void printCFString(FILE* f, CFStringRef formatString, ...) {
     CFStringRef resultString;
     CFDataRef data;
     va_list argList;
-    
+
     va_start(argList, formatString);
     resultString = CFStringCreateWithFormatAndArguments(NULL, NULL,
                                                         formatString, argList);
     va_end(argList);
-    
+
     data = CFStringCreateExternalRepresentation(NULL, resultString,
                                                 CFStringGetSystemEncoding(), '?');
-    
+
     if (data != NULL) {
         fprintf (f, "%.*s\n\n", (int)CFDataGetLength(data),
                 CFDataGetBytePtr(data));
@@ -178,7 +178,7 @@ pid_t MouseEventTool::getPid() {
     if (err) {
         return -1;
     }
-    
+
     err = GetProcessPID(&proc, &pid);
     if (err) {
         return -1;
@@ -195,7 +195,7 @@ void MouseEventTool::getMainWindowNumber() {
         CFArrayRef windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements, kCGNullWindowID);
         for (int i = 0; i < CFArrayGetCount(windows); ++i) {
             CFDictionaryRef windInfo = (CFDictionaryRef) CFArrayGetValueAtIndex(windows, i);
-            
+
             // We'll know if it's this process because it has the same PID as us, and it's got a name.
             int windowPid;
             CFNumberRef windowPidRef = (CFNumberRef) CFDictionaryGetValue(windInfo, kCGWindowOwnerPID);
@@ -222,26 +222,26 @@ bool MouseEventTool::isMinimized() {
     if (windowNumber_ == NULL) {
         return false;
     }
-    
+
     SInt32 windNumVal;
     CFNumberGetValue(windowNumber_, kCFNumberSInt32Type, &windNumVal);
-    
-    
+
+
     CFArrayRef windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenAboveWindow | kCGWindowListOptionIncludingWindow | kCGWindowListExcludeDesktopElements, windNumVal);
     int count = CFArrayGetCount(windows);
-    
+
     pid_t pid = getPid();
 
     // Start at 1 to ignore our own window
     for (int i = 0; i < count; ++i) {
         CFDictionaryRef windInfo = (CFDictionaryRef) CFArrayGetValueAtIndex(windows, i);
         // We have the full screen window if the pid is the same as ours, but there is no name
-        
+
         int windowPid;
         CFNumberRef windowPidRef = (CFNumberRef) CFDictionaryGetValue(windInfo, kCGWindowOwnerPID);
         CFNumberGetValue(windowPidRef, kCFNumberIntType, &windowPid);
         if (windowPid == pid) {
-            
+
             CFBooleanRef windowHiddenRef = (CFBooleanRef) CFDictionaryGetValue(windInfo, kCGWindowIsOnscreen);
             bool onScreen = CFBooleanGetValue(windowHiddenRef);
             if (!onScreen) {
@@ -256,16 +256,16 @@ bool MouseEventTool::isFullScreenWindow() {
     if (windowNumber_ == NULL) {
         getMainWindowNumber();
     }
-    
+
     // If windowNumber_ is still NULL, we don't have the main window
     if (windowNumber_ == NULL) {
         return false;
     }
-    
+
     SInt32 windNumVal;
     CFNumberGetValue(windowNumber_, kCFNumberSInt32Type, &windNumVal);
-    
-    
+
+
     CFArrayRef windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenAboveWindow | kCGWindowListOptionIncludingWindow | kCGWindowListExcludeDesktopElements, windNumVal);
     int count = CFArrayGetCount(windows);
     if (count == 1) {
@@ -279,7 +279,7 @@ bool MouseEventTool::isFullScreenWindow() {
     for (int i = 1; i < count; ++i) {
         CFDictionaryRef windInfo = (CFDictionaryRef) CFArrayGetValueAtIndex(windows, i);
         // We have the full screen window if the pid is the same as ours, but there is no name
-        
+
         int windowPid;
         CFNumberRef windowPidRef = (CFNumberRef) CFDictionaryGetValue(windInfo, kCGWindowOwnerPID);
         CFNumberGetValue(windowPidRef, kCFNumberIntType, &windowPid);
@@ -309,8 +309,8 @@ CGEventRef MouseEventTool::myCGEventCallback(CGEventTapProxy proxy, CGEventType 
         // The event was handled, so return NULL saying it should get eaten.
         return NULL;
     }
-    
-    // We must return the event for it to be useful. 
+
+    // We must return the event for it to be useful.
     return event;
 }
 
@@ -323,15 +323,15 @@ bool MouseEventTool::HandleMouseEvent(CGEventType type, CGEventRef event) {
             ::SetSystemUIMode(kUIModeAllHidden, 0);
         }
     }
-    
+
     if (type == kCGEventKeyUp || type == kCGEventKeyDown) {
         // Don't do anything to key events
         return false;
     }
-    
+
     CGPoint mouseLocation = CGEventGetLocation(event);
     double scrollMotion = CGEventGetDoubleValueField(event, kCGScrollWheelEventDeltaAxis1);
-    
+
     if (mouseEventCallback_ != NULL) {
         int dx = 0;
         int dy = 0;
@@ -339,43 +339,43 @@ bool MouseEventTool::HandleMouseEvent(CGEventType type, CGEventRef event) {
             dx = mouseLocation.x - prevX_;
             dy = mouseLocation.y - prevY_;
         }
-        
+
         mouseEventCallback_->MouseEvent(macEventToWindowsEventType(type), mouseLocation.x, mouseLocation.y, dx, dy, scrollMotion);
     }
-    
+
     prevX_ = mouseLocation.x;
     prevY_ = mouseLocation.y;
-    
+
     int eventTypeEnum = macEventToEnum(type);
     if (eventTypeEnum == -1) {
         return false;
-    }    
-    
+    }
+
     isFullScreen_ = isFullScreenWindow();
-    short resultKey = buttonMapping_[eventTypeEnum];	
-    
+    short resultKey = buttonMapping_[eventTypeEnum];
+
     if (resultKey != -1) {
         if (resultKey != VK_NO_EVENT) {
             CGEventRef eventDown, eventUp;
             CGEventRef commandDown, commandUp;
             CGEventSourceRef eventSource = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
             CGKeyCode keyToSend = resultKey;
-            
+
             if (resultKey == VK_BROWSER_BACK && isFullScreen_) {
                 keyToSend = kVK_Escape;
             } else if (resultKey == VK_BROWSER_BACK) {
                 commandDown = CGEventCreateKeyboardEvent(eventSource, kVK_Command, true);
                 keyToSend = kVK_ANSI_LeftBracket;
-                
+
                 CGEventPost(kCGHIDEventTap, commandDown);
             }
-            
+
             eventDown = CGEventCreateKeyboardEvent (eventSource, keyToSend, true);
             eventUp = CGEventCreateKeyboardEvent (eventSource, keyToSend, false);
-            
+
             CGEventPost(kCGHIDEventTap, eventDown);
             CGEventPost(kCGHIDEventTap, eventUp);
-            
+
             if (resultKey == VK_BROWSER_BACK && !isFullScreen_) {
                 commandUp = CGEventCreateKeyboardEvent(eventSource, kVK_Command, false);
                 CGEventPost(kCGHIDEventTap, commandUp);
@@ -383,55 +383,55 @@ bool MouseEventTool::HandleMouseEvent(CGEventType type, CGEventRef event) {
                 CFRelease(commandDown);
                 CFRelease(commandUp);
             }
-            
+
             CFRelease(eventDown);
             CFRelease(eventUp);
             CFRelease(eventSource);
-            
+
         }
         return true;
     }
-    
+
     return false;
 }
 
-void MouseEventTool::AddHook() 
+void MouseEventTool::AddHook()
 {
     CGEventMask eventMask;
     CFRunLoopSourceRef runLoopSource;
     ProcessSerialNumber psn;
-    
+
     myself = this;
-    
+
     OSErr err = GetCurrentProcess(&psn);
     if (err) {
         return;
     }
-    
+
     // Create an event tap.
     eventMask = kCGEventMaskForAllEvents;
-    
+
     eventTap_ = CGEventTapCreateForPSN((void*) &psn, kCGHeadInsertEventTap, 0, eventMask, myCGEventCallback, NULL);
     //eventTap = CGEventTapCreate(kCGHIDEventTap, kCGHeadInsertEventTap, 0, eventMask, myCGEventCallback, NULL);
-    
+
     if (!eventTap_) {
         exit(1);
     }
-    
+
     // Create a run loop source.
     runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap_, 0);
-    
+
     // Add to the current run loop.
-    CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource,  kCFRunLoopCommonModes); 
-    
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource,  kCFRunLoopCommonModes);
+
     // Enable the event tap.
     CGEventTapEnable(eventTap_, true);
-    
+
 }
 
-void MouseEventTool::RemoveHook() 
+void MouseEventTool::RemoveHook()
 {
-    
+
 }
 
 NS_IMETHODIMP MouseEventTool::RemapButton(const char *processName, PRInt16 inputEvent, PRInt16 outputEvent)
@@ -441,7 +441,7 @@ NS_IMETHODIMP MouseEventTool::RemapButton(const char *processName, PRInt16 input
 
 NS_IMETHODIMP MouseEventTool::UnmapButton(const char *processName, PRInt16 inputEvent)
 {
-	buttonMapping_[winEventToEnum(inputEvent)] = -1;
+    buttonMapping_[winEventToEnum(inputEvent)] = -1;
 }
 
 #ifdef XPCOM_USE_PRBOOL
@@ -467,7 +467,7 @@ NS_IMETHODIMP MouseEventTool::SetObjCallback(MouseEventCallback * aObjCallback)
         mouseEventCallback_->Release();
     }
     mouseEventCallback_ = aObjCallback;
-    
+
     if (mouseEventCallback_ != NULL) {
         mouseEventCallback_->AddRef();
     }

@@ -1,18 +1,18 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 notificationbox {
-	-moz-appearance: none;
-	background: red;
+    -moz-appearance: none;
+    background: red;
 }
 
 notification {
-	-moz-appearance: none;
-	-moz-box-align: center;
+    -moz-appearance: none;
+    -moz-box-align: center;
     height: 66px;
     background: -moz-linear-gradient(#9f9f9f,#7c7c7c 3%,#626262 50%,#4e4e4e 51%,#6a6a6a 97%,#1d1d1d);
     font-size: 22px;
-	color: #efefef;	
-    text-shadow: 0 0 7px #000000;	   
+    color: #efefef;
+    text-shadow: 0 0 7px #000000;
 }
 
 notification[type="critical"] {
@@ -20,9 +20,9 @@ notification[type="critical"] {
 }
 
 .notification-inner {
-	-moz-appearance: none;
-	border: none !important;
-	margin: 0 25px;
+    -moz-appearance: none;
+    border: none !important;
+    margin: 0 25px;
 }
 
 .messageImage {
@@ -46,4 +46,4 @@ notification[type="critical"] .messageImage {
 .messageCloseButton {
   display: none;
 }
- 
+

@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -28,7 +28,7 @@
 }
 
 #places-grid[state=select] placesgriditem[type=bookmark] .places-grid-item-titleBox {
-	-moz-border-image: url("../common/images/thumbnail_border_edit.png") 15 15 15 15 / 15px 15px 15px 15px;
+    -moz-border-image: url("../common/images/thumbnail_border_edit.png") 15 15 15 15 / 15px 15px 15px 15px;
 }
 
 #places-grid[state=select] placesgriditem[type=bookmark]:hover .places-grid-item-titleBox {
@@ -44,26 +44,26 @@
 }
 
 #places-open-pages-list {
-	min-width: 345px;
-	-moz-border-image: url("../common/images/area_bg_light.png") 12 12 12 12 / 12px 12px 12px 12px;
+    min-width: 345px;
+    -moz-border-image: url("../common/images/area_bg_light.png") 12 12 12 12 / 12px 12px 12px 12px;
 }
 
 #places-edit-ui > grid {
-	-moz-border-image: url("../common/images/area_bg.png") 12 12 12 12 / 12px 12px 12px 12px;
+    -moz-border-image: url("../common/images/area_bg.png") 12 12 12 12 / 12px 12px 12px 12px;
 }
 
 #places-edit-ui > grid > rows > row {
-	padding: 0 0 12px 0;
+    padding: 0 0 12px 0;
 }
 
 #places-edit-ui > grid > rows > row > label {
-	min-width: 195px;
-	padding: 15px;
+    min-width: 195px;
+    padding: 15px;
 }
 
 #places-edit-ui > grid > rows > row > textbox {
     -moz-border-image: url("../common/images/area_bg.png") 12 12 12 12 / 12px 12px 12px 12px;
-	font-size: 33px;
+    font-size: 33px;
 }
 
 
@@ -107,7 +107,7 @@
     margin: 15px;
 }
 
-.places-grid-item-titleBox {    
+.places-grid-item-titleBox {
     width: 270px;
     height: 165px;
     -moz-border-image: url("../common/images/thumbnail_border.png") 15 15 15 15 / 15px 15px 15px 15px;
@@ -120,17 +120,17 @@
     padding: 0 5px;
 }
 
-.places-grid-folder-titleBox {    
+.places-grid-folder-titleBox {
     max-width: 218px;
     max-height: 120px;
 }
 
-.places-grid-folder-title { 
+.places-grid-folder-title {
     font-size: 32px;
     text-shadow: #000000 0 0 5px, #000000 0 0 7px;
     padding: 15px 4px;
 }
- 
+
 placesgriditem[selected] .places-grid-item-titleBox {
     -moz-border-image: url("../common/images/thumbnail_border_green.png") 15 15 15 15 / 15px 15px 15px 15px;
 }
@@ -167,16 +167,16 @@ treechildren::-moz-tree-row {
 treechildren::-moz-tree-image {
     -moz-padding-end: 6px;
     height: 75px;
-    width: 117px;   
-    list-style-image: url("images/folder_icon.png");  
+    width: 117px;
+    list-style-image: url("images/folder_icon.png");
 }
 
 treechildren::-moz-tree-image(invalid-move-dest) {
-    list-style-image: url("images/folder_icon_error.png"); 
+    list-style-image: url("images/folder_icon_error.png");
 }
 
 /* ::::: tree cells ::::: */
-treechildren::-moz-tree-cell-text {   
+treechildren::-moz-tree-cell-text {
     font-size: 34px;
 }
 
@@ -189,7 +189,7 @@ treechildren::-moz-tree-twisty(closed) {
 
 treechildren::-moz-tree-twisty(open) {
     -moz-padding-end: 6px;
-    width: 117px;   
+    width: 117px;
     height: 75px;
     list-style-image: url("images/folder_icon_minus.png");
 }
@@ -206,7 +206,7 @@ span.places-grid-dimensions {
     width: 300px;
     margin-left: 32px;
     margin-right: 32px;
-    
+
     display: none;
 }
 

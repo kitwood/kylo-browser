@@ -35,9 +35,9 @@
         <![CDATA[
           var state = parseInt(this.getAttribute("state"));
           const dl = Components.interfaces.nsIDownloadManager;
-          return state == dl.DOWNLOAD_NOTSTARTED || 
+          return state == dl.DOWNLOAD_NOTSTARTED ||
                  state == dl.DOWNLOAD_QUEUED ||
-                 state == dl.DOWNLOAD_DOWNLOADING || 
+                 state == dl.DOWNLOAD_DOWNLOADING ||
                  state == dl.DOWNLOAD_PAUSED ||
                  state == dl.DOWNLOAD_SCANNING;
         ]]>
@@ -48,11 +48,11 @@
         <![CDATA[
           var state = parseInt(this.getAttribute("state"));
           const dl = Components.interfaces.nsIDownloadManager;
-          return state == dl.DOWNLOAD_FINISHED || 
-                 state == dl.DOWNLOAD_CANCELED || 
-                 state == dl.DOWNLOAD_BLOCKED_PARENTAL || 
-                 state == dl.DOWNLOAD_BLOCKED_POLICY || 
-                 state == dl.DOWNLOAD_DIRTY || 
+          return state == dl.DOWNLOAD_FINISHED ||
+                 state == dl.DOWNLOAD_CANCELED ||
+                 state == dl.DOWNLOAD_BLOCKED_PARENTAL ||
+                 state == dl.DOWNLOAD_BLOCKED_POLICY ||
+                 state == dl.DOWNLOAD_DIRTY ||
                  state == dl.DOWNLOAD_FAILED;
         ]]>
         </getter>
@@ -71,7 +71,7 @@
       </property>
     </implementation>
   </binding>
-  
+
   <binding id="download-starting" extends="chrome://mozapps/content/downloads/download.xml#download-base">
     <content>
       <xul:hbox flex="1">
@@ -94,13 +94,13 @@
                           oncommand="performCommand('cmd_cancel', this);"/>
               <xul:button class="closeBtn" label="&cmd.removeFromList.label;"
                           cmd="cmd_removeFromList" ondblclick="event.stopPropagation();"
-                          oncommand="performCommand('cmd_removeFromList', this);"/>                      
+                          oncommand="performCommand('cmd_removeFromList', this);"/>
             </xul:hbox>
-        </xul:vbox>        
+        </xul:vbox>
       </xul:hbox>
-    </content>  
+    </content>
   </binding>
-  
+
   <binding id="download-downloading" extends="chrome://mozapps/content/downloads/download.xml#download-base">
     <content>
       <xul:hbox flex="1" class="downloadContentBox">
@@ -122,7 +122,7 @@
             <xul:hbox pack="center">
               <xul:button label="&cmd.pause.label;"
                           cmd="cmd_pause" ondblclick="event.stopPropagation();"
-                          oncommand="performCommand('cmd_pause', this);"/>        
+                          oncommand="performCommand('cmd_pause', this);"/>
               <xul:button label="&cmd.cancel.label;"
                           cmd="cmd_cancel" ondblclick="event.stopPropagation();"
                           oncommand="performCommand('cmd_cancel', this);"/>
@@ -131,10 +131,10 @@
       </xul:hbox>
     </content>
   </binding>
-  
+
   <binding id="download-paused" extends="chrome://mozapps/content/downloads/download.xml#download-base">
     <content>
-      <xul:hbox flex="1" > 
+      <xul:hbox flex="1" >
         <xul:vbox pack="center">
           <xul:image class="downloadTypeIcon" validate="always"
                      xbl:inherits="src=image"/>
@@ -162,7 +162,7 @@
       </xul:hbox>
     </content>
   </binding>
-  
+
   <binding id="download-done" extends="chrome://mozapps/content/downloads/download.xml#download-base">
     <content>
       <xul:hbox flex="1">
@@ -183,19 +183,19 @@
         <xul:vbox class="button-container">
             <xul:hbox pack="center" align="center">
               <xul:label xbl:inherits="value=dateTime,tooltiptext=dateTimeTip"
-                       class="dateTime"/>            
+                       class="dateTime"/>
               <xul:button label="&cmd.open.label;"
                           cmd="cmd_open" ondblclick="event.stopPropagation();"
-                          oncommand="performCommand('cmd_open', this);"/>        
+                          oncommand="performCommand('cmd_open', this);"/>
               <xul:button class="closeBtn" label="&downloads.removeButtonLabel;"
                           cmd="cmd_removeFromList" ondblclick="event.stopPropagation();"
                           oncommand="performCommand('cmd_removeFromList', this);"/>
             </xul:hbox>
         </xul:vbox>
       </xul:hbox>
-    </content>  
+    </content>
   </binding>
-  
+
   <binding id="download-canceled" extends="chrome://mozapps/content/downloads/download.xml#download-base">
     <content>
       <xul:hbox flex="1">
@@ -219,16 +219,16 @@
                        class="dateTime"/>
               <xul:button label="&cmd.retry.label;"
                           cmd="cmd_retry" ondblclick="event.stopPropagation();"
-                          oncommand="performCommand('cmd_retry', this);"/>        
+                          oncommand="performCommand('cmd_retry', this);"/>
               <xul:button class="closeBtn" label="&cmd.removeFromList.label;"
                           cmd="cmd_removeFromList" ondblclick="event.stopPropagation();"
                           oncommand="performCommand('cmd_removeFromList', this);"/>
             </xul:hbox>
-        </xul:vbox>        
+        </xul:vbox>
       </xul:hbox>
-    </content>  
+    </content>
   </binding>
-  
+
   <binding id="download-failed" extends="chrome://mozapps/content/downloads/download.xml#download-base">
     <content>
       <xul:hbox flex="1">
@@ -252,14 +252,14 @@
                        class="dateTime"/>
               <xul:button label="&cmd.retry.label;"
                           cmd="cmd_retry" ondblclick="event.stopPropagation();"
-                          oncommand="performCommand('cmd_retry', this);"/>        
+                          oncommand="performCommand('cmd_retry', this);"/>
               <xul:button class="closeBtn" label="&cmd.removeFromList.label;"
                           cmd="cmd_removeFromList" ondblclick="event.stopPropagation();"
                           oncommand="performCommand('cmd_removeFromList', this);"/>
             </xul:hbox>
-        </xul:vbox>         
+        </xul:vbox>
       </xul:hbox>
-    </content>  
+    </content>
   </binding>
 
   <binding id="download-blocked-parental" extends="chrome://mozapps/content/downloads/download.xml#download-base">
@@ -325,7 +325,7 @@
           <xul:spacer flex="1"/>
         </xul:vbox>
       </xul:hbox>
-    </content>  
+    </content>
   </binding>
 
   <binding id="download-dirty" extends="chrome://mozapps/content/downloads/download.xml#download-base">

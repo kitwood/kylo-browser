@@ -66,46 +66,46 @@ public:
     // Returns true if the event is handled
     bool HandleMouseEvent(WPARAM wParam, LPARAM lParam);
 #endif
-    
+
 #ifdef __APPLE__
 
     static CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type,  CGEventRef event, void *refcon);
-    
+
     bool HandleMouseEvent(CGEventType type, CGEventRef event);
 #endif
 private:
     ~MouseEventTool();
-    
+
     nsCOMPtr<MouseEventCallback> mouseEventCallback_;
-    
+
     bool shouldMakeFullScreenOrNot_;
-    
+
 #ifdef WIN32
     // Remappings:
     // Defines an application and an output event
     AppSignalPairVec* remapping_;
-    
+
     AppSignalPairVec* getVecFromInputValue(short input);
-    
+
     POINT prevMousePoint_;
-#else	
+#else
 #ifdef __APPLE__
 
     static CFMachPortRef eventTap_;
 
     short buttonMapping_[NUM_WM_MESSAGES];
-    
-	CFNumberRef windowNumber_;
-    
+
+    CFNumberRef windowNumber_;
+
     bool isFullScreen_;
-    
+
     void getMainWindowNumber();
     bool isFullScreenWindow();
     bool isMinimized();
     pid_t getPid();
-    
+
     void attachEventHandler(CFNumberRef windowRef);
-    
+
     int prevX_, prevY_;
 #else //__APPLE__
     // Must be linux

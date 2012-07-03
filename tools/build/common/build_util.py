@@ -1,9 +1,9 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
-# You can obtain one at http://mozilla.org/MPL/2.0/. 
-# 
-# Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-# Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+# Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
 # trademarks of Hillcrest Laboratories, Inc.
 
 """ Utilities for Kylo Build scripts """
@@ -67,16 +67,16 @@ class StreamLogger(object):
             tmp = tmp.rstrip('\x0a\x0d')
             self.logger.info('%s%s' % (self.prefix, tmp))
             self.data = ''
-            
+
 class VersionFormat(object):
-    # Version numbers are screwy. 
+    # Version numbers are screwy.
     #
     # version = The "complete" version number
     #    Can have alphanumeric values and will contain full revision data. This
     #    is the version that Kylo uses to identify itself to the update servers.
     #
     # win = Windows format version number
-    #    Windows expects version numbers in the format x.x.x.x (Major, Minor, 
+    #    Windows expects version numbers in the format x.x.x.x (Major, Minor,
     #    Build, Revision), where x is an integer value. This version only
     #    applies to the NSIS installer. We will strip non-numerical values from
     #    the complete version to get this number.
@@ -84,45 +84,45 @@ class VersionFormat(object):
     # display = "Display" version number
     #    This is the first three version numbers (Major, Minor, Build). It can
     #    have alphanumeric values.
-    
+
     def __init__(self, version=None):
         if version is None:
             self.full = Settings.config.get("App", "Version")
         else:
             self.full = version
-        
+
         # First, strip off any trailing "-xxxx" revision numbers (ie. 1.1b2.1.1-abcdef -> 1.1b2.1.1)
         self.stripped = re.sub("([^-]+)-.*", self.__replVersion, self.full)
-        
-        # Second, remove any alpha, beta, etc. tags (ie. 1.1b2.1.1 -> 1.1.1.1) 
+
+        # Second, remove any alpha, beta, etc. tags (ie. 1.1b2.1.1 -> 1.1.1.1)
         self.num = re.sub("(\d+)[a-zA-Z]+\d*", self.__replVersion, self.stripped)
-          
-        # Array of integers    
+
+        # Array of integers
         self.ints = [int(x) for x in self.num.split(".")[:4]]
-        
+
         # Display version
         self.display = ".".join(str(x) for x in self.ints[:3])
-        
+
         # Win version
         self.win = "%s.0" % self.display
-        
+
         # Display with alpha/beta tags
-        self.displayTagged = ".".join(x for x in self.stripped.split(".")[:3])        
-    
+        self.displayTagged = ".".join(x for x in self.stripped.split(".")[:3])
+
     def __replVersion(self, m):
         return m.group(1)
 
 def RMFail(function, path, excinfo):
-    function(chmod_w(path))        
+    function(chmod_w(path))
 
 def chmod_w(path, doCheck=False):
     if os.path.exists(path):
         if doCheck and \
             os.stat(path).st_mode & stat.S_IWRITE:
                 return path
-            
+
         os.chmod(path, os.stat(path).st_mode | stat.S_IWRITE)
-    
+
     return path
 
 def mkdir_p(path):
@@ -144,33 +144,33 @@ def syncDirs(dir_in, dir_out, purge=True, force_write=False, exclude=[]):
     args = args + (dir_in, dir_out)
     copier.parse_args(args)
     copier.do_work()
-    
+
     ret = copier.report()
-    
+
     if force_write:
         for root, dirs, files in os.walk(dir_out):
             for f in files:
                 chmod_w(os.path.join(root, f), doCheck=True)
-                
+
     return ret
-        
+
 def syncFile(file_in, dir_out, force_write=False):
     file_out = os.path.join(dir_out, os.path.basename(file_in))
-    
+
     src_is_newer = True;
-    
+
     if os.path.exists(file_out):
         # File already exists, check timestamps
         src_is_newer = False;
-        
+
         src_mt = os.path.getmtime(file_in)
         trg_mt = os.path.getmtime(file_out)
-        
+
         if os.stat_float_times():
             src_mt = math.fabs(src_mt)
             trg_mt = math.fabs(trg_mt)
             diff = math.fabs(src_mt - trg_mt)
-            
+
             if diff > 1:
                 src_is_newer = True
         else:
@@ -180,16 +180,16 @@ def syncFile(file_in, dir_out, force_write=False):
         shutil.copy2(file_in, dir_out)
         if force_write:
             chmod_w(os.path.join(dir_out, os.path.basename(file_in)))
-            
+
     return src_is_newer
 
 def signExe(path, logger):
     if "SIGNTOOL_PATH" in os.environ:
         if not os.path.exists(path):
             logger.error("... file to sign is missing: %s", path)
-            
+
         signtool_bat = os.path.normpath(os.path.join(os.environ["SIGNTOOL_PATH"], "run_signtool.bat"))
-         
+
         cmd = [signtool_bat, path]
         logger.info("... Signing: %s", path)
         runSubprocess(cmd, logger)
@@ -198,20 +198,20 @@ def signExe(path, logger):
 
 def runSubprocess(arguments, logger, **kwargs):
     logger.info("Running:  " + " ".join(arguments))
-    
+
     start = time.time()
     proc = subprocess.Popen(arguments, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize = kwargs.get("bufsize", -1), **kwargs)
-    logger.debug("Done executing %s", time.time() - start)    
+    logger.debug("Done executing %s", time.time() - start)
     while proc.returncode is None:
-        (out, error) = proc.communicate()            
+        (out, error) = proc.communicate()
         if out:
             logger.info(">>> " + out)
         if error:
             logger.warning(">>> " + error)
     logger.debug("Returned, and done logging %s", time.time() - start)
-    
+
     if proc.returncode:
         logger.error("script returned with: %i" %proc.returncode)
         raise Exception("script returned with: %i" %proc.returncode)
-    
+
     return proc.returncode

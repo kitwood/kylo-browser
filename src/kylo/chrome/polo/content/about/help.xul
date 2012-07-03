@@ -5,37 +5,37 @@
 <?xml-stylesheet href="chrome://polo/skin/common/helpPage.css" type="text/css"?>
 
 <!DOCTYPE page [
-	<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
-	%brandDTD;
-	<!ENTITY % helpDTD SYSTEM "chrome://polo/locale/help.dtd">
+    <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+    %brandDTD;
+    <!ENTITY % helpDTD SYSTEM "chrome://polo/locale/help.dtd">
     %helpDTD;
 ]>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <page id="help-page" title="&help.pageTitle;" onload="onload()" orient="vertical" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
     <script type="application/x-javascript" src="chrome://polo/content/utils/utils.js" />
     <script type="application/x-javascript" src="chrome://polo/content/about/help.js" />
     <script type="application/x-javascript">
     <![CDATA[
-    
+
 [
     [
-        "chromeWindow", 
-        function () {   
+        "chromeWindow",
+        function () {
             var w = window.QueryInterface(Ci.nsIInterfaceRequestor)
                                 .getInterface(Ci.nsIWebNavigation)
                                 .QueryInterface(Ci.nsIDocShellTreeItem)
                                 .rootTreeItem
                                 .QueryInterface(Ci.nsIInterfaceRequestor)
-                                .getInterface(Ci.nsIDOMWindow); 
-        
-            return w;   
+                                .getInterface(Ci.nsIDOMWindow);
+
+            return w;
         }
     ],
     [
@@ -71,20 +71,20 @@
                 <tab id="faqTab" label="&help.faqTabLabel;" />
                 <tab id="onlineHelpTab" label="&help.onlineHelpTabLabel;" />
                 <tab id="shortcutsTab" label="&help.shortcutTabLabel;" />
-				<image id="tabCap"/>
+                <image id="tabCap"/>
             </tabs>
             <tabpanels id="tabPanels" flex="1">
                 <tabpanel id="controlsTabPanel" orient="vertical">
-                	<hbox class="help-item" hint="home">
+                    <hbox class="help-item" hint="home">
                         <image class="icon-home" />
                         <description flex="1">&help.homeLabel;</description>
                     </hbox>
                     <hbox class="help-item" hint="addressbar">
                         <image class="icon-urlEntry" />
                         <description flex="1">
-                        	&help.urlLabel;
+                            &help.urlLabel;
                             <html:span title=" " class="help-emphasis"><html:br/>&help.tipLabel;</html:span>
-						    &help.urlTip;  
+                            &help.urlTip;
                         </description>
                     </hbox>
                     <hbox id="pageListItem" class="help-item" hint="pagelist">
@@ -94,10 +94,10 @@
                     <hbox class="help-item" id="panZoomItem" hint="panzoom">
                         <image class="icon-panZoom" />
                         <description flex="1">
-                        	&help.panZoomLabel;
-						    <html:span title=" " class="help-emphasis"><html:br/>&help.tipLabel;</html:span>
-							<html:span class="help-emphasis2">&help.panZoomTip;</html:span>
-						</description>
+                            &help.panZoomLabel;
+                            <html:span title=" " class="help-emphasis"><html:br/>&help.tipLabel;</html:span>
+                            <html:span class="help-emphasis2">&help.panZoomTip;</html:span>
+                        </description>
                     </hbox>
                     <hbox class="help-item" id="bookmarksItem" hint="bookmarks">
                         <image class="icon-bookmarks" />
@@ -120,7 +120,7 @@
                             <description>&help.zoomPageEntry;</description>
                         </vbox>
                     </hbox>
-					<hbox class="faq-item" hint="menu">
+                    <hbox class="faq-item" hint="menu">
                         <image class="icon-menu" />
                         <vbox flex="1">
                             <description class="faq-title">&help.zoomSettingTitle;</description>
@@ -137,7 +137,7 @@
                             </description>
                         </vbox>
                     </hbox>
-					<hbox class="faq-item" hint="pagelist">
+                    <hbox class="faq-item" hint="pagelist">
                         <image class="icon-pageList" />
                         <vbox flex="1">
                             <description class="faq-title">&help.newPageBarTitle;</description>
@@ -146,14 +146,14 @@
                             </description>
                         </vbox>
                     </hbox>
-					<hbox class="faq-item" hint="addressbar">
+                    <hbox class="faq-item" hint="addressbar">
                         <image class="icon-urlEntry" />
                         <vbox flex="1">
                             <description class="faq-title">&help.newWebsiteTitle;</description>
                             <description>&help.newWebsiteEntry;</description>
                         </vbox>
                     </hbox>
-					<hbox class="faq-item" hint="addressbar">
+                    <hbox class="faq-item" hint="addressbar">
                         <image class="icon-urlEntry" />
                         <vbox flex="1">
                             <description class="faq-title">&help.searchWebTitle;</description>
@@ -179,7 +179,7 @@
                     </hbox>
                 </tabpanel>
                 <tabpanel id="onlineHelpTab" orient="vertical" flex="1">
-                	<hbox class="faq-item">
+                    <hbox class="faq-item">
                         <image class="icon-onlinehelp" />
                         <vbox flex="1">
                             <description class="faq-title">&help.pointerTitle;</description>
@@ -190,33 +190,33 @@
                             </description>
                         </vbox>
                     </hbox>
-					<hbox class="faq-item">
+                    <hbox class="faq-item">
                         <image class="icon-onlinehelp" />
                         <vbox flex="1">
                             <description class="faq-title">&help.pcTvTitle;</description>
                             <description>
                                 &help.pcTvBodyPre;
                                 <html:span title=" " id="pctotv-link" class="help-link">&help.pcTvLabel;</html:span>
-								&help.pcTvBodyPost;
+                                &help.pcTvBodyPost;
                             </description>
                         </vbox>
                     </hbox>
-					<hbox class="faq-item">
+                    <hbox class="faq-item">
                         <image class="icon-onlinehelp" />
                         <vbox flex="1">
                             <description class="faq-title">&help.moreHelpTitle;</description>
                             <description>
                                 &help.moreHelpBodyPre;
                                 <html:span title=" " id="support-link" class="help-link">&help.moreHelpLabel;</html:span>
-								&help.moreHelpBodyPost;
+                                &help.moreHelpBodyPost;
                             </description>
                         </vbox>
-                    </hbox>					
+                    </hbox>
                 </tabpanel>
                 <tabpanel id="shortcutsTabPanel" orient="vertical" flex="1">
                     <hbox class="faq-item">
                         <description class="faq-title">&help.generalTitle;</description>
-                    </hbox>         
+                    </hbox>
                     <hbox class="faq-item" hint="home">
                         <image class="icon-home" />
                         <vbox flex="1">
@@ -228,26 +228,26 @@
                         <vbox flex="1">
                             <description>&help.shortcutBookmark;</description>
                         </vbox>
-                    </hbox>                                                                              
-                                                                           
+                    </hbox>
+
                     <hbox class="faq-item">
                         <description class="faq-title">&help.keyboardTitle;</description>
                     </hbox>
-                    
+
                     <hbox class="faq-item" hint="menu">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
                             <description>&help.shortcutHelp;</description>
                         </vbox>
                     </hbox>
-                                    
-                         <!-- Windows specific keyboard shortcuts -->    
+
+                         <!-- Windows specific keyboard shortcuts -->
                     <hbox class="faq-item os-win32" hint="menu">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
                             <description>&help.win32.shortcutSettings;</description>
                         </vbox>
-                    </hbox>                          
+                    </hbox>
                     <hbox class="faq-item os-win32" hint="menu">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
@@ -289,7 +289,7 @@
                         <vbox flex="1">
                             <description>&help.win32.shortcutUrlEntry;</description>
                         </vbox>
-                    </hbox>                    
+                    </hbox>
                     <hbox class="faq-item os-win32" hint="keyboard">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
@@ -326,26 +326,26 @@
                             <description>&help.win32.shortcutQuit;</description>
                         </vbox>
                     </hbox>
-                    
+
                         <!-- Mac OSX specific keyboard shortcuts -->
                     <hbox class="faq-item os-osx" hint="menu">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
                             <description>&help.osx.shortcutSettings;</description>
                         </vbox>
-                    </hbox>                      
+                    </hbox>
                     <hbox class="faq-item os-osx" hint="menu">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
                             <description>&help.osx.shortcutDownloads;</description>
                         </vbox>
-                    </hbox>             
+                    </hbox>
                     <hbox class="faq-item os-osx" hint="bookmarks">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
                             <description>&help.osx.shortcutBookmarks;</description>
                         </vbox>
-                    </hbox>                          
+                    </hbox>
                     <hbox class="faq-item os-osx" hint="keyboard">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
@@ -375,7 +375,7 @@
                         <vbox flex="1">
                             <description>&help.osx.shortcutUrlEntry;</description>
                         </vbox>
-                    </hbox>                    
+                    </hbox>
                     <hbox class="faq-item os-osx" hint="keyboard">
                         <image class="icon-keyboard" />
                         <vbox flex="1">
@@ -411,7 +411,7 @@
                         <vbox flex="1">
                             <description>&help.osx.shortcutQuit;</description>
                         </vbox>
-                    </hbox>                    
+                    </hbox>
                 </tabpanel>
             </tabpanels>
         </tabbox>

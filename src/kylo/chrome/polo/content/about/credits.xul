@@ -12,29 +12,29 @@
 ]>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <page id="credits-page" title="&credits.creditsPageTitle;" orient="vertical" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
     <script type="application/x-javascript" src="chrome://polo/content/utils/utils.js"/>
     <script type="application/x-javascript">
     <![CDATA[
-    
+
 [
     [
-        "chromeWindow", 
-        function () {   
+        "chromeWindow",
+        function () {
             var w = window.QueryInterface(Ci.nsIInterfaceRequestor)
                                 .getInterface(Ci.nsIWebNavigation)
                                 .QueryInterface(Ci.nsIDocShellTreeItem)
                                 .rootTreeItem
                                 .QueryInterface(Ci.nsIInterfaceRequestor)
-                                .getInterface(Ci.nsIDOMWindow); 
-        
-            return w;   
+                                .getInterface(Ci.nsIDOMWindow);
+
+            return w;
         }
     ],
     [
@@ -54,7 +54,7 @@
 
     ]]>
     </script>
-    
+
     <html:head>
         <html:link rel="icon" href="chrome://polo/skin/hcrestlabs.ico" />
     </html:head>

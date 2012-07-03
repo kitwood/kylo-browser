@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -17,7 +17,7 @@ richlistitem[type="download"] {
 }
 
 richlistitem[type="download"] button {
-	-moz-border-image: url("../../global/images/btn/button_embed_off.png") 23 23 23 23 / 23px 23px 23px 23px;
+    -moz-border-image: url("../../global/images/btn/button_embed_off.png") 23 23 23 23 / 23px 23px 23px 23px;
 }
 
 richlistitem[type="download"] button:not([disabled=true]):hover {
@@ -25,9 +25,9 @@ richlistitem[type="download"] button:not([disabled=true]):hover {
 }
 
 richlistitem[type="download"] button.closeBtn {
-	margin-left: 15px;
-	width: 75px;
-	height: 75px;
+    margin-left: 15px;
+    width: 75px;
+    height: 75px;
     min-width: 75px;
     min-height: 75px;
     background: url("../../polo/common/images/close.png") no-repeat;
@@ -60,7 +60,7 @@ richlistitem[type="download"] .dateTime {
 
 .dateTime {
     font-size: 32px;
-    text-shadow: 0 0 10px #000000;  
+    text-shadow: 0 0 10px #000000;
 }
 
 .status {

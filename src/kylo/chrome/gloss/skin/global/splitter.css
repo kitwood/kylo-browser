@@ -94,7 +94,7 @@ splitter[orient="vertical"] > grippy {
   min-width: 115px;
   min-height: 4px;
 }
-  
+
 /* ..... normal state ..... */
 
 /* vertical grippies */
@@ -109,12 +109,12 @@ splitter[collapse="after"] > grippy {
 /* horizontal grippies */
 splitter[collapse="before"][orient="vertical"] > grippy {
   background-image: url("chrome://global/skin/splitter/grip-hrz-before.gif");
-}  
+}
 
 splitter[collapse="after"][orient="vertical"] > grippy {
   background-image: url("chrome://global/skin/splitter/grip-hrz-after.gif");
-}  
-  
+}
+
 /* ..... collapsed state ..... */
 
 /* vertical grippies */
@@ -129,9 +129,9 @@ splitter[collapse="after"][state="collapsed"] > grippy {
 /* horizontal grippies */
 splitter[collapse="before"][state="collapsed"][orient="vertical"] > grippy {
   background-image: url("chrome://global/skin/splitter/grip-hrz-after.gif");
-}  
+}
 
 splitter[collapse="after"][state="collapsed"][orient="vertical"] > grippy {
   background-image: url("chrome://global/skin/splitter/grip-hrz-before.gif");
-}  
+}
 

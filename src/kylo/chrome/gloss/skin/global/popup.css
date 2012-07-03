@@ -73,14 +73,14 @@ popup > menu > menupopup {
 
 tooltip {
     margin-top: 21px;
-    max-width: 40em;  
+    max-width: 40em;
     -moz-appearance: none;
     font-size: 22px;
     padding: 4px;
     color: #efefef;
     font-weight: bold;
-    text-shadow: 0 0 7px #000000, 3px 3px 3px #000000;	
-	border-style: solid;
+    text-shadow: 0 0 7px #000000, 3px 3px 3px #000000;
+    border-style: solid;
     border-radius: 10px;
     background-color: rgba(0,0,0,0.5);
     border-color: rgba(255,255,255,0.4);

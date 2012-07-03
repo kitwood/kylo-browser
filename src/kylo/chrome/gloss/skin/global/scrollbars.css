@@ -2,22 +2,22 @@
 @namespace html url("http://www.w3.org/1999/xhtml"); /* namespace for HTML elements */
 
 scrollbar {
-	-moz-binding: url("chrome://polo/content/bindings/polo-scrollbar.xml#scrollbar");
-	cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-	min-height: 22px;
+    -moz-binding: url("chrome://polo/content/bindings/polo-scrollbar.xml#scrollbar");
+    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
+    min-height: 22px;
 }
 
 scrollbar[orient="vertical"] {
-	min-width: 22px;
+    min-width: 22px;
 }
 
 scrollbar > stack {
-	height: 16px;		
-	margin: 3px;	
+    height: 16px;
+    margin: 3px;
 }
 
 scrollbar[orient="vertical"] > stack {
-	width: 16px;
+    width: 16px;
 }
 
 scrollbar [anonid=track] {
@@ -25,26 +25,26 @@ scrollbar [anonid=track] {
 }
 
 scrollbar[orient="vertical"] [anonid=track] {
-	-moz-border-image: url("images/scrollbar/sb_slider_bg.png") 10 0 / 10px 0px;
+    -moz-border-image: url("images/scrollbar/sb_slider_bg.png") 10 0 / 10px 0px;
 }
 
 
 slider {
-	margin: 0 3px 0 3px;	
+    margin: 0 3px 0 3px;
 }
 
 scrollbar[orient="vertical"] slider {
-	margin: 3px 0 -1px 0;
+    margin: 3px 0 -1px 0;
 }
 
 thumb {
-	-moz-border-image: url("images/scrollbar/sb_thumb.png") 4 2 9 2 / 4px 2px 9px 2px;
-	min-height: 20px;
+    -moz-border-image: url("images/scrollbar/sb_thumb.png") 4 2 9 2 / 4px 2px 9px 2px;
+    min-height: 20px;
 }
 
 thumb[orient="horizontal"] {
-	-moz-border-image: url("images/scrollbar/sb_thumb_horiz.png") 2 4 2 4 / 2px 4px 2px 4px;
-	min-height: 16px;
+    -moz-border-image: url("images/scrollbar/sb_thumb_horiz.png") 2 4 2 4 / 2px 4px 2px 4px;
+    min-height: 16px;
     min-width: 20px;
 }
 
@@ -54,7 +54,7 @@ scrollbarbutton:hover:active, scrollbarbutton[active="true"] {
 
 /* ::::: square at the corner of two scrollbars ::::: */
 
-scrollcorner { 
+scrollcorner {
   -moz-binding: url("chrome://polo/content/bindings/polo-scrollbar.xml#scrollbar-base");
   width: 16px;
   height: 16px;
@@ -65,19 +65,19 @@ scrollcorner {
 /* ::::: scrollbar button ::::: */
 
 scrollbarbutton {
-	display: none;
+    display: none;
 }
 
 /*
 scrollbarbutton {
-	min-width: 16px;
-	min-height: 16px;
-	width: 16px;
-	height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 scrollbarbutton[disabled="true"] {
-	opacity: 0.4;
+    opacity: 0.4;
 }
 */
 
@@ -113,7 +113,7 @@ scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
     background: url("chrome://global/skin/scrollbar/slider.gif") scrollbar;
   }
 
-  html|div scrollbar[orient="vertical"] 
+  html|div scrollbar[orient="vertical"]
   {
      -moz-appearance: scrollbartrack-vertical;
   }

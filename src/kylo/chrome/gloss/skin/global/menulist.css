@@ -115,7 +115,7 @@ menulist:hover:active > .menulist-dropmarker {
 menulist:focus > .menulist-label-box {
   /*border: 1px dotted #F5DB95;
   background-color: #CCCCCC;
-  color: black;  
+  color: black;
   */
 }
 
@@ -162,7 +162,7 @@ html|*.menulist-editable-input {
 .menulist-compact > .menulist-label-box > .menulist-label {
   margin: 0 3px !important;
   text-align: right;
-}  
+}
 
 .menulist-compact > .menulist-label-box > .menulist-icon {
   -moz-margin-start: 2px;

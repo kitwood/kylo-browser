@@ -37,7 +37,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /* ***** ADDITIONAL CONTRIBUTIONS *****
- * Original Code modified by Hillcrest Labs, Inc. for use in Kylo. 
+ * Original Code modified by Hillcrest Labs, Inc. for use in Kylo.
  * Portions created by Hillcrest Labs, Inc. are Copyright (c) 2010. All Rights Reserved.
  */
 
@@ -81,17 +81,17 @@ toolbarbutton:focus {
 
 toolbarbutton:hover:not([disabled="true"]),
 toolbarbutton[buttonover="true"] {
-  
+
 }
 
 toolbarbutton:hover:active:not([disabled="true"]),
 toolbarbutton[open="true"]:hover,
 toolbarbutton[open="true"] {
-  
+
 }
 
 toolbarbutton[disabled="true"] {
-  
+
 }
 
 /*

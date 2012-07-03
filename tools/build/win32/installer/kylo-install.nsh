@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -12,7 +12,7 @@
 ** Installer
 ***************************************************/
 
-; 
+;
 ;  Note: BUILD_INSTALLER starts at line 10 so when u see:
 ;           Error in macro BUILD_INSTALLER on macroline 265
 ;         Add +10 to macroline 265 to find the error location in this file.
@@ -100,10 +100,10 @@ Section "$(SectNameMain)" SecBrowser
 
     ; Top Level Files
     File /r ${APP_DIR}\*.*
-    
+
     ; Icon file
     File /oname=${ICO_NAME} ${MUI_ICON}
-    
+
     call WMP_DoInstall
     call MSVC_DoInstall
 SectionEnd
@@ -136,25 +136,25 @@ SectionEnd
 
 ; Optional section (can be disabled by the user)
 Section "$(SectNameWinMediaCtrShrtcuts)" SecWMCShortcuts
-	${If} $IsWMCInstalled == 1
+    ${If} $IsWMCInstalled == 1
 
         CreateDirectory $INSTDIR\wmc
-		SetOutPath $INSTDIR\wmc   
-        
-    	File ${RESOURCE_DIR}\kylo_wmc.png
-    	File ${REDIST_DIR}\MceAppHandler.exe
+        SetOutPath $INSTDIR\wmc
 
-    	FileOpen $0 kylo_wmc.xml w
-    	FileWrite $0 '<application title="Kylo Browser" id="{25e1993f-a9d8-4251-871c-0bf84c6d6e29}" StartMenuStripTitle="Kylo" StartMenuStripCategory="Kylo\Kylo"><entrypoint id="{58267566-672b-4b1d-812a-fc46d728d073}" run="$INSTDIR\wmc\kylo_wmc.lnk" title="Kylo Browser" description="The browser built for the big screen" imageUrl="$INSTDIR\wmc\kylo_wmc.png"><category category="More Programs"/><category category="Kylo\Kylo"/></entrypoint></application>'
-    	FileClose $0
-    	CreateShortCut "$INSTDIR\wmc\kylo_wmc.lnk" \
+        File ${RESOURCE_DIR}\kylo_wmc.png
+        File ${REDIST_DIR}\MceAppHandler.exe
+
+        FileOpen $0 kylo_wmc.xml w
+        FileWrite $0 '<application title="Kylo Browser" id="{25e1993f-a9d8-4251-871c-0bf84c6d6e29}" StartMenuStripTitle="Kylo" StartMenuStripCategory="Kylo\Kylo"><entrypoint id="{58267566-672b-4b1d-812a-fc46d728d073}" run="$INSTDIR\wmc\kylo_wmc.lnk" title="Kylo Browser" description="The browser built for the big screen" imageUrl="$INSTDIR\wmc\kylo_wmc.png"><category category="More Programs"/><category category="Kylo\Kylo"/></entrypoint></application>'
+        FileClose $0
+        CreateShortCut "$INSTDIR\wmc\kylo_wmc.lnk" \
                         "$INSTDIR\wmc\MceAppHandler.exe" "$\"$INSTDIR\${EXE_NAME}$\"" "$INSTDIR\${ICO_NAME}" 0
 
-    	${If} ${UAC_IsAdmin}
-    		Exec '"$WINDIR\ehome\registermceapp.exe" /allusers "$INSTDIR\wmc\kylo_wmc.xml"'
-		${Else}
-    		Exec '"$WINDIR\ehome\registermceapp.exe" "$INSTDIR\wmc\kylo_wmc.xml"'
-		${EndIf}
+        ${If} ${UAC_IsAdmin}
+            Exec '"$WINDIR\ehome\registermceapp.exe" /allusers "$INSTDIR\wmc\kylo_wmc.xml"'
+        ${Else}
+            Exec '"$WINDIR\ehome\registermceapp.exe" "$INSTDIR\wmc\kylo_wmc.xml"'
+        ${EndIf}
     ${EndIf}
 SectionEnd
 
@@ -227,23 +227,23 @@ Function CheckInstDir
     ${EndIf}
 
     ${DirState} $INSTDIR $R0
-    
+
     ${If} $R0 == 0
         ; empty dir
         !insertmacro ensureInstDirWritable
     ${ElseIf} $R0 == 1
-        
+
         ; dir has files
         ; check the app.ini to see if it is a Polo install
         ${If} ${FileExists} $INSTDIR\application.ini
-        
+
             StrCpy $0 $INSTDIR\application.ini
             ReadINIStr $1 $0 App Name
             ${IfNot} $1 == "${INTERNAL_NAME}"
                 Call AbortOnInvalidInstallDir
                 Return
             ${EndIf}
-            
+
         ; handle the case where:
         ;      1. doing a single user install to the c:\users\xx\appdata\local\Hillcrest Labs\Kylo\
         ;      2. a previous Kylo profile exists
@@ -252,7 +252,7 @@ Function CheckInstDir
             Call AbortOnInvalidInstallDir
             Return
         ${EndIf}
-        
+
         ; validate write permissions
         !insertmacro ensureInstDirWritable
 
@@ -280,9 +280,9 @@ Function PrepDirForUpgrade
     ; Don't remain and cause problems
 
     ; TODO improve this section
-    
+
     ; Uninstall wmc
-    ${If} $IsWMCInstalled == 1 
+    ${If} $IsWMCInstalled == 1
     ${AndIf} ${FileExists} $INSTDIR\wmc\kylo_wmc.xml
       DetailPrint "Uninstalling WMC shortcut"
       ${If} ${UAC_IsAdmin}
@@ -290,7 +290,7 @@ Function PrepDirForUpgrade
       ${Else}
         ExecWait '"$WINDIR\ehome\registermceapp.exe" /u "$INSTDIR\wmc\kylo_wmc.xml"'
       ${EndIf}
-    ${EndIf}    
+    ${EndIf}
 
     DetailPrint "Backing up installed files"
     CreateDirectory $INSTDIR\backup
@@ -317,13 +317,13 @@ Function PrepDirForUpgrade
 FunctionEnd
 
 Function MSVC_DoInstall
-      ReadRegDword $R0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\VCRedist\x86" "Installed"                
+      ReadRegDword $R0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\VCRedist\x86" "Installed"
       ${If} $R0 == ""
           StrCpy $R1 "$PLUGINSDIR\${MSVC_REDIST}"
           File /nonfatal /oname=$R1  ${REDIST_DIR}\${MSVC_REDIST}
           ${If} ${FileExists} $R1
             ExecWait '"$R1" /q /norestart'
-          ${EndIf}    
+          ${EndIf}
           Delete $R1
       ${EndIf}
 FunctionEnd
@@ -333,7 +333,7 @@ Function WMP_DoInstall
         CreateDirectory "$INSTDIR\Plugins"
     ${EndIf}
     SetOutPath $INSTDIR\Plugins
-    
+
     File /nonfatal /r ${WMP_PLUGIN_DIR}\*.*
 FunctionEnd
 

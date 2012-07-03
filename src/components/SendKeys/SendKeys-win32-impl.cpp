@@ -32,47 +32,47 @@ SendKeys::~SendKeys() {
 
 /* void key_up (in octet vk); */
 NS_IMETHODIMP SendKeys::Key_up(PRUint8 vk) {
-	char scanCode = 0;
-	keybd_event(vk, scanCode, KEYEVENTF_KEYUP, 0);
+    char scanCode = 0;
+    keybd_event(vk, scanCode, KEYEVENTF_KEYUP, 0);
 
-	return NS_OK;
+    return NS_OK;
 }
 
 /* void key_down (in octet vk); */
 NS_IMETHODIMP SendKeys::Key_down(PRUint8 vk) {
-	char scanCode = 0;
-	keybd_event(vk, scanCode, 0, 0);
+    char scanCode = 0;
+    keybd_event(vk, scanCode, 0, 0);
 
-	return NS_OK;
+    return NS_OK;
 }
 
 /* void char_up (in char key); */
 NS_IMETHODIMP SendKeys::Char_up(PRUnichar key) {
-	INPUT input;
-	input.type = INPUT_KEYBOARD;
-	input.ki.wVk = 0;
-	input.ki.wScan = (WCHAR) key;
-	input.ki.dwFlags = KEYEVENTF_KEYUP | KEYEVENTF_UNICODE;
-	input.ki.time = 0;
-	input.ki.dwExtraInfo = 0;
+    INPUT input;
+    input.type = INPUT_KEYBOARD;
+    input.ki.wVk = 0;
+    input.ki.wScan = (WCHAR) key;
+    input.ki.dwFlags = KEYEVENTF_KEYUP | KEYEVENTF_UNICODE;
+    input.ki.time = 0;
+    input.ki.dwExtraInfo = 0;
 
-	SendInput(1, &input, sizeof(INPUT));
+    SendInput(1, &input, sizeof(INPUT));
 
-	return NS_OK;
+    return NS_OK;
 }
 
 
 /* void char_down (in char key); */
 NS_IMETHODIMP SendKeys::Char_down(PRUnichar key) {
-	INPUT input;
-	input.type = INPUT_KEYBOARD;
-	input.ki.wVk = 0;
-	input.ki.wScan = (WCHAR) key;
-	input.ki.dwFlags = KEYEVENTF_UNICODE;
-	input.ki.time = 0;
-	input.ki.dwExtraInfo = 0;
+    INPUT input;
+    input.type = INPUT_KEYBOARD;
+    input.ki.wVk = 0;
+    input.ki.wScan = (WCHAR) key;
+    input.ki.dwFlags = KEYEVENTF_UNICODE;
+    input.ki.time = 0;
+    input.ki.dwExtraInfo = 0;
 
-	SendInput(1, &input, sizeof(INPUT));
+    SendInput(1, &input, sizeof(INPUT));
 
     return NS_OK;
 }

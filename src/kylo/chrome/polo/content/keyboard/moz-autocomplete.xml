@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
-<!-- 
+<!--
     Originally from Mozilla Fennec: mobile/chrome/content/bindings.xml
     and portions inside #popup_autocompleteresult from Mozilla Toolkit: tookit/content/widgets/autocomplete.xml
  -->
- 
+
 <!DOCTYPE bindings [
 <!ENTITY % browserDTD SYSTEM "chrome://polo/content/keyboard/moz-autocomplete.dtd">
 %browserDTD;
@@ -54,23 +54,23 @@
     <content>
         <xul:image class="autocomplete-item-image" src="" xbl:inherits="src"/>
         <xul:vbox flex="1" class="autocomplete-item-inner-container">
-        	<xul:hbox class="autocomplete-item-title-container">
+            <xul:hbox class="autocomplete-item-title-container">
                 <xul:description class="autocomplete-item-title" anonid="title-desc"/>
-			</xul:hbox>
+            </xul:hbox>
             <xul:hbox class="autocomplete-item-url-container">
                 <xul:description class="autocomplete-item-url" anonid="url-desc"/>
             </xul:hbox>
         </xul:vbox>
     </content>
     <implementation implements="nsIDOMXULSelectControlItemElement">
-    
+
       <constructor>
         <![CDATA[
             this._title = document.getAnonymousElementByAttribute(this, "anonid", "title-desc");
             this._url = document.getAnonymousElementByAttribute(this, "anonid", "url-desc");
           ]]>
-      </constructor>    
-    
+      </constructor>
+
       <field name="_boundaryCutoff">null</field>
 
       <property name="boundaryCutoff" readonly="true">
@@ -196,7 +196,7 @@
           // If we're searching for something that needs alternate emphasis,
           // we'll need to check the text that we match
           let checkAlt = this._needsAlternateEmphasis(search);
-    
+
           let next;
           let start = 0;
           let len = indices.length;
@@ -228,27 +228,27 @@
           var url = this.getAttribute("url");
           var title = this.getAttribute("title");
           var type = this.getAttribute("type");
-		  var terms = this.getAttribute("searchTerms");
-            
-		  
-		  if (type == "auto_search") {
-		      while (this._title.hasChildNodes())
+          var terms = this.getAttribute("searchTerms");
+
+
+          if (type == "auto_search") {
+              while (this._title.hasChildNodes())
                     this._title.removeChild(this._title.firstChild);
               this._title.appendChild(document.createTextNode(title));
-			  
-			  while (this._url.hasChildNodes())
+
+              while (this._url.hasChildNodes())
                     this._url.removeChild(this._url.firstChild);
               this._url.appendChild(document.createTextNode("\"" + terms + "\""));
-		  } else {
-	          // Emphasize the matching search terms for the description
-	          this._setUpDescription(this._title, title.slice(0, 200));
+          } else {
+              // Emphasize the matching search terms for the description
+              this._setUpDescription(this._title, title.slice(0, 200));
               this._setUpDescription(this._url, url.slice(0, 60));
-		  }
+          }
           ]]>
         </body>
       </method>
 
-    
+
     </implementation>
   </binding>
 
@@ -259,10 +259,10 @@
                        class="autocomplete-items"
                        anonid="autocomplete-items"
                        flex="1000">
-			<xul:autocompleteresult hidden="true"/>
-		</xul:scrollbox>
+            <xul:autocompleteresult hidden="true"/>
+        </xul:scrollbox>
         <children/>
-      </xul:richlistbox>  
+      </xul:richlistbox>
     </content>
 
     <implementation implements="nsIAutoCompletePopup, nsIDOMEventListener">
@@ -332,7 +332,7 @@
             this.hidden = false;
           this.collapsed = false;
           this._popupOpen = true;
-            
+
           //this.setAttribute("height", aElement.clientHeight - (parseInt(this.getAttribute("heightadjustment")) || 0));
           this.invalidate();
         ]]></body>
@@ -365,8 +365,8 @@
           // Don't bother doing work if we're not even open
           if (!this.popupOpen)
             return;
-          
-          
+
+
           // Scroll to the top left if only if necessary
           if (this._items.scrollTop || this._items.scrollLeft)
             this._scrollBoxObject.scrollTo(0, 0);
@@ -384,7 +384,7 @@
           let matchCount = this._matchCount;
           let children = items.childNodes;
           let iterCount = Math.max(children.length, matchCount);
-          
+
           for (let i = 0; i < iterCount; ++i) {
             let item = children.item(i);
 
@@ -408,27 +408,27 @@
             // Assign the values
             let type = controller.getStyleAt(i);
             let title = controller.getCommentAt(i);
-			
-			/*
+
+            /*
             let tags = '';
-            
+
             if (type == "tag")
               [, title, tags] = title.match(/^(.+) \u2013 (.+)$/);
             item.setAttribute("tags", tags);
-			*/
-			item.setAttribute("type", type);
+            */
+            item.setAttribute("type", type);
 
             let url = controller.getValueAt(i);
             // Unescape the URI spec for showing as an entry in the popup
-            url = nsITextToSubURI.unEscapeURIForUI("UTF-8", url);                        
-        	item.setAttribute("title", title || "");
-        	item.setAttribute("url", url);
+            url = nsITextToSubURI.unEscapeURIForUI("UTF-8", url);
+            item.setAttribute("title", title || "");
+            item.setAttribute("url", url);
 
             let isBookmark = ((type == "bookmark") || (type == "tag"));
             item.setAttribute("favorite", isBookmark);
             item.setAttribute("src", controller.getImageAt(i));
             item.setAttribute("searchTerms", trimmedSearchString);
-            
+
             item._adjustAcItem();
           }
 
@@ -526,11 +526,11 @@
             if (element.localName == "autocompleteresult") {
                 this._selectedIndex = element._index;
                 this.input.controller.handleEnter(true);
-                return;                
+                return;
             }
             element = element.parentNode;
           } while (i++ < DEEPEST_CHILD_DEPTH);
-          
+
           debug("Click on autocomplete result, could not find item's index");
           debug(event.target.id, "       target-id");
           debugObj(event.target, "       target");

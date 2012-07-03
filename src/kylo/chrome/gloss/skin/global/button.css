@@ -37,7 +37,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /* ***** ADDITIONAL CONTRIBUTIONS *****
- * Original Code modified by Hillcrest Labs, Inc. for use in Kylo. 
+ * Original Code modified by Hillcrest Labs, Inc. for use in Kylo.
  * Portions created by Hillcrest Labs, Inc. are Copyright (c) 2010. All Rights Reserved.
  */
 
@@ -52,11 +52,9 @@
 button {
     min-height: 50px;
     min-width: 200px;
-	margin: 0;
-	
+    margin: 0;
     border: none;
     background: none;
-    
     -moz-border-image: url("chrome://global/skin/images/btn/button_off.png") 15 15 15 15 / 15px 15px 15px 15px;
 }
 
@@ -102,7 +100,7 @@ button:focus > .button-box {
 
   */
 
-/** These states are nice, but we're going to save them for a 
+/** These states are nice, but we're going to save them for a
  * different skin.
  */
 /* .......... default state .......... */
@@ -127,9 +125,9 @@ button[checked="true"]:hover {
 /* .......... down state .......... */
 /*
 button:hover:active,
-button[open="true"]:hover:active, 
+button[open="true"]:hover:active,
 button[checked="true"]:hover:active {
-	-moz-border-image: url("chrome://global/skin/images/btn/btn_down.png") 12 36 8 36 / 12px 36px 8px 36px;
+    -moz-border-image: url("chrome://global/skin/images/btn/btn_down.png") 12 36 8 36 / 12px 36px 8px 36px;
 }
 */
 /* .......... disabled state .......... */
@@ -192,6 +190,6 @@ button[type="disclosure"] {
 }
 
 button[type="disclosure"][open="true"] {
-  list-style-image: url("chrome://global/skin/tree/twisty-open.png"); 
+  list-style-image: url("chrome://global/skin/tree/twisty-open.png");
 }
 

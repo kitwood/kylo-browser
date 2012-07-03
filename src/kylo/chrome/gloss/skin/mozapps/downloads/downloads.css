@@ -1,10 +1,10 @@
 window {
     -moz-appearance: none;
-	cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
+    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 page {
-	background: url("chrome://polo/skin/common/images/downloads_bg.jpg") repeat top left;
+    background: url("chrome://polo/skin/common/images/downloads_bg.jpg") repeat top left;
 }
 
 #downloadManager {
@@ -13,7 +13,7 @@ page {
 
 /* Download View */
 #downloadView {
-    -moz-appearance: none;  
+    -moz-appearance: none;
     -moz-border-bottom-colors: none;
     background: none;
     margin: 0;
@@ -23,7 +23,7 @@ page {
 /* Download View Items */
 richlistitem {
     -moz-border-image: url("chrome://polo/skin/common/images/listitem_bg.png") 10 10 14 10 / 10px 10px 14px 10px;
-	margin: 3px;
+    margin: 3px;
 }
 
 richlistitem:last-child {
@@ -48,18 +48,18 @@ richlistitem[type="download"] .name {
 
 richlistitem[type="download"] .dateTime {
     font-size: 22px;
-    color: #b4b4b4;    
-    text-shadow: 0 0 7px #000000; 
+    color: #b4b4b4;
+    text-shadow: 0 0 7px #000000;
 }
 
 richlistitem[type="download"] .status {
     font-size: 22px;
-    color: #b4b4b4;    
-    text-shadow: 0 0 7px #000000; 
+    color: #b4b4b4;
+    text-shadow: 0 0 7px #000000;
 }
 
 richlistitem[type="download"] button {
-	-moz-border-image: url("chrome://global/skin/images/btn/button_embed_off.png") 15 15 15 15 / 15px 15px 15px 15px;
+    -moz-border-image: url("chrome://global/skin/images/btn/button_embed_off.png") 15 15 15 15 / 15px 15px 15px 15px;
 }
 
 richlistitem[type="download"] button:not([disabled=true]):hover {
@@ -67,8 +67,8 @@ richlistitem[type="download"] button:not([disabled=true]):hover {
 }
 
 richlistitem[type="download"] button.closeBtn {
-	margin-left: 10px;
-	width: 50px;
+    margin-left: 10px;
+    width: 50px;
     min-width: 50px;
     background: url("chrome://polo/skin/common/images/close.png") no-repeat;
     -moz-border-image: none;
@@ -76,7 +76,7 @@ richlistitem[type="download"] button.closeBtn {
 
 richlistitem[type="download"] button.closeBtn:not([disabled=true]):hover {
     background: url("chrome://polo/skin/common/images/close_over.png") no-repeat;
-	-moz-border-image: none;
+    -moz-border-image: none;
 }
 
 richlistitem[type="download"] button.closeBtn label {
@@ -85,9 +85,9 @@ richlistitem[type="download"] button.closeBtn label {
 
 #search {
     -moz-appearance: none;
-	height: 66px;
+    height: 66px;
     background: -moz-linear-gradient(#9f9f9f,#7c7c7c 3%,#626262 50%,#4e4e4e 51%,#6a6a6a 97%,#1d1d1d);
-	padding: 0px 32px;
+    padding: 0px 32px;
 }
 
 progressmeter {

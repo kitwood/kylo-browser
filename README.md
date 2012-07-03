@@ -16,7 +16,7 @@ Basic documentation of the Kylo build process.
 
 - LICENSE  
 Lawyer stuff. Lists Open Source licenses and terms.
-	
+
 - TRADEMARKS  
 Helpful info regarding use of the Kylo name and trademarks. If you're planning on distributing a modified version of Kylo, YOU SHOULD READ THIS.
 

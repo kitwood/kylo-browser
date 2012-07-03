@@ -69,13 +69,13 @@ UDLRTool::UDLRTool()
 
     pressed_ = false;
     capture_ = true;
-    
+
     leftClickKey_ = VK_RETURN;
     rightClickKey_ = NULL;
     middleClickKey_ = NULL;
     scrollUpKey_ = NULL;
     scrollDownKey_ = NULL;
-    
+
     /**
      * We're going to get the main Kylo window through some special XPCOM APIs.
      *
@@ -145,7 +145,7 @@ UDLRTool::UDLRTool()
     GetWindowThreadProcessId(mainHWND, &mainPID);
 
     keyboardhhook = NULL;
-    
+
 #ifdef _DEBUG_
     WCHAR buff[512];
     _snwprintf_s(buff, _countof(buff), _TRUNCATE, L"%s\\Hillcrest Labs\\Kylo\\udlrtool.log", _wgetenv(L"APPDATA"));
@@ -178,7 +178,7 @@ HINSTANCE GetHInstance()
         if (GetModuleFileName((HINSTANCE)mbi.AllocationBase, (LPWCH) szModule,sizeof(szModule)))
         {
             return (HINSTANCE)mbi.AllocationBase;
-        }        
+        }
     }
     return NULL;
 }
@@ -227,7 +227,7 @@ void UDLRTool::AddHook()
     return;
 }
 
-void UDLRTool::RemoveHook() 
+void UDLRTool::RemoveHook()
 {
     bool result = KillTimer(NULL, uIDEvent_);
     if (keyboardhhook != NULL) {

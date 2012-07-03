@@ -1,15 +1,15 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
 page {
     -moz-appearance: none;
-	background: url('images/settings_bg.jpg') repeat top left;
+    background: url('images/settings_bg.jpg') repeat top left;
 }
 
 groupbox > hbox {
@@ -23,26 +23,26 @@ groupbox > hbox > label {
 
 tabbox {
     margin-top: 20px;
-	/*max-height: 335px;*/
+    /*max-height: 335px;*/
 }
 
 #tabCap {
-	-moz-border-image: url("chrome://global/skin/images/tabs/tabs_v_end.png") 0 28 22 0 / 0 28px 22px 0;
+    -moz-border-image: url("chrome://global/skin/images/tabs/tabs_v_end.png") 0 28 22 0 / 0 28px 22px 0;
 }
 
 tabpanel {
     overflow-y: auto;
-} 
+}
 
 tabpanels {
     padding-top: 10px;
     padding-right: 5px;
-	min-height: 337px;
+    min-height: 337px;
 }
 
 .pref-container > * {
     margin-right: 5px;
-    border-bottom: 2px solid;    
+    border-bottom: 2px solid;
     -moz-border-bottom-colors: #222327 #1e1f23;
     padding: 12px 0;
 }
@@ -58,20 +58,20 @@ tabpanels {
 }
 
 .text-size-example {
-	margin: 10px 10px 10px 40px;
-	width: 400px;
-	max-width: 400px;
+    margin: 10px 10px 10px 40px;
+    width: 400px;
+    max-width: 400px;
 }
 
 .text-size-example-content {
-	border: 2px solid;
+    border: 2px solid;
     -moz-border-top-colors: #6b6b6b #5b5b5b;
     -moz-border-left-colors: #6b6b6b #5b5b5b;
     -moz-border-right-colors: #5b5b5b #6b6b6b;
     -moz-border-bottom-colors: #5b5b5b #6b6b6b;
     background: rgba(56, 56, 56, 0.98);
-	font-size: 12px;
-	padding: 5px;
+    font-size: 12px;
+    padding: 5px;
 }
 
 .setting_header {
@@ -79,51 +79,51 @@ tabpanels {
 }
 
 .setting_subitem {
-	margin-left: 60px;
+    margin-left: 60px;
 }
 
 .input-label-align > .prefbox > vbox,
 .label-align {
-	width: 220px;
-	max-width: 220px;
-	margin: 0;
+    width: 220px;
+    max-width: 220px;
+    margin: 0;
 }
 
 .label-align-left {
-	margin-left: 0;
+    margin-left: 0;
 }
 
 .input-fixed-width-small > .prefbox > vbox {
     width: 120px;
-	max-width: 120px;
-} 
+    max-width: 120px;
+}
 
 .input-fixed-width-small [anonid="input"] {
-	width: 300px;
-	max-width: 300px;
-} 
+    width: 300px;
+    max-width: 300px;
+}
 
 #hp_box {
-	margin: 0;
+    margin: 0;
 }
 
 #hp_label {
-	border: 3px solid #494949;
-	background-color: black;
-	margin: 4px 8px;
-	-moz-box-align: center;	
+    border: 3px solid #494949;
+    background-color: black;
+    margin: 4px 8px;
+    -moz-box-align: center;
 }
 
 #hp_label > image {
-	margin: 4px 4px 4px 10px;
+    margin: 4px 4px 4px 10px;
 }
 
 #hp_buttons {
-	-moz-box-align: center;
+    -moz-box-align: center;
 }
 
 #hp_buttons > button:first-child {
-	margin-left: 0;
+    margin-left: 0;
 }
 
 #hp_buttons > button:last-child {
@@ -134,11 +134,11 @@ settings:disabled setting,
 setting:disabled,
 settings[disabled=true] setting,
 setting[disabled=true] {
-	opacity: 0.4;
+    opacity: 0.4;
 }
 
 #screen-change-message {
-	background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid;
     -moz-border-top-colors: #6b6b6b #5b5b5b;
     -moz-border-left-colors: #6b6b6b #5b5b5b;
@@ -161,13 +161,13 @@ menuitem {
 }
 
 #browseFolderButton,
-#restoreButton, 
+#restoreButton,
 #clearDataButton {
-	min-width: 225px;
+    min-width: 225px;
 }
 
 textbox {
-	-moz-appearance: none;
+    -moz-appearance: none;
     background: none !important;
     border: none;
     -moz-border-image: url("chrome://polo/skin/common/images/area_bg.png") 8 8 8 8 / 8px 8px 8px 8px;
@@ -176,15 +176,15 @@ textbox {
 }
 
 filefield {
-	-moz-appearance: none;
+    -moz-appearance: none;
 }
 
 .fileFieldContentBox {
-	background: none !important;
+    background: none !important;
 }
 
 #proxy_host label {
-	padding-top: 10px;
+    padding-top: 10px;
 }
 
 #proxy_host textbox {
@@ -214,7 +214,7 @@ filefield {
     background: none;
     margin: 3px 3px 3px 0;
     padding: 4px 8px 4px 4px;
-    min-height: 46px;    
+    min-height: 46px;
 }
 
 .themeItem[active=true] {
@@ -237,7 +237,7 @@ filefield {
 .themeItem .description {
     font-size: 22px;
     color: #b4b4b4;
-    text-shadow: 0 0 7px #000000;    
+    text-shadow: 0 0 7px #000000;
 }
 
 .themeItem[active=true] .description {

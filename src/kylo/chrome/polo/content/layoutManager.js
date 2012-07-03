@@ -1,11 +1,11 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
- * 
+ *
  * @author bdyer
  */
 
@@ -13,7 +13,7 @@ Components.utils["import"]("resource://gre/modules/AddonManager.jsm");
 Components.utils["import"]("resource://gre/modules/Services.jsm");
 
 /**
- * LayoutManager Handles all layout changes to the Kylo application, like changing 
+ * LayoutManager Handles all layout changes to the Kylo application, like changing
  * the overscan settings and handling resize events, etc.
  * @name LayoutManager
  * @constuctor
@@ -23,24 +23,24 @@ function LayoutManager() {
     this.layoutDeck_ = document.getElementById("overscanDeck");
     this.contentBox_ = document.getElementById("content-box");
     this.browserDeck_ = document.getElementById("browserDeck");
-    
+
     this.prevBrowserWidth_ = this.browserDeck_.clientWidth;
-    this.prevBrowserHeight_ = this.browserDeck_.clientHeight; 
-    
+    this.prevBrowserHeight_ = this.browserDeck_.clientHeight;
+
     this.controls_ = document.getElementById("controlsOverlay");
-    
+
     this.spacers_ = {
         top: document.getElementById("overscan-top"),
         left: document.getElementById("overscan-left"),
         bottom: document.getElementById("overscan-bottom"),
-        right: document.getElementById("overscan-right"),       
+        right: document.getElementById("overscan-right"),
     }
-    
+
     this.selectedTheme_ = null;
     this.selectedThemeResolution_ = null;
     this.themes720_ = {};
     this.themes1080_ = {};
-    
+
     var root = document.getElementById("overscan-adjust");
     var btns = root.getElementsByTagName("button");
     var f = this.buttonEvent.bind(this);
@@ -59,14 +59,14 @@ function LayoutManager() {
             root.removeAttribute("highlight");
         }, false);
     }
-    
+
     document.getElementById("overscan-reset").addEventListener("mouseover", function (evt) {
         root.setAttribute("highlight", "top right bottom left");
     }, false);
     document.getElementById("overscan-reset").addEventListener("mouseout", function (evt) {
         root.removeAttribute("highlight");
     }, false);
-    
+
     document.getElementById("overscan-max").addEventListener("mouseover", function (evt) {
         root.setAttribute("highlight", "top right bottom left");
     }, false);
@@ -75,7 +75,7 @@ function LayoutManager() {
     }, false);
 
     this.initPrefs();
-    
+
     window.setTimeout(this.checkOnStartup.bind(this), 150);
 }
 
@@ -87,9 +87,9 @@ function LayoutManager() {
 LayoutManager.prototype.initPrefs = function () {
     this.prefs_ = gPrefService.getBranch("layout.");
     this.adjustIncrement_ = this.prefs_.getIntPref("overscan.adjustIncrement");
-    this.prefs_.QueryInterface(Ci.nsIPrefBranch2);  
-    this.prefs_.addObserver("", this, false); 
-    
+    this.prefs_.QueryInterface(Ci.nsIPrefBranch2);
+    this.prefs_.addObserver("", this, false);
+
     this.updateOverscan();
 }
 
@@ -105,24 +105,24 @@ LayoutManager.prototype.observe = function (subject, topic, pref)  {
     if (topic != "nsPref:changed") {
         return;
     }
-    
+
     switch (pref) {
         case "overscan.adjustIncrement":
             this.adjustIncrement_ = this.prefs_.getIntPref("overscan.adjustIncrement");
             return;
-           
+
         case "overscan.bottom":
         case "overscan.left":
         case "overscan.right":
         case "overscan.top":
             // update only if not in overscan adjust mode
-            // do a delayed update to coalesce multiple changes. 
+            // do a delayed update to coalesce multiple changes.
             if (this.layoutDeck_.selectedIndex != 1 && !this.overscanUpdate_) {
                 this.overscanUpdate_ = window.setTimeout(function () {
                     this.overscanUpdate_ = null;
                     this.updateOverscan();
-                    this.forceResizeEvent();                    
-                }.bind(this), 100);             
+                    this.forceResizeEvent();
+                }.bind(this), 100);
             }
             return;
     }
@@ -136,31 +136,31 @@ LayoutManager.prototype.observe = function (subject, topic, pref)  {
 LayoutManager.prototype.updateOverscan = function () {
     // First check if we have a user value, otherwise calculate the default
     // overscan size by percentage
-    
+
     if (!this.prefs_.prefHasUserValue("overscan.top")) {
         var p = this.prefs_.getIntPref("overscan.default.percent");
-        
+
         var w = window.screen.width;
         var h = window.screen.height;
-        
+
         var rl = (w * p)/200;
         var tb = (h * p)/200;
-        
+
         this.prefs_.setIntPref("overscan.top", tb);
         this.prefs_.setIntPref("overscan.bottom", tb);
         this.prefs_.setIntPref("overscan.right", rl);
         this.prefs_.setIntPref("overscan.left", rl);
     }
-    
+
     for (var id in this.spacers_) {
         // need a minimum overscan of 1px so that panels don't anchor on the wrong
         // screen when using dual monitors
         var max = this.prefs_.getIntPref("overscan.max." + id);
         var val = Math.max(1, Math.min(this.prefs_.getIntPref("overscan." + id), max));
-                 
+
         var attr = (id == "top" || id == "bottom") ? "height" : "width";
         this.spacers_[id].setAttribute(attr, val);
-    }   
+    }
 }
 
 /**
@@ -186,7 +186,7 @@ LayoutManager.prototype.checkFullScreen = function () {
     if (platform_ == "osx" && mouseevttool_) {
         browser_.setMouseEventToolFullScreenMode();
     }
-    
+
 }
 
 /**
@@ -194,16 +194,16 @@ LayoutManager.prototype.checkFullScreen = function () {
  * if you are over 720p and performs the initial resize
  * @name checkOnStartup
  */
-LayoutManager.prototype.checkOnStartup = function () { 
+LayoutManager.prototype.checkOnStartup = function () {
     this.checkFullScreen();
     this.resize();
     //TODO: Horrible hack for Mac not being able to minimize when fullscreen
-    if (platform_ == "osx" || platform_ == "x11") {      
+    if (platform_ == "osx" || platform_ == "x11") {
         document.getElementById("polo-main").addEventListener("click", this.checkFullScreen.bind(this), false);
-    }    
-    
+    }
+
     var self = this;
-    AddonManager.getAddonsByTypes(["theme"], 
+    AddonManager.getAddonsByTypes(["theme"],
     function (themeList) {
        for (var i=0, j=themeList.length; i<j; i++) {
            var m = themeList[i].name.match(/\[(\d+)\]/i);
@@ -224,7 +224,7 @@ LayoutManager.prototype.checkOnStartup = function () {
            }
        }
        self.checkResolution();
-    });  
+    });
 }
 
 /**
@@ -238,11 +238,11 @@ LayoutManager.prototype.checkResolution = function () {
        // 1080 screens sometimes have built in overscan compensation, trigger at a lower number.
        "1080" : {"minW": 1500, "maxW": 0,    "minH": 850, "maxH": 0},
    };
-   
+
    var themeSize = this.selectedThemeResolution_ || "720";
-   
+
    // First check if the screen is smaller than the current optimal resolution
-   if (window.screen.width < resolutionConstraints[themeSize].minW || 
+   if (window.screen.width < resolutionConstraints[themeSize].minW ||
        window.screen.height < resolutionConstraints[themeSize].minH) {
            if (themeSize == "720") {
                // Theme size is already 720, so just show a message telling the user
@@ -258,15 +258,15 @@ LayoutManager.prototype.checkResolution = function () {
                        break;
                    }
                }
-               
+
                if (suggestedTheme_) {
                    this.showThemeSuggestion(suggestedTheme_);
                }
            }
            return;
     }
-    
-    // Check if the screen size is higher than the current optimal resolution, 
+
+    // Check if the screen size is higher than the current optimal resolution,
     // but only if our theme is specifically targeted for 720
     if (this.selectedThemeResolution_ == "720" &&
         (window.screen.width > resolutionConstraints[themeSize].maxW ||
@@ -280,12 +280,12 @@ LayoutManager.prototype.checkResolution = function () {
                    break;
                }
            }
-           
+
            if (suggestedTheme_) {
                this.showThemeSuggestion(suggestedTheme_);
-           }   
+           }
            return;
-    }    
+    }
 }
 
 /**
@@ -294,7 +294,7 @@ LayoutManager.prototype.checkResolution = function () {
  * @returns {Bool} Result of query
  */
 LayoutManager.prototype.isDialogShownForCurrentScreen = function () {
-    var key = "layout.resolution.issues.displayed." + this.selectedTheme_.id + "." + window.screen.width + "x" + window.screen.height;   
+    var key = "layout.resolution.issues.displayed." + this.selectedTheme_.id + "." + window.screen.width + "x" + window.screen.height;
     return gPrefService.getPrefType(key) != Ci.nsIPrefBranch.PREF_INVALID;
 }
 
@@ -337,10 +337,10 @@ LayoutManager.prototype.showThemeSuggestion = function (suggestedTheme) {
         var title = i18nStrings_["alerts"].getString("alerts.screenResTitle");
         var text = i18nStrings_["alerts"].getString("alerts.screenResMismatchText");
         var checkMsg = i18nStrings_["alerts"].getString("alerts.screenResMismatchCheckbox");
-        var checkState = {value:false}; 
+        var checkState = {value:false};
         if (gPromptService.confirmCheck(window, title, text, checkMsg, checkState)) {
             suggestedTheme.userDisabled = false;
-                        
+
             // Restart the app
             let cancelQuit = Cc["@mozilla.org/supports-PRBool;1"].
                              createInstance(Ci.nsISupportsPRBool);
@@ -348,15 +348,15 @@ LayoutManager.prototype.showThemeSuggestion = function (suggestedTheme) {
                                          "restart");
             if (cancelQuit.data)
               return; // somebody canceled our quit request
-    
+
             let appStartup = Cc["@mozilla.org/toolkit/app-startup;1"].
                              getService(Ci.nsIAppStartup);
             appStartup.quit(Ci.nsIAppStartup.eAttemptQuit |  Ci.nsIAppStartup.eRestart);
         }
-		if (checkState.value) {
-			this.setDialogShownForCurrentScreen(suggestedTheme.id);
-		}                    
-        
+        if (checkState.value) {
+            this.setDialogShownForCurrentScreen(suggestedTheme.id);
+        }
+
     }.bind(this), 1000);
 }
 
@@ -397,110 +397,110 @@ LayoutManager.prototype.getScreenHelper = function (cb) {
 LayoutManager.prototype.buttonEvent = function (evt) {
     var v, h;
     var delta = this.adjustIncrement_;
-    
+
     var self = this;
     function adjust(border, val) {
         var max = self.prefs_.getIntPref("overscan.max." + border);
         // need a minimum overscan of 1px so that panels don't anchor on the wrong
         // screen when using dual monitors
         val = Math.max(1, Math.min(val, max));
-        if (val != self.adjust_[border]) { 
+        if (val != self.adjust_[border]) {
             self.spacers_[border].setAttribute((border == "top" || border == "bottom") ? "height" : "width", val);
             self.adjust_[border] = val;
         }
     }
-    
+
     function persist() {
         for (var id in self.spacers_) {
             self.prefs_.setIntPref("overscan." + id, self.adjust_[id]);
         }
     }
-    
+
     switch (evt.currentTarget.id) {
-            
+
         case "overscan-cancel":
             adjust("bottom", this.prefs_.getIntPref("overscan.bottom"));
             adjust("left", this.prefs_.getIntPref("overscan.left"));
             adjust("right", this.prefs_.getIntPref("overscan.right"));
             adjust("top", this.prefs_.getIntPref("overscan.top"));
-            this.exitAdjustMode();  
+            this.exitAdjustMode();
             break
 
-            
+
         case "overscan-reset":
             if (evt.ctrlKey) {
                 if (evt.shiftKey) {
                     adjust("bottom", this.prefs_.getIntPref("overscan.max.bottom"));
                     adjust("left", this.prefs_.getIntPref("overscan.max.left"));
                     adjust("right", this.prefs_.getIntPref("overscan.max.right"));
-                    adjust("top", this.prefs_.getIntPref("overscan.max.top"));                                  
+                    adjust("top", this.prefs_.getIntPref("overscan.max.top"));
                 } else {
                     adjust("bottom", 0);
                     adjust("left", 0);
                     adjust("right", 0);
-                    adjust("top", 0);                   
+                    adjust("top", 0);
                 }
             } else {
                 var def = gPrefService.getDefaultBranch("layout.overscan.");
-                
+
                 var p = def.getIntPref("default.percent");
-        
+
                 var w = window.screen.width;
                 var h = window.screen.height;
-        
+
                 var rl = (w * p)/200;
                 var tb = (h * p)/200;
-                
+
                 adjust("bottom", tb);
                 adjust("left", rl);
                 adjust("right", rl);
-                adjust("top", tb);                
+                adjust("top", tb);
             }
-            break;      
-            
+            break;
+
         case "overscan-max":
             adjust("bottom", 0);
             adjust("left", 0);
             adjust("right", 0);
             adjust("top", 0);
             break;
-            
+
         case "overscan-exit-mode":
-            persist();                    
+            persist();
             this.exitAdjustMode();
             return;
-            
+
         default:
             var m = evt.currentTarget.id.match(/overscan-arrow-(\w+)-\w+/);
             if (!m) {
                 break;
             }
-            
+
             var border = m[1];
             if (evt.currentTarget.id.match(/-more/)) {
                 adjust(border, this.adjust_[border] + delta);
             } else {
                 adjust(border, this.adjust_[border] - delta);
             }
-            break;            
+            break;
     }
 
-    // TODO: remove this hack... 
+    // TODO: remove this hack...
     document.getElementById("overscan-counter").value = Math.random();
 }
 
 /**
- * Puts the application into adustment mode by changing the main 
+ * Puts the application into adustment mode by changing the main
  * layout deck to view the adjustment screen.  Sets the overscan spacers
  * as well.
  * @name enterAdjustMode
  */
 LayoutManager.prototype.enterAdjustMode = function () {
-    this.layoutDeck_.selectedIndex = 1;    
+    this.layoutDeck_.selectedIndex = 1;
     for (var i in this.spacers_) {
         this.spacers_[i].setAttribute("active", true);
     }
-    
+
     this.adjust_ = {};
     for (var id in this.spacers_) {
         this.adjust_[id] = this.prefs_.getIntPref("overscan." + id);
@@ -508,20 +508,20 @@ LayoutManager.prototype.enterAdjustMode = function () {
 }
 
 /**
- * Takes the application out of adustment mode by changing the main 
+ * Takes the application out of adustment mode by changing the main
  * layout deck to view the browsers/chrome.
  * @name enterAdjustMode
  */
 LayoutManager.prototype.exitAdjustMode = function () {
-    this.layoutDeck_.selectedIndex = 0;    
+    this.layoutDeck_.selectedIndex = 0;
     for (var i in this.spacers_) {
         this.spacers_[i].removeAttribute("active");
     }
-    
+
     this.adjust_ = null;
     var stack = document.getElementById("overscan-stack");
 //    stack.removeChild(stack.firstChild); // discard the canvas
-    
+
     this.resize();
 }
 
@@ -539,16 +539,16 @@ LayoutManager.prototype.handleEvent = function (evt) {
  * @name resize
  */
 LayoutManager.prototype.resize = function () {
-    // Resize control bar  
+    // Resize control bar
     document.getElementById("controlsOverlay").style.width = this.contentBox_.clientWidth + "px";
 
     // Resizing global panels
     if (this.prevBrowserWidth_ != this.browserDeck_.clientWidth ||
         this.prevBrowserHeight_ != this.browserDeck_.clientHeight) {
-        
+
         this.prevBrowserHeight_ = this.browserDeck_.clientHeight;
         this.prevBrowserWidth_ = this.browserDeck_.clientWidth;
-        
+
         gZoomWidget.resize(this.browserDeck_.clientWidth, this.browserDeck_.clientHeight);
         gToolsMenu.resize(this.browserDeck_.clientWidth, this.browserDeck_.clientHeight);
     }
@@ -589,8 +589,8 @@ LayoutManager.prototype.sizePopupToContentArea = function (pnl, useMaxWidth, use
     pnl.style[useMaxWidth ? "maxWidth" : "width"] = this.getInnerWidth() + "px";
     var h = this.getInnerHeight();
     h -= this.controls_.clientHeight;
-    
-    pnl.style[useMaxHeight ? "maxHeight" : "height"] = h + "px";    
+
+    pnl.style[useMaxHeight ? "maxHeight" : "height"] = h + "px";
 }
 
 /**
@@ -608,7 +608,7 @@ function ScreenHelper() {
  * @name getScreens
  * @returns {Array} The array of screen objects
  */
-ScreenHelper.prototype.getScreens = function () {    
+ScreenHelper.prototype.getScreens = function () {
     return this.screens_;
 }
 
@@ -622,15 +622,15 @@ ScreenHelper.prototype.getCurrentScreenIndex = function () {
 }
 
 /**
- * Load the windowWatcher service and the screenCrawler xul window.   
+ * Load the windowWatcher service and the screenCrawler xul window.
  * @name load
  * @returns {Array} The array of screen objects
  */
 ScreenHelper.prototype.load = function (cb) {
     this.cb_ = cb;
-    var ww = Cc["@mozilla.org/embedcomp/window-watcher;1"].getService(Ci.nsIWindowWatcher);    
+    var ww = Cc["@mozilla.org/embedcomp/window-watcher;1"].getService(Ci.nsIWindowWatcher);
     this.window_ = ww.openWindow(window, "screenCrawler.xul", "screen-crawler-" + Date.now(), "chrome", {
-        wrappedJSObject: this        
+        wrappedJSObject: this
     });
     window.focus();
 }
@@ -648,8 +648,8 @@ ScreenHelper.prototype.crawlerLoaded = function (crawler) {
 
 /**
  * Begins crawling at the first position checked by the crawler window.
- * When crawling has completed, screen names are assigned and screens are 
- * returned to the caller. 
+ * When crawling has completed, screen names are assigned and screens are
+ * returned to the caller.
  * @name beginCrawl
  */
 ScreenHelper.prototype.beginCrawl = function () {
@@ -666,7 +666,7 @@ ScreenHelper.prototype.beginCrawl = function () {
             return t;
         });
         this.screens_.map(function (screen, i) {
-            screen.name = i18nStrings_["browser"].getString("browser.screen") + (i + 1) + " (" + screen.width + "x" + screen.height + ")"; 
+            screen.name = i18nStrings_["browser"].getString("browser.screen") + (i + 1) + " (" + screen.width + "x" + screen.height + ")";
         });
         this.cb_ && this.cb_(this.screens_);
     }.bind(this));
@@ -684,7 +684,7 @@ ScreenHelper.prototype.indexOfScreen = function (x) {
             return i;
         }
     }
-    
+
     return -1;
 }
 
@@ -693,24 +693,24 @@ ScreenHelper.prototype.indexOfScreen = function (x) {
  * and determines if the position exists to determine where the screens
  * are located.
  * @name crawl
- * @param {Number} top The location of where to position the top of the crawler 
+ * @param {Number} top The location of where to position the top of the crawler
  * @param {Number} left The location of where to position the left side of the crawler
  * @param {Function} cb The callback function when the crawl completes
  */
 ScreenHelper.prototype.crawl = function (top, left, cb) {
     this.crawler_.reposition(top, left, function () {
         var currentScreen = this.crawler_.getCurrentScreen();
-        
+
         var index = this.indexOfScreen(currentScreen);
         if (index >= 0) {
             // already seen this screen..
             return cb(false);
         }
-        
+
         this.screens_.push(this.duplicate(currentScreen));
-    
+
         /**
-         * x marks the places we try to visit 
+         * x marks the places we try to visit
          *              x          x          x
          *              ------------------------
          *             x|                      |x
@@ -718,42 +718,42 @@ ScreenHelper.prototype.crawl = function (top, left, cb) {
          *             x|                      |x
          *              |                      |
          *             x|                      |x
-         *              ------------------------                                
+         *              ------------------------
          *              x          x          x
          */
-        
+
         let [dw, dh] = this.crawler_.getSize();
-        
+
         var top = currentScreen.top;
         var left = currentScreen.left;
         var height = currentScreen.height;
         var width = currentScreen.width;
-        
-        var positions = [       
+
+        var positions = [
             top - dh,            left,
             top - dh,            left + width / 2,
             top - dh,            left + width,
-            
+
             top,                 left + width,
             top + height / 2,    left + width,
             top + height,        left + width,
-            
+
             top + height,        left,
             top + height,        left + width / 2,
-            top + height,        left + width,          
-            
+            top + height,        left + width,
+
             top,                 left -dw,
             top + height / 2,    left -dw,
             top + height,        left -dw,
         ];
-        
+
         var f = (function () {
             if (positions.length == 0) {
                 return cb(true);
             }
             var top = positions.pop()
             var left = positions.pop();
-            
+
             this.crawl(left, top, f);
         }).bind(this);
         f();
@@ -789,11 +789,11 @@ ScreenHelper.prototype.isScreensEqual = function (a, b) {
 }
 
 /**
- * Sets the screen index and switches the application to the screen at that 
+ * Sets the screen index and switches the application to the screen at that
  * index.
  * @name setScreenIndex
  * @param {Object} idx The index of the screen to move the application to
- * 
+ *
  */
 ScreenHelper.prototype.setScreenIndex = function (idx) {
     var screen = this.screens_[idx];

@@ -1,13 +1,13 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
-/* From Gecko 5.0 src */ 
+/* From Gecko 5.0 src */
 #app-picker {
   width: 320px;
 }
@@ -42,7 +42,7 @@ dialog > vbox {
   -moz-border-right-colors: #252324 #252324;
   -moz-border-bottom-colors: #252324 #252324;
   -moz-border-left-colors: #252324 #252324;
-  background: #8d8d8d;    
+  background: #8d8d8d;
 }
 
 richlistitem {
@@ -63,7 +63,7 @@ richlistitem:hover {
     -moz-border-right-colors: #5b5b5b #5b5b5b #5b5b5b #6b6b6b #6b6b6b;
     -moz-border-bottom-colors: #5b5b5b #5b5b5b #5b5b5b #6b6b6b #6b6b6b;
     margin: 0px;
-    border-width: 5px;    
+    border-width: 5px;
     background: url("../common/images/tab-bg.png") left repeat-y;
 }
 
@@ -73,7 +73,7 @@ richlistitem[selected="true"] {
     -moz-border-right-colors: #001f7c #001f7c #001f7c #474d5d #474d5d;
     -moz-border-bottom-colors: #001f7c #001f7c #001f7c #474d5d #474d5d;
     margin: 0px;
-    border: 5px solid;    
+    border: 5px solid;
     background: none;
 }
 

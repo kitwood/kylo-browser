@@ -16,7 +16,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(UDLRTool)
 NS_DEFINE_NAMED_CID(UDLRTOOL_CID);
 
 static const mozilla::Module::CIDEntry kUDLRToolCIDs[] = {
-	{ &kUDLRTOOL_CID, false, NULL, UDLRToolConstructor},
+    { &kUDLRTOOL_CID, false, NULL, UDLRToolConstructor},
     { NULL }
 };
 
@@ -29,7 +29,7 @@ const mozilla::Module UDLRToolModule= {
     mozilla::Module::kVersion,
     kUDLRToolCIDs,
     kUDLRToolContracts,
-	NULL
+    NULL
 };
 
 NSMODULE_DEFN(UDLRTool-module) = &UDLRToolModule;

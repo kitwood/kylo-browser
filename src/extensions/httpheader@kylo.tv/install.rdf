@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:em="http://www.mozilla.org/2004/em-rdf#">     
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>httpheader@kylo.tv</em:id>
     <em:version>1.1</em:version>

@@ -229,7 +229,7 @@ sidebarheader:-moz-lwtheme {
   border-bottom-color: ThreeDHighlight;
   margin: 0 5px 5px;
 }
-  
+
 .outset {
   border: 1px solid ThreeDShadow;
   border-left-color: ThreeDHighlight;
@@ -246,15 +246,12 @@ separator[orient="vertical"] {
 
 separator.thin:not([orient="vertical"]) {
   height: 3px;
-}  
+}
 separator.thin[orient="vertical"] {
   width: 3px;
 }
 
 separator.groove:not([orient="vertical"]) {
-	/**
-	 * TODO
-	 */
   border-top: 1px solid ThreeDShadow;
   border-bottom: 1px solid ThreeDHighlight;
   height: 0;
@@ -262,10 +259,6 @@ separator.groove:not([orient="vertical"]) {
   margin-bottom: 0.4em;
 }
 separator.groove[orient="vertical"] {
-    /**
-     * TODO
-     */
-	
   border-left: 1px solid ThreeDShadow;
   border-right: 1px solid ThreeDHighlight;
   width: 0;
@@ -276,7 +269,7 @@ separator.groove[orient="vertical"] {
 .small-margin {
   margin: 1px 2px;
 }
-    
+
 .plain {
   -moz-appearance: none;
   margin: 0 !important;
@@ -343,7 +336,7 @@ label[disabled="true"]:-moz-system-metric(windows-classic) {
   border: 1px solid transparent;
   cursor: pointer;
 }
-  
+
 .text-link:focus {
   border: 1px dotted -moz-DialogText;
 }

@@ -14,7 +14,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(SendKeys)
 NS_DEFINE_NAMED_CID(SENDKEYS_CID);
 
 static const mozilla::Module::CIDEntry kSendKeysCIDs[] = {
-	{ &kSENDKEYS_CID, false, NULL, SendKeysConstructor },
+    { &kSENDKEYS_CID, false, NULL, SendKeysConstructor },
     { NULL }
 };
 
@@ -27,7 +27,7 @@ const mozilla::Module SendKeysModule= {
     mozilla::Module::kVersion,
     kSendKeysCIDs,
     kSendKeysContracts,
-	NULL
+    NULL
 };
 
 NSMODULE_DEFN(SendKeys-module) = &SendKeysModule;

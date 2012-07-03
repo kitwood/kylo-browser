@@ -9,7 +9,7 @@ System::Call 'kernel32::SetEnvironmentVariable(t "${env}",t "${tmpvar}")'
 !macro _GetUserShellFolderFromRegistry_RestoreEnv env
 System::Call 'kernel32::SetEnvironmentVariable(t "${env}",ts)'
 !macroend
- 
+
 Function un.GetUserShellFolderFromRegistry
 Exch $1 ;_hku
 Exch

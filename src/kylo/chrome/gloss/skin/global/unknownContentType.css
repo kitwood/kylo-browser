@@ -22,11 +22,11 @@ caption {
 }
 
 #contentTypeImage {
-	width: 32px;
+    width: 32px;
 }
 
 #unknownContentType {
-	font-size: 22px;
+    font-size: 22px;
 }
 
 /* ======== */
@@ -133,7 +133,7 @@ dropmarker {
   padding-top: 0;
   padding-bottom: 0px;
   -moz-padding-start: 0px;
-  -moz-padding-end: 0px;  
+  -moz-padding-end: 0px;
   list-style-image: none;
   -moz-image-region: inherit;
   background: url("images/dropmarker.png");

@@ -49,7 +49,7 @@ var MozSettingsUtils = {
    * Returns the Downloads folder.  If aFolder is "Desktop", then the Downloads
    * folder returned is the desktop folder; otherwise, it is a folder whose name
    * indicates that it is a download folder and whose path is as determined by
-   * the XPCOM directory service via the download manager's attribute 
+   * the XPCOM directory service via the download manager's attribute
    * defaultDownloadsDirectory.
    *
    * @throws if aFolder is not "Desktop" or "Downloads"

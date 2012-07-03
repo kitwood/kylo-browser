@@ -11,30 +11,29 @@
 ]>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <page id="about-page" title="&about.aboutPageTitle;" onload="onload();"  onunload="onunload();" orient="vertical" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml">
     <script type="application/x-javascript" src="chrome://polo/content/about/about.js"/>
     <script type="application/x-javascript" src="chrome://polo/content/utils/utils.js"/>
     <script type="application/x-javascript">
     <![CDATA[
-	
 [
     [
-        "chromeWindow", 
-        function () {   
+        "chromeWindow",
+        function () {
             var w = window.QueryInterface(Ci.nsIInterfaceRequestor)
                                 .getInterface(Ci.nsIWebNavigation)
                                 .QueryInterface(Ci.nsIDocShellTreeItem)
                                 .rootTreeItem
                                 .QueryInterface(Ci.nsIInterfaceRequestor)
-                                .getInterface(Ci.nsIDOMWindow); 
-        
-            return w;   
+                                .getInterface(Ci.nsIDOMWindow);
+
+            return w;
         }
     ],
     [
@@ -54,14 +53,14 @@
 
     ]]>
     </script>
-    
+
     <html:head>
         <html:link rel="icon" href="chrome://polo/skin/hcrestlabs.ico" />
     </html:head>
-    
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="strings" src="chrome://polo/locale/about.properties"/>
-	</stringbundleset>
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="strings" src="chrome://polo/locale/about.properties"/>
+    </stringbundleset>
 
 
     <hbox id="topBar">
@@ -86,7 +85,7 @@
             <vbox id="checkingUpdateBox">
                 <description id="noUpdate" class="updateHeader" value="&about.checkingLabel;"/>
                 <progressmeter id="checkingMeter" class="progress-meter" mode="undetermined"/>
-            </vbox>                 	
+            </vbox>
             <vbox id="up-to-date">
                 <description id="noUpdate" value="&about.haveLatestVeresionLabel;"/>
                 <hbox>
@@ -100,20 +99,20 @@
                     <spacer flex="1"/>
                     <vbox>
                         <button id="updateButton" oncommand="doUpdate()"/>
-                        <progressmeter id="downloadMeter" class="progress-meter" mode="undetermined" hidden="true"/> 
+                        <progressmeter id="downloadMeter" class="progress-meter" mode="undetermined" hidden="true"/>
                     </vbox>
                     <spacer flex="1"/>
                 </hbox>
             </vbox>
-			<vbox id="update-check-failed">
-				<description>
-					&about.updateErrorLabel; <html:br/> &about.tryAgainLabel;
-    			</description>
-				<hbox>
-    				<button label="&about.checkAgainButtonLabel;" oncommand="doCheck()"/>
+            <vbox id="update-check-failed">
+                <description>
+                    &about.updateErrorLabel; <html:br/> &about.tryAgainLabel;
+                </description>
+                <hbox>
+                    <button label="&about.checkAgainButtonLabel;" oncommand="doCheck()"/>
                     <spacer flex="1"/>
-				</hbox>
-			</vbox>
+                </hbox>
+            </vbox>
         </deck>
     </hbox>
     <hbox id="poweredBy">

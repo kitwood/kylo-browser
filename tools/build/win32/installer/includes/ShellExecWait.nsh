@@ -5,7 +5,7 @@
 !include WinMessages.nsh
 
 !macro ShellExecWait verb app param workdir show exitoutvar ;only app and show must be != "", every thing else is optional
-#define SEE_MASK_NOCLOSEPROCESS 0x40 
+#define SEE_MASK_NOCLOSEPROCESS 0x40
 System::Store S
 System::Call '*(&i60)i.r0'
 System::Call '*$0(i 60,i 0x40,i $hwndparent,t "${verb}",t "${app}",t "${param}",t "${workdir}",i ${show})i.r0'

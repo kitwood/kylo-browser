@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -13,16 +13,16 @@
 
 .kb-key-small,
 .kb-key-large,
-.kb-key-large-special, 
+.kb-key-large-special,
 .kb-key-stretch,
 .kb-key-dblwide {
-	font-size: 34px;
+    font-size: 34px;
     text-shadow: 0 0 10px #000000;
     height: 96px;
-	-moz-border-image: url("images/kb_darkgrey.png") 18 21 21 18 / 18px 21px 21px 18px;
+    -moz-border-image: url("images/kb_darkgrey.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
-.kb-key-small { 
+.kb-key-small {
     width: 96px;
 }
 
@@ -36,11 +36,11 @@
 }
 
 .kb-key-large-special {
-	-moz-border-image: url("images/kb_darkblue.png") 18 21 21 18 / 18px 21px 21px 18px;
+    -moz-border-image: url("images/kb_darkblue.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
 .kb-key-large-special:not([disabled=true]):hover {
-	-moz-border-image: url("images/kb_blue.png") 18 21 21 18 / 18px 21px 21px 18px;
+    -moz-border-image: url("images/kb_blue.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
 .kb-key-large-special:not([disabled=true]):active {
@@ -54,7 +54,7 @@
 
 .kb-input,
 #kb-space {
-	-moz-border-image: url("images/kb_grey.png") 18 21 21 18 / 18px 21px 21px 18px;
+    -moz-border-image: url("images/kb_grey.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
 .kb-key-small:not([disabled=true]):hover,
@@ -72,19 +72,19 @@
 }
 
 .kb-key-small[selected=true],
-.kb-key-stretch[selected=true], 
+.kb-key-stretch[selected=true],
 .kb-key-large[selected=true] {
     -moz-border-image: url("images/kb_darkblue.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
 .kb-key-small[selected=true]:hover ,
-.kb-key-stretch[selected=true]:hover , 
+.kb-key-stretch[selected=true]:hover ,
 .kb-key-large[selected=true]:hover {
     -moz-border-image: url("images/kb_blue.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
 .kb-accept {
-	-moz-border-image: url("images/kb_darkgreen.png") 18 21 21 18 / 18px 21px 21px 18px;
+    -moz-border-image: url("images/kb_darkgreen.png") 18 21 21 18 / 18px 21px 21px 18px;
 }
 
 .kb-accept:not([disabled=true]):hover {
@@ -97,7 +97,7 @@
 
 .kb-cancel {
     -moz-border-image: url("images/kb_darkred.png") 18 21 21 18 / 18px 21px 21px 18px;
-	margin: -14px -14px -14px -10px;
+    margin: -14px -14px -14px -10px;
 }
 
 .kb-cancel:not([disabled=true]):hover {
@@ -109,16 +109,16 @@
 }
 
 #kb-movable {
-	min-width: 972px;
-	min-height: 393px;
+    min-width: 972px;
+    min-height: 393px;
     background: url("images/kb_border.png") no-repeat top left;
-	padding: 5px 7px;
+    padding: 5px 7px;
 }
 
 #kb-left-pad-group,
 #kb-action-pad-group1,
 #kb-action-pad-group2 {
-	-moz-border-image: url("images/large_text_field.png") 18 18 18 18 / 18px 18px 18px 18px;
+    -moz-border-image: url("images/large_text_field.png") 18 18 18 18 / 18px 18px 18px 18px;
 }
 
 #kb-bksp {
@@ -126,35 +126,35 @@
 }
 
 #kb-shift {
-	list-style-image: url("images/kb_icon-shift.png");
+    list-style-image: url("images/kb_icon-shift.png");
 }
 
 #kb-shift[selected=true] {
-	/*list-style-image: url("images/kb_icon-shift_selected.png");*/
+    /*list-style-image: url("images/kb_icon-shift_selected.png");*/
 }
 
 #kb-shift .toolbarbutton-icon {
-	padding-left: 15px;
+    padding-left: 15px;
 }
 
 #kb-tab-left {
     list-style-image: url("images/kb_icon-tab_back.png");
-	margin: 0 -14px -14px -10px;
+    margin: 0 -14px -14px -10px;
 }
 
 #kb-tab-right {
     list-style-image: url("images/kb_icon-tab.png");
-	margin: -14px -14px 0 -10px;
+    margin: -14px -14px 0 -10px;
 }
 
 #kb-enter {
     list-style-image: url("images/kb_icon-enter.png");
-	margin: -14px -14px -14px -10px;
+    margin: -14px -14px -14px -10px;
 }
 
 #kb-embed-url-top {
     padding: 0 27px;
-    height: 81px;		
+    height: 81px;
 }
 
 #kb-done {

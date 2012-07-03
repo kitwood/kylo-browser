@@ -145,13 +145,13 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
 }
 
 .ac-site-icon {
-  width: 16px; 
+  width: 16px;
   height: 16px;
   margin: 0 5px -3px 3px;
 }
 
 .ac-type-icon {
-  width: 16px; 
+  width: 16px;
   height: 16px;
 }
 
@@ -165,7 +165,7 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
 
 .ac-ellipsis-after {
   margin: 2px 0px 0px 0px !important;
-  padding: 0; 
+  padding: 0;
   min-width: 1em;
 }
 

@@ -71,7 +71,7 @@ toolbar:first-child, menubar {
 }
 
 /* ::::: lightweight theme ::::: */
- 
+
 toolbox:-moz-lwtheme,
 toolbar:-moz-lwtheme {
   -moz-appearance: none;

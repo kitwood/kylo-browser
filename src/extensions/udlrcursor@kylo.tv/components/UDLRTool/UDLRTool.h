@@ -34,7 +34,7 @@ public:
 
     void HandleTimerEvent();
     bool HandleKeyEvent(WPARAM wParam, LPARAM lParam);
-    
+
 
 private:
     HOOKPROC hkprc;

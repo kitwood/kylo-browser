@@ -6,20 +6,20 @@ function makeBundle() {
     var set = document.createElement("stringbundleset");
     var bundle = document.createElement("stringbundle");
     bundle.setAttribute("src", "chrome://polo/locale/moz/moz-browser.properties");
-    
+
     set.appendChild(bundle);
     document.documentElement.appendChild(bundle);
     return bundle;
 }
 
-var gNavigatorBundle = makeBundle(); 
+var gNavigatorBundle = makeBundle();
 
 function BrowserOpenAddonsMgr(page) {
     switch (page) {
         case "plugins":
             browser_.switchOrCreate("about:addons");
             break;
-			
+
         default:
             break;
     }
@@ -32,38 +32,38 @@ var gBrowser = {
     getBrowserForDocument: function (doc) {
         return browser_.getBrowserForDocument(doc);
     },
-    
+
     getNotificationBox: function (doc) {
         return getNotificationBox(doc);
     },
-    
+
     getSelectedBrowser: function () {
-        return browser_.getCurrentBrowser();  
+        return browser_.getCurrentBrowser();
     },
-	
-	loadOneTab: function (url) {
-		return browser_.createNewBrowser(true, url).getBrowserElement();
-	}
+
+    loadOneTab: function (url) {
+        return browser_.createNewBrowser(true, url).getBrowserElement();
+    }
 }
 
 
 /**
  * Given a starting docshell and a URI to look up, find the docshell the URI
- * is loaded in. 
+ * is loaded in.
  * @param   aDocument
- *          A document to find instead of using just a URI - this is more specific. 
+ *          A document to find instead of using just a URI - this is more specific.
  * @param   aDocShell
  *          The doc shell to start at
  * @param   aSoughtURI
  *          The URI that we're looking for
- * @returns The doc shell that the sought URI is loaded in. Can be in 
+ * @returns The doc shell that the sought URI is loaded in. Can be in
  *          subframes.
  */
 function findChildShell(aDocument, aDocShell, aSoughtURI) {
   aDocShell.QueryInterface(Components.interfaces.nsIWebNavigation);
   aDocShell.QueryInterface(Components.interfaces.nsIInterfaceRequestor);
   var doc = aDocShell.getInterface(Components.interfaces.nsIDOMDocument);
-  if ((aDocument && doc == aDocument) || 
+  if ((aDocument && doc == aDocument) ||
       (aSoughtURI && aSoughtURI.spec == aDocShell.currentURI.spec))
     return aDocShell;
 
@@ -153,7 +153,7 @@ missingPluginInstaller.prototype.newMissingPlugin = function(aEvent){
   var blockedNotification = notificationBox.getNotificationWithValue("blocked-plugins");
   var missingNotification = notificationBox.getNotificationWithValue("missing-plugins");
   var priority = notificationBox.PRIORITY_WARNING_MEDIUM;
-  
+
   function showBlocklistInfo() {
     var formatter = Cc["@mozilla.org/toolkit/URLFormatterService;1"].
                     getService(Ci.nsIURLFormatter);
@@ -161,7 +161,7 @@ missingPluginInstaller.prototype.newMissingPlugin = function(aEvent){
     gBrowser.loadOneTab(url, {inBackground: false});
     return true;
   }
-  
+
   function showOutdatedPluginsInfo() {
     gPrefService.setBoolPref("plugins.update.notifyUser", false);
     var formatter = Cc["@mozilla.org/toolkit/URLFormatterService;1"].
@@ -170,7 +170,7 @@ missingPluginInstaller.prototype.newMissingPlugin = function(aEvent){
     gBrowser.loadOneTab(url, {inBackground: false});
     return true;
   }
-  
+
   function showPluginsMissing() {
     // get the urls of missing plugins
     var missingPluginsArray = gBrowser.selectedBrowser.missingPlugins;
@@ -237,7 +237,7 @@ missingPluginInstaller.prototype.newMissingPlugin = function(aEvent){
       popup: null,
       callback: showPluginsMissing
     }];
-  
+
     notificationBox.appendNotification(messageString, "missing-plugins",
                                        iconURL, priority, buttons);
   }
@@ -290,7 +290,7 @@ function getPluginInfo(pluginElement)
       var docShell = findChildShell(doc, gBrowser.selectedBrowser.docShell, null);
       try {
         pluginsPage = makeURI(pluginsPage, doc.characterSet, docShell.currentURI).spec;
-      } catch (ex) { 
+      } catch (ex) {
         pluginsPage = "";
       }
     }

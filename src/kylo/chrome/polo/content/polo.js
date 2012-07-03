@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -26,7 +26,7 @@ var EventMap = {
 };
 
 /**
- * Implements nsIBrowserDOMWindow interface and 
+ * Implements nsIBrowserDOMWindow interface and
  * opens any pages that would normally open in a new
  * window (usu. via javascript) into a new tab.
  * @name BrowserMonitor
@@ -48,14 +48,14 @@ BrowserMonitor.prototype.QueryInterface = function(aIID) {
  * as we only want one kylo window open
  * @name openURI
  * @returns a nsiDOMWindow instance which is the window of the new Browser(the new tab)
- */ 
+ */
 BrowserMonitor.prototype.openURI = function(aURI, aOpener, aWhere, aContext) {
-    
+
     // don't spawn windows for a preview creator
     if (gPagePreview.isPreviewContentWindow(aOpener)) {
         return null;
     }
-     
+
     var browser = browser_.createNewBrowser(true);
     var newWindow = browser.getBrowserElement().docShell.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindow);
     var aNotifyBox = browser.getNotificationBoxElement();
@@ -97,7 +97,7 @@ BrowserMonitor.prototype.openURI = function(aURI, aOpener, aWhere, aContext) {
 BrowserMonitor.prototype.isTabContentWindow = function(aWindow) {}
 
 /**
- * BrowserManager is the main class which controls instances of the 
+ * BrowserManager is the main class which controls instances of the
  * Browser class.
  * @name BrowserManager
  * @constuctor
@@ -109,45 +109,45 @@ function BrowserManager() {
     this.browserDeck_ = document.getElementById("browserDeck");
     this.tabButton_ = document.getElementById("titleBox");
     this.switcher_ = document.getElementById("tabSwitcher");
-    this.closeBar_ = document.getElementById("closeBar"); 
+    this.closeBar_ = document.getElementById("closeBar");
     this.tabListBox_ = document.getElementById("tab-listbox");
-        
+
     this.currentBrowser_ = null;
     this.currentBrowserIdx_;
-    this.browsers_ = []; 
+    this.browsers_ = [];
     this.clickX_;
     this.clickY_;
     this.mouseDown_ = false;
-            
+
     this.uriBlackList_ = {};
-            
+
     window.QueryInterface(Ci.nsIDOMChromeWindow).browserDOMWindow = new BrowserMonitor();
-    
+
     document.getElementById("zoomVeil").addEventListener("DOMMouseScroll", this.handleScroll.bind(this), false);
-    
+
     window.addEventListener("keydown", this.monitorKeys.bind(this), false);
     window.addEventListener("AppCommand", this.handleAppCommandEvent.bind(this), true);
-    
+
     this.tabListBox_.addEventListener("select", this.tabListItemSelected.bind(this), false);
     this.closeBar_.addEventListener("click", this.closeTabList.bind(this), false);
 
     var poloPrefs = gPrefService.getBranch("polo.");
     poloPrefs.QueryInterface(Ci.nsIPrefBranch2);
-    poloPrefs.addObserver("", { 
+    poloPrefs.addObserver("", {
         observe: function(subject, topic, pref) {
             if (topic != "nsPref:changed" || pref != "defaultZoomLevel") {
                 return;
             }
             var zoomLevel = parseFloat(poloPrefs.getCharPref("defaultZoomLevel"));
-			gZoomWidget.setDefaultZoomLevel(zoomLevel);   
+            gZoomWidget.setDefaultZoomLevel(zoomLevel);
             browser_.updateZoomLevels(zoomLevel);
         }
-        
+
     }, false);
 }
 
 /**
- * Sets up instances of MouseEventTool and UDLRTool and performs mappings for 
+ * Sets up instances of MouseEventTool and UDLRTool and performs mappings for
  * virtual keys to be handled by the mouseevttool callbacks.
  * @name setupTools
  */
@@ -164,7 +164,7 @@ BrowserManager.prototype.setupTools = function () {
                     controls_.openPanel("zoom");
                 }
             } else if (eventType == EventMap.RIGHT_UP) {
-            } else if (eventType == EventMap.RIGHT_DOWN) { 
+            } else if (eventType == EventMap.RIGHT_DOWN) {
                 //window.focus();
             } else if (eventType == EventMap.LEFT_DOWN) {
                 this.mouseDown_ = true;
@@ -174,23 +174,23 @@ BrowserManager.prototype.setupTools = function () {
         }.bind(this)
     }
     try {
-        
+
         var cursorPrefs = gPrefService.getBranch("polo.cursor.");
         cursorPrefs.QueryInterface(Ci.nsIPrefBranch2);
-        
+
         mouseevttool_ = Cc["@hcrest.com/MouseEventTool;1"].createInstance(Ci.IMouseEventTool);
-        
-        mouseevttool_.objCallback = this.mouseevttoolObjCallback_;        
-        
-        //right click mapping   
+
+        mouseevttool_.objCallback = this.mouseevttoolObjCallback_;
+
+        //right click mapping
         if (cursorPrefs.getBoolPref("goBackOnRightClick")) {
             mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_RBUTTONDOWN, Ci.IMouseEventTool.VK_NO_EVENT);
             mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_RBUTTONUP, Ci.IMouseEventTool.VK_BROWSER_BACK);
         } else {
             mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_RBUTTONDOWN, Ci.IMouseEventTool.VK_NO_EVENT);
-            mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_RBUTTONUP, Ci.IMouseEventTool.VK_NO_EVENT);            
+            mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_RBUTTONUP, Ci.IMouseEventTool.VK_NO_EVENT);
         }
-        
+
         //middle click mapping
         mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_MBUTTONDOWN, Ci.IMouseEventTool.VK_NO_EVENT);
         mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_MBUTTONUP, Ci.IMouseEventTool.VK_NO_EVENT);
@@ -199,7 +199,7 @@ BrowserManager.prototype.setupTools = function () {
                     if (topic != "nsPref:changed") {
                         return;
                     }
-                    
+
                     switch (pref) {
                         case "goBackOnRightClick":
                             if (cursorPrefs.getBoolPref("goBackOnRightClick")) {
@@ -210,7 +210,7 @@ BrowserManager.prototype.setupTools = function () {
                                 mouseevttool_.RemapButton("xulrunner", Ci.IMouseEventTool.WM_RBUTTONUP, Ci.IMouseEventTool.VK_NO_EVENT);
                             }
                             break;
-                    }  
+                    }
                 }
         }, false);
     } catch (e) {
@@ -228,7 +228,7 @@ BrowserManager.prototype.setupTools = function () {
                 if (gPromptService.confirmCheck(window, title, text, checkMsg, checkState)) {
                     browser_.loadURL("http://connect.kylo.tv/sysreq");
                 }
-                
+
                 if (checkState.value) {
                     gPrefService.setBoolPref("polo.showSysReq", false);
                 }
@@ -258,11 +258,11 @@ BrowserManager.prototype.getPlatform = function () {
  */
 BrowserManager.prototype.updateZoomLevels = function(zoom){
     for (var i = 0; i < this.browsers_.length; i++) {
-	    // Skip applying default zoom to "about:" pages
-	    if (this.browsers_[i].browser_.currentURI.spec.indexOf("about:") != 0) {
-    		this.browsers_[i].restoreZoomLevel();
-	    }
-	}
+        // Skip applying default zoom to "about:" pages
+        if (this.browsers_[i].browser_.currentURI.spec.indexOf("about:") != 0) {
+            this.browsers_[i].restoreZoomLevel();
+        }
+    }
 }
 
 /**
@@ -274,7 +274,7 @@ BrowserManager.prototype.clearMouseEventToolFullScreenMode = function () {
 }
 
 /**
- * Sets flag for MouseEventTool on the OSX platform to ensure full screen window mode.  Called on startup if 
+ * Sets flag for MouseEventTool on the OSX platform to ensure full screen window mode.  Called on startup if
  * running on OSX
  * @name setMouseEventToolFullScreenMode
  */
@@ -283,7 +283,7 @@ BrowserManager.prototype.setMouseEventToolFullScreenMode = function () {
 }
 
 /**
- * Clears the callback for MouseEventTool when a dialog is shown so 
+ * Clears the callback for MouseEventTool when a dialog is shown so
  * mouse events are not processed and queued.
  * @name clearMouseEventToolCallback
  */
@@ -291,12 +291,12 @@ BrowserManager.prototype.clearMouseEventToolCallback = function () {
     mouseevttool_.objCallback = null;
 }
 
-/** 
+/**
  * Resets the MouseEventTool callback when the blocking dialog is closed
  * @name resetMouseEventToolCallback
  */
 BrowserManager.prototype.resetMouseEventToolCallback = function () {
-    mouseevttool_.objCallback = this.mouseevttoolObjCallback_; 
+    mouseevttool_.objCallback = this.mouseevttoolObjCallback_;
 
 }
 
@@ -311,17 +311,17 @@ BrowserManager.prototype.monitorKeys = function (evt) {
     if (platform_ == "osx") {
         modKey = evt.metaKey;
     }
-    
+
     if (!modKey) {
         if (evt.keyCode == 166) { // VK_BROWSER_BACK
             browser_.getCurrentBrowser().goBack();
         } else if (evt.keyCode == 167) { //VK_BROWSER_FORWARD
             browser_.getCurrentBrowser().goForward();
-        } else if (evt.keyCode == 8 //VK_BACK (backspace) 
+        } else if (evt.keyCode == 8 //VK_BACK (backspace)
                     && !KeyboardAutoLauncher.isEditableNode(evt.target)) {
             if (evt.shiftKey) {
-                browser_.getCurrentBrowser().goForward();    
-            } else {            
+                browser_.getCurrentBrowser().goForward();
+            } else {
                 browser_.getCurrentBrowser().goBack();
             }
         } else if (evt.keyCode == 112) { // VK_F1
@@ -339,9 +339,9 @@ BrowserManager.prototype.monitorKeys = function (evt) {
         }
         return;
     }
-        
+
     switch (evt.keyCode) {
-        
+
         // Windows Back/Forward
         case 37: //VK_LEFT
             if (platform_ == "win32") {
@@ -353,7 +353,7 @@ BrowserManager.prototype.monitorKeys = function (evt) {
                 browser_.getCurrentBrowser().goForward();
             }
             break;
-            
+
         // Mac OSX Back/Forward
         case 219: // [
             if (platform_ == "osx") {
@@ -365,13 +365,13 @@ BrowserManager.prototype.monitorKeys = function (evt) {
                 browser_.getCurrentBrowser().goForward();
             }
             break;
-                                
+
         case 84:
         case 78:
             //Ctrl+t opens a new tab
             //Ctrl+n opens a new page (does the same thing... using "page" lingo for tabs in Kyloland)
             controls_.addTab();
-            break;    
+            break;
         case 75:
             //Ctrl+k opens keyboard
             if (controls_.isPanelOpen("keyboard")) {
@@ -390,14 +390,14 @@ BrowserManager.prototype.monitorKeys = function (evt) {
             break;
         case 72:
             //Ctrl+h goes home
-		    browser_.getCurrentBrowserObject().goHome();
+            browser_.getCurrentBrowserObject().goHome();
             break;
         case 107:
         case 61:  // osx
             //Ctrl++ zooms in
             browser_.getCurrentBrowserObject().zoomIn();
             break;
-        case 109: 
+        case 109:
             //Ctrl+- zooms out
             browser_.getCurrentBrowserObject().zoomOut();
             break;
@@ -405,14 +405,14 @@ BrowserManager.prototype.monitorKeys = function (evt) {
             //Ctrl+0 resets zoom level
             browser_.getCurrentBrowserObject().restoreZoomLevel(true);
             break;
-        case 77: 
+        case 77:
             //Ctrl+m minimizes
             controls_.handleMinimize();
             break;
         case 74:
             //Ctrl+j opens downloads
             browser_.switchOrCreate("about:downloads");
-            break;            
+            break;
         case 79:
             //Ctrl+o opens settings
             browser_.switchOrCreate("about:settings");
@@ -421,7 +421,7 @@ BrowserManager.prototype.monitorKeys = function (evt) {
             //Ctrl+b opens bookmarks
             browser_.switchOrCreate("about:places");
             break;
-        case 82: 
+        case 82:
             //Ctrl+r reloads the page
             if (evt.shiftKey) {
                 // Ctrl+Shift+r ignores cache
@@ -438,7 +438,7 @@ BrowserManager.prototype.monitorKeys = function (evt) {
             //Ctrl+q quits
             controls_.confirmClose();
             break;
-        
+
     }
 }
 
@@ -499,26 +499,26 @@ BrowserManager.prototype.handleScroll = function (evt) {
 };
 
 /**
- * When in zoom mode, this function calculates the scroll position based on 
+ * When in zoom mode, this function calculates the scroll position based on
  * the mouse move event and drags the browser window to the correct place.
  * @name dragBrowser
  * @param deltaX The distance in the x axis the mouse has moved
  * @param deltaY The distance in the y axis the mouse has moved
  */
 BrowserManager.prototype.dragBrowser = function (deltaX, deltaY) {
-    if (controls_.isPanelOpen("zoom") && this.mouseDown_) {             
+    if (controls_.isPanelOpen("zoom") && this.mouseDown_) {
         var browserWin = this.getCurrentBrowser().contentWindow;
-        
+
         var zoom = this.getCurrentBrowserObject().getMarkupDocumentViewer().fullZoom.toFixed(1);
-                
+
         var dx = deltaX - (deltaX * (zoom / 10));
         var dy = deltaY - (deltaY * (zoom / 10));
-        
+
         if (zoom == "1.0") {
             browserWin.scrollBy(-deltaX, -deltaY);
         } else {
             browserWin.scrollBy(-dx, -dy);
-        }   
+        }
     }
 };
 
@@ -570,7 +570,7 @@ BrowserManager.prototype.tabListItemSelected = function (evt) {
 BrowserManager.prototype.closeTabList = function (evt) {
     if (this.switcher_.hidden) return;
     controls_.closePanel("tabs");
-    controls_.focusOut();   
+    controls_.focusOut();
 }
 
 /**
@@ -581,29 +581,29 @@ BrowserManager.prototype.closeTabList = function (evt) {
  * @param {Bool} updateSwitchPanel Flag to update the ui of the tabSwitcher panel
  */
 BrowserManager.prototype.setCurrentBrowser = function (idx, updateSwitchPanel) {
-    
+
     if (idx instanceof Browser) {
         idx = this.browsers_.indexOf(idx);
     }
     // TODO ???? if (idx != this.currentBrowserIdx_) {return;}
-    
+
     var oldBrowser = this.currentBrowser_;
     if (oldBrowser) {
         oldBrowser.getBrowserElement().setAttribute("type", "content-targetable");
     }
-        
+
     this.currentBrowserIdx_ = idx;
-    this.browserDeck_.selectedIndex = idx;    
+    this.browserDeck_.selectedIndex = idx;
     this.currentBrowser_ = this.browsers_[this.currentBrowserIdx_];
     this.currentBrowser_.lastSelectedTimeStamp_ = Date.now();
     this.currentBrowser_.getBrowserElement().setAttribute("type", "content-primary");
-    
-        
+
+
     controls_.activeBrowserChanged(this.currentBrowser_);
     this.currentBrowser_.updateControls();
-    
+
     if (updateSwitchPanel !== false) {
-        // TODO asynch?        
+        // TODO asynch?
         window.setTimeout(function () {
             this.tabListBox_.suppressOnSelect = true;
             this.tabListBox_.selectedIndex = idx;
@@ -611,7 +611,7 @@ BrowserManager.prototype.setCurrentBrowser = function (idx, updateSwitchPanel) {
             if (this.isSwitchPanelOpen()) {
                 this.tabListBox_.scrollToIndex(idx);
             }
-        }.bind(this), 100);        
+        }.bind(this), 100);
     }
 };
 
@@ -626,7 +626,7 @@ BrowserManager.prototype.getBrowser = function (idx) {
 };
 
 /**
- * Retuns browser for a given XUL browser element 
+ * Retuns browser for a given XUL browser element
  * @name getBrowserByElement
  * @param element XUL browser element of the browser to return
  * @returns {Browser} Browser class instance
@@ -654,13 +654,13 @@ BrowserManager.prototype.createNewBrowser = function (focus, url) {
     this.browsers_[idx] = browser;
     if (focus == true) {
         this.setCurrentBrowser(idx, false);
-    } 
-
-    
-    if (this.isSwitchPanelOpen()) {
-        this.addTabListItem(browser);  
     }
-    
+
+
+    if (this.isSwitchPanelOpen()) {
+        this.addTabListItem(browser);
+    }
+
     if (url) {
         this.loadURL(url);
     }
@@ -713,54 +713,54 @@ BrowserManager.prototype.closeSwitchPanel = function () {
 BrowserManager.prototype.createListItem = function (b, i) {
     // TODO put this junk in a binding
     var el = document.createElement("richlistitem");
-    
+
     el.setAttribute("type", "tabswitch");
     el.value = b;
-    
+
     var icn = document.createElement("image");
     icn.setAttribute("class", "item-icon");
     el.appendChild(icn);
-    
+
     var vbox = document.createElement("vbox");
     el.appendChild(vbox);
-    
+
     vbox.setAttribute("flex", 1);
 
     var title = document.createElement("description");
     title.setAttribute("crop", "end");
     title.className = "item-title";
     vbox.appendChild(title);
-    
+
     var uri = document.createElement("description");
     uri.setAttribute("crop", "center");
     uri.className = "item-uri";
     vbox.appendChild(uri);
-    
+
     var closeBtn = document.createElement("button");
-	closeBtn.className = "closeBtn";
-    closeBtn.setAttribute("tooltiptext", i18nStrings_["browser"].getString("browser.closePageButtonLabel"));    
+    closeBtn.className = "closeBtn";
+    closeBtn.setAttribute("tooltiptext", i18nStrings_["browser"].getString("browser.closePageButtonLabel"));
     // TODO register events at tabList level, listeners may not get cleaned up.
     // Note: this is a mousedown vs command so that the down event can be consumed before
     //       reaching the richlistbox which will fire a "selected" event
     closeBtn.addEventListener("mousedown", this.handleCloseTab.bind(this), true);
     el.appendChild(closeBtn);
-    
-    // These values get updated in the notify methods above when the browser updates 
-    let [titleText, currentURI] = b.getDisplayTitleURI();    
+
+    // These values get updated in the notify methods above when the browser updates
+    let [titleText, currentURI] = b.getDisplayTitleURI();
     title.setAttribute("value",titleText);
     uri.setAttribute("value", currentURI.spec);
     icn.setAttribute("src", b.getIcon() || Controls.DEFAULT_FAVICON);
     icn.setAttribute("onerror", "this.src = Controls.ERRORED_FAVICON;");
-    
-    
+
+
     el.browser = b;
     el.favIcon =  icn;
     el.title = title;
     el.uri = uri;
     el.closeBtn = closeBtn;
-    
-    
-    return el;    
+
+
+    return el;
 }
 
 /**
@@ -771,15 +771,15 @@ BrowserManager.prototype.createListItem = function (b, i) {
  */
 BrowserManager.prototype.findSwitchPanelListItem = function (browser) {
     var item = this.tabListBox_.childNodes.item(browser.browserIndex_);
-    
+
     if (!item) {
         throw "Could not find item for browser: " + browser.getBrowserElement().id;
     }
-    
+
     if (item.browser !== browser) {
         throw "Tab list items not in synch!!! " + browser.getBrowserElement().id;
     }
-    
+
     return item;
 }
 
@@ -788,7 +788,7 @@ BrowserManager.prototype.findSwitchPanelListItem = function (browser) {
  * @name addTabListItem
  * @param browser The Browser insance for the list item being added.
  */
-BrowserManager.prototype.addTabListItem = function (browser) {    
+BrowserManager.prototype.addTabListItem = function (browser) {
     var el = this.createListItem(browser, this.browsers_.length - 1);
     this.tabListBox_.appendChild(el);
     if (this.tabListBox_.childNodes.length == 1) {
@@ -807,21 +807,21 @@ BrowserManager.prototype.removeTabListItem = function (idx) {
     this.tabListBox_.removeChild(item);
     if (this.tabListBox_.childNodes.length == 1) {
         // disable the close btn
-        this.tabListBox_.firstChild.closeBtn.disabled = true;   
+        this.tabListBox_.firstChild.closeBtn.disabled = true;
     }
 }
 
 /**
- * Perform action on the corresponding tablist item when the browser's 
+ * Perform action on the corresponding tablist item when the browser's
  * document has completed loading (set favicon, etc)
  * @name notifyDocumentLoadCompleted
  * @param browser The Browser instance which document has finished loading
  */
 BrowserManager.prototype.notifyDocumentLoadCompleted = function (browser) {
     if (!this.isSwitchPanelOpen()) {
-        return;   
+        return;
     }
-    
+
     var el = this.findSwitchPanelListItem(browser);
     if (el) {
         el.favIcon.src = browser.getIcon();
@@ -829,22 +829,22 @@ BrowserManager.prototype.notifyDocumentLoadCompleted = function (browser) {
 }
 
 /**
- * Perform action on the corresponding tablist item when the browser's 
+ * Perform action on the corresponding tablist item when the browser's
  * document's title has changed
  * @name notifyDocumentTitleChanged
  * @param browser The Browser instance which document's title has changed
  */
 BrowserManager.prototype.notifyDocumentTitleChanged = function (browser) {
     if (!this.isSwitchPanelOpen()) {
-        return;   
+        return;
     }
-    
+
     var el = this.findSwitchPanelListItem(browser);
     if (el) {
         let [title, uri] = browser.getDisplayTitleURI();
         el.title.value = title;
         el.uri.value = uri.spec;
-    }    
+    }
 }
 
 /**
@@ -854,13 +854,13 @@ BrowserManager.prototype.notifyDocumentTitleChanged = function (browser) {
  */
 BrowserManager.prototype.makeTabList = function () {
     while(this.tabListBox_.lastChild) {
-        this.tabListBox_.removeChild(this.tabListBox_.lastChild);   
+        this.tabListBox_.removeChild(this.tabListBox_.lastChild);
     }
     this.tabListBox_.clearSelection();
     this.tabListBox_.hidden = true;
-            
+
     for (var i = 0, j = this.browsers_.length; i < j; i++ ) {
-        var b = this.browsers_[i];    
+        var b = this.browsers_[i];
         try {
             var listItem = this.createListItem(b, i);
             if (j == 1) {
@@ -872,7 +872,7 @@ BrowserManager.prototype.makeTabList = function () {
         }
     }
 
-    this.tabListBox_.hidden = false;    
+    this.tabListBox_.hidden = false;
 };
 
 /**
@@ -891,12 +891,12 @@ BrowserManager.prototype.getSnapshots = function (doc) {
             uri : uri
         });
     }
-    
+
     return A;
 }
 
 /**
- * Handler for the close button on a tablist item.  Closes the tab and 
+ * Handler for the close button on a tablist item.  Closes the tab and
  * eats the event
  * @name handleCloseTab
  * @param evt The click event on the tablist item's close button
@@ -916,17 +916,17 @@ BrowserManager.prototype.closeTab = function (idx) {
     if (this.browsers_.length == 1) {
         return;
     }
-    
+
     if (idx instanceof Browser) {
         idx = this.browsers_.indexOf(idx);
     } else {
-        idx = parseInt(idx);   
+        idx = parseInt(idx);
     }
 
     if (this.isSwitchPanelOpen()) {
-        this.removeTabListItem(idx);  
+        this.removeTabListItem(idx);
     }
-        
+
     var elToRemove = document.getElementById("notificationbox-"+idx);
     this.browsers_.splice(idx, 1);
     this.browserDeck_.removeChild(elToRemove);
@@ -934,25 +934,25 @@ BrowserManager.prototype.closeTab = function (idx) {
     for(var i = 0; i < this.browsers_.length; i++) {
         var B = this.browsers_[i];
         B.browserIndex_ = i;
-        
+
         var b = B.getBrowserElement();
         b.parentNode.id = "notificationbox-"+i;
         b.id = "browser-"+i;
-    } 
+    }
 
     // did we close the current tab?
-    if (idx == this.currentBrowserIdx_) {   
+    if (idx == this.currentBrowserIdx_) {
         var B = this.browsers_.reduce(function (prev, cur) {
             return (prev.lastSelectedTimeStamp_ > cur.lastSelectedTimeStamp_) ? prev : cur;
         });
         this.setCurrentBrowser(B);
         return;
     }
-    
-    // update the currentBrowserIdx_ / deck onyl if we removed a Browser before it 
+
+    // update the currentBrowserIdx_ / deck onyl if we removed a Browser before it
     if (idx < this.currentBrowserIdx_) {
         this.browserDeck_.selectedIndex = --this.currentBrowserIdx_;
-    }    
+    }
 
 };
 
@@ -975,18 +975,18 @@ BrowserManager.prototype.initBrowser = function () {
      *
      *      ... or...
      *
-     *      3) Home page - show if no saved/CLI tabs 
-     */ 
-    
+     *      3) Home page - show if no saved/CLI tabs
+     */
+
     var startupPrefs = gPrefService.getBranch("browser.startup.");
     var appInfo = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo);
     var vendor = gPrefService.getCharPref("polo.swupdate.vendor");
     var homepageURI = startupPrefs.getCharPref("homepage");
     PlacesUtils.history.addVisit(Utils.newURI(homepageURI), Date.now() * 1000, null, PlacesUtils.history.TRANSITION_TYPED, false, 0);
-    
+
     // First check for saved tabs to restore
-    var restoreTabs = startupPrefs.getBoolPref("restoreTabs"); 
-    
+    var restoreTabs = startupPrefs.getBoolPref("restoreTabs");
+
     if (restoreTabs) {
         var savedTabs = {index: 0, tabs: [homepageURI]};
         if (gPrefService.getPrefType("browser.tabs.savedSession") != Ci.nsIPrefBranch.PREF_INVALID) {
@@ -1005,22 +1005,22 @@ BrowserManager.prototype.initBrowser = function () {
                 }
             }
         }
-        
+
         for (var i=0, j=savedTabs.tabs.length; i<j; i++) {
             this.createNewBrowser(true, savedTabs.tabs[i]);
         }
-        
+
         this.setCurrentBrowser(savedTabs.index);
     }
-    
+
     // Clear out the previous saved session
     if (gPrefService.prefHasUserValue("browser.tabs.savedSession")) {
         gPrefService.clearUserPref("browser.tabs.savedSession");
     }
-    
+
     // Get urls and options from command line
     var clh = Cc["@hcrest.com/polo/final-clh;1"].getService(Ci.nsICommandLineHandler);
-    
+
     // Check for command line options
     var cliOpts = clh.wrappedJSObject.getStartupOptions();
     for (var i=0, j=cliOpts.length; i<j; i++) {
@@ -1029,82 +1029,82 @@ BrowserManager.prototype.initBrowser = function () {
             case "debug":
                 gDebugTools.enable();
                 break;
-                
+
             default:
                 debug("unexpected command line option: " + opt);
                 break;
         }
     }
-    
+
     // Check for command line tabs
     var cliURIs = clh.wrappedJSObject.getStartupURIs();
-    
+
     for (var i=0, j=cliURIs.length; i<j; i++) {
         this.createNewBrowser(true, cliURIs[i].spec);
-    }      
-    
+    }
+
     // Reset the lastRunVersion
-    var previousVersion = null;    
+    var previousVersion = null;
     if (startupPrefs.getPrefType("lastRunVersion") != Ci.nsIPrefBranch.PREF_INVALID) {
         previousVersion = startupPrefs.getCharPref("lastRunVersion") || null;
-    }        
-    startupPrefs.setCharPref("lastRunVersion", appInfo.version);  
-        
-        
+    }
+    startupPrefs.setCharPref("lastRunVersion", appInfo.version);
+
+
     // Tack on the upgrade page if we just upgraded from a previous version
     if (previousVersion && (previousVersion != appInfo.version)) {
         // Handle upgrade stuff
         this.handleVersionUpdate(previousVersion);
-        
+
         // See if we have a special upgrade page to go to
         if (startupPrefs.getPrefType("firstrun.upgrade") != Ci.nsIPrefBranch.PREF_INVALID &&
             startupPrefs.getCharPref("firstrun.upgrade") != "") {
-                
+
             var upgradeURI = Utils.newURI(startupPrefs.getCharPref("firstrun.upgrade")
                 .replace("$version", encodeURIComponent(appInfo.version))
                 .replace("$previousVersion", encodeURIComponent(previousVersion))
                 .replace("$vendor", encodeURIComponent(vendor)));
-            
+
             // Add this URL to our blacklist to prevent saving this tab
             this.uriBlackList_[upgradeURI.spec] = true;
-                
+
             this.createNewBrowser(true, upgradeURI.spec);
-            
+
             // We have our upgrade page - no need to show home page
             return;
         }
     }
-    
+
     // Tack on the firstrun page if this is the first launch of Kylo
     if (startupPrefs.getBoolPref("firstrun")) {
         // Reset the firstrun flag
         startupPrefs.setBoolPref("firstrun", false);
-        
+
         // Handle firstrun stuff
         gBookmarkManager.populateDefaults();
-        
+
         // See if we have a special firstrun page to go to
         if (startupPrefs.getPrefType("firstrun.location") != Ci.nsIPrefBranch.PREF_INVALID &&
             startupPrefs.getCharPref("firstrun.location") != "") {
-                
+
             var firstrunURI = Utils.newURI(startupPrefs.getCharPref("firstrun.location")
                 .replace("$version", encodeURIComponent(appInfo.version))
                 .replace("$vendor", encodeURIComponent(vendor)));
-            
+
             // Add this URL to our blacklist to prevent saving this tab
             this.uriBlackList_[firstrunURI.spec] = true;
-            
+
             this.createNewBrowser(true, firstrunURI.spec);
-            
+
             // We have our firstrun page - no need to show home page
             return;
         }
     }
-    
+
     // Now see if we want to load the homepage
     if (!restoreTabs && cliURIs.length == 0) {
         this.createNewBrowser(true, homepageURI);
-    }  
+    }
 };
 
 /**
@@ -1115,18 +1115,18 @@ BrowserManager.prototype.initBrowser = function () {
 BrowserManager.prototype.handleVersionUpdate = function (fromVersion) {
     // Remove setup files in our profile directory
     SWUpdate.cleanSetupFiles();
-    
+
     // make sure the pref exists; was introduced in mothra
     if (gPrefService.getPrefType("keyboard.autolaunch.open") == Ci.nsIPrefBranch.PREF_BOOL) {
         if (gPrefService.prefHasUserValue("keyboard.autolaunch.open")) {
             gPrefService.setBoolPref("keyboard.autolaunch.focusLock", gPrefService.getBoolPref("keyboard.autolaunch.open"));
         }
     }
-    
+
     // See if we need to upgrade bookmarks to push them all into the main bookmark folder
     if (gPrefService.getCharPref("polo.bookmarks.upgrade") == "-1") {
         upgradeBookmarks();
-    }        
+    }
 
     // Handle new feature - bookmarked "My Videos", "My Pictures", "My Music" folders...
     if (!gPrefService.getBoolPref("bookmarks.localBookmarksAdded")) {
@@ -1150,7 +1150,7 @@ BrowserManager.prototype.getBrowserIndexForDocument = function (doc) {
 
 /**
  * Get the XUL browser element for the given document
- * @name getBrowserElementForDocument 
+ * @name getBrowserElementForDocument
  * @param doc Document to get the browser element for.
  */
 BrowserManager.prototype.getBrowserElementForDocument = function (doc) {
@@ -1196,14 +1196,14 @@ BrowserManager.prototype.switchOrCreate = function (link) {
         this.setCurrentBrowser(b);
     } else {
         this.createNewBrowser(true, link);
-    }    
+    }
 }
 
 /**
  * Global function, used by the login manager prompter service.
  */
 function getNotificationBox(win) {
-    
+
     if (win) {
         var b = browser_.getBrowserElementForDocument(win.document);
         if (b) {
@@ -1214,7 +1214,7 @@ function getNotificationBox(win) {
     if (b) {
         return b.parentNode;
     }
-    
+
     return null;
 }
 
@@ -1230,18 +1230,18 @@ function registerStyleSheets() {
  * Onload handler, starts services and gets app up and running.
  */
 function app_onload() {
-    
+
     // spawn the login manager.
     Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager);
     i18nStrings_["browser"] = document.getElementById("strings");
     i18nStrings_["alerts"] = document.getElementById("alertStrings");
     gLayoutManager = new LayoutManager();
     controls_ = new Controls();
-    
+
     start_page_preview();
     start_places_manager()
     start_keyboard();
-    
+
     browser_ = new BrowserManager();
     browser_.initBrowser();
 
@@ -1277,7 +1277,7 @@ function app_unload() {
                 index = tabs.length - 1;
             }
         }
-    	gPrefService.setCharPref("browser.tabs.savedSession", JSON.stringify({"index": index, "tabs": tabs}));
+        gPrefService.setCharPref("browser.tabs.savedSession", JSON.stringify({"index": index, "tabs": tabs}));
     }
 
     // forces all extra windows to close.. there to make the jsconsole window die

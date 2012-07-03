@@ -49,7 +49,7 @@ DownloadManagerUI.prototype = {
     classDescription: "Download Manager UI",
     contractID: "@mozilla.org/download-manager-ui;1",
     classID: Components.ID("{a3a63df5-c019-11de-8a39-0800200c9a66}"),
-  
+
     show: function show(aWindowContext, aID, aReason) {
         if (!aReason)
             aReason = Ci.nsIDownloadManagerUI.REASON_USER_INTERACTED;
@@ -74,7 +74,7 @@ DownloadManagerUI.prototype = {
     getAttention: function getAttention() {
         this.show(null, null, null);
     },
-    
+
     QueryInterface: XPCOMUtils.generateQI([Ci.nsIDownloadManagerUI])
 };
 

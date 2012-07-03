@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -17,13 +17,13 @@ page {
     margin: 0 0 0 12px;
     padding: 32px 0 22px 0;
     -moz-box-align: center;
-    border-bottom: 2px solid;    
+    border-bottom: 2px solid;
     -moz-border-bottom-colors: #222327 #1e1f23;
-    
+
 }
 
 #tabCap {
-	-moz-border-image: url("chrome://polo/skin/global/images/tabs/tabs_v_end.png") 0 28 20 0 / 0 28px 20px 0;
+    -moz-border-image: url("chrome://polo/skin/global/images/tabs/tabs_v_end.png") 0 28 20 0 / 0 28px 20px 0;
 }
 
 .help-item:first-child, .faq-item:first-child {
@@ -59,7 +59,7 @@ page {
 }
 
 .help-link:hover {
-	color: #00aaff;
+    color: #00aaff;
 }
 
 .icon-home{
@@ -92,17 +92,17 @@ page {
 
 .icon-onlinehelp {
     /*-moz-border-image: url('images/icon_www.png') 0 / 0;*/
-	display: none;
+    display: none;
 }
 
 .faq-title {
     font-size: 26px;
-    color: #00aaff; 
+    color: #00aaff;
 }
 
 .spacer-icon-align {
-	width: 100px;
-	min-width: 100px;
+    width: 100px;
+    min-width: 100px;
 }
 
 .text-link:hover {

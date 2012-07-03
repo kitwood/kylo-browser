@@ -64,7 +64,7 @@ textbox[isempty="true"] {
   color: GrayText;
 }
 
-html|*.textbox-input, 
+html|*.textbox-input,
 html|*.textbox-textarea {
   margin: 0px !important;
   border: none !important;

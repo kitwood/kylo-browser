@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -13,11 +13,11 @@
     -moz-border-image: none !important;
 }
 
-.zoomButton {    
-	width: 150px;
-	height: 150px;
-	min-width: 150px;
-	min-height: 150px;
+.zoomButton {
+    width: 150px;
+    height: 150px;
+    min-width: 150px;
+    min-height: 150px;
 }
 
 #zoomIn {
@@ -34,7 +34,7 @@
 }
 
 #zoomReset {
-	background: url("images/zoom/zoom_reset.png") no-repeat;
+    background: url("images/zoom/zoom_reset.png") no-repeat;
 }
 
 #zoomReset:not([disabled=true]):hover {
@@ -47,7 +47,7 @@
 }
 
 #zoomOut {
-	background: url("images/zoom/zoom_out.png") no-repeat;
+    background: url("images/zoom/zoom_out.png") no-repeat;
 }
 
 #zoomOut:not([disabled=true]):hover {
@@ -60,7 +60,7 @@
 }
 
 #help-overlay {
-	border-radius: 10px;
+    border-radius: 10px;
 }
 
 /* --- special classes to hold dimension values. Allows themes to override programmatic layout in JS --- */
@@ -68,6 +68,6 @@
 span.page-preview-dimensions {
     width: 240px;
     height: 135px;
-    
+
     display: none;
 }

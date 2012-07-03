@@ -1,22 +1,22 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
-#overscan-top, 
-#overscan-bottom, 
-#overscan-left, 
+#overscan-top,
+#overscan-bottom,
+#overscan-left,
 #overscan-right {
   background: black;
 }
 
-#overscan-top[active=true], 
-#overscan-bottom[active=true], 
-#overscan-left[active=true], 
+#overscan-top[active=true],
+#overscan-bottom[active=true],
+#overscan-left[active=true],
 #overscan-right[active=true] {
   background: #a6a6a6;
 }
@@ -111,11 +111,11 @@
   -moz-user-select: -moz-none;
   -moz-border-image: none;
   -moz-margin-start: 0px;
-  min-width: inherit;  
+  min-width: inherit;
   height: 88px;
   width: 103px;
-}  
-  
+}
+
 .overscan-arrow:hover {
   -moz-border-image: none;
 }

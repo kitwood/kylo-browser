@@ -65,7 +65,7 @@
     <implementation>
       <constructor><![CDATA[
         this.preferenceChanged();
-        
+
         if (this.usePref)
           this._prefs.addObserver(this.pref, this._observer, true);
       ]]></constructor>
@@ -309,7 +309,7 @@
       </xul:box>
     </content>
   </binding>
-  
+
   <binding id="setting-string" extends="chrome://polo/content/bindings/moz-settings.xml#setting-base">
     <content>
       <xul:box flex="1" class="prefbox">
@@ -351,14 +351,14 @@
       <property name="value" onget="return this.input.value;" onset="return this.input.value=val;"/>
     </implementation>
   </binding>
-  
+
   <!-- Themes -->
   <binding id="theme-item"
-           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">    
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
     <implementation>
       <constructor><![CDATA[
         this._initWithAddon(this.mAddon);
-      ]]></constructor>          
+      ]]></constructor>
       <field name="_info">
         document.getAnonymousElementByAttribute(this, "anonid", "info");
       </field>
@@ -379,8 +379,8 @@
       </field>
       <field name="_removeBtn">
         document.getAnonymousElementByAttribute(this, "anonid", "remove-btn");
-      </field>                   
-      
+      </field>
+
       <property name="userDisabled">
         <getter><![CDATA[
           return this.mAddon.userDisabled;
@@ -388,8 +388,8 @@
         <setter><![CDATA[
           this.mAddon.userDisabled = val;
         ]]></setter>
-      </property>      
-      
+      </property>
+
       <method name="hasPermission">
         <parameter name="aPerm"/>
         <body><![CDATA[
@@ -402,16 +402,16 @@
         <body><![CDATA[
           this.mAddon.uninstall();
         ]]></body>
-      </method>   
-      
+      </method>
+
       <method name="isPending">
         <parameter name="aAction"/>
         <body><![CDATA[
           var action = AddonManager["PENDING_" + aAction.toUpperCase()];
           return !!(this.mAddon.pendingOperations & action);
         ]]></body>
-      </method>      
-      
+      </method>
+
       <method name="_initWithAddon">
         <parameter name="aAddon"/>
         <body><![CDATA[
@@ -438,15 +438,15 @@
             this._description.value = this.mAddon.description;
           } else {
             this._description.hidden = true;
-          }        
-          
+          }
+
           this._updateState();
         ]]></body>
-      </method>      
-      
+      </method>
+
       <method name="_updateState">
-        <body><![CDATA[          
-          // Check for pending operations           
+        <body><![CDATA[
+          // Check for pending operations
           var pending = this.mAddon.pendingOperations;
           if (pending != AddonManager.PENDING_NONE) {
             var pending = null;
@@ -459,7 +459,7 @@
           } else {
             this.removeAttribute("pending");
           }
-            
+
           if (this.hasPermission("enable")) {
             this._enableBtn.hidden = false;
             let tooltip = i18nStrings_.getString("settings.addons.enableThemeTooltip");
@@ -467,14 +467,14 @@
           } else {
             this._enableBtn.hidden = true;
           }
-          
+
           if (this.hasPermission("disable")) {
             this._disableBtn.hidden = false;
             let tooltip = i18nStrings_.getString("settings.addons.disableThemeTooltip");
             this._disableBtn.setAttribute("tooltiptext", tooltip);
           } else {
             this._disableBtn.hidden = true;
-          }          
+          }
 
           if (this.hasPermission("uninstall")) {
             this._removeBtn.hidden = false;
@@ -487,60 +487,60 @@
             this._removeBtn.hidden = true;
           }
 
-          this.setAttribute("active", this.mAddon.isActive);             
+          this.setAttribute("active", this.mAddon.isActive);
           ]]>
           </body>
       </method>
-      
+
       <method name="onEnabling">
           <body><![CDATA[
               this._updateState();
           ]]></body>
       </method>
-      
+
       <method name="onEnabled">
           <body><![CDATA[
               this._updateState();
           ]]></body>
       </method>
-      
+
       <method name="onDisabling">
           <body><![CDATA[
               this._updateState();
-              
-              ThemeSettings.promptRestartToApply(this.mAddon);              
+
+              ThemeSettings.promptRestartToApply(this.mAddon);
           ]]></body>
       </method>
-      
+
       <method name="onDisabled">
           <body><![CDATA[
               this._updateState();
           ]]></body>
       </method>
-      
+
       <method name="onUninstalling">
         <parameter name="aRestartRequired"/>
         <body><![CDATA[
           this._updateState();
-          
+
           if (this.mAddon.isActive) {
             ThemeSettings.promptRestartToApply(this.mAddon);
           }
         ]]></body>
       </method>
-      
+
       <method name="onUninstalled">
           <body><![CDATA[
               this.parentNode.removeChild(this);
           ]]></body>
       </method>
-      
+
       <method name="onOperationCancelled">
           <body><![CDATA[
               this._updateState();
           ]]></body>
       </method>
-    </implementation>        
+    </implementation>
     <content>
       <xul:hbox class="content-container" flex="1">
         <xul:vbox class="icon-container">
@@ -561,13 +561,13 @@
           </xul:hbox>
         </xul:vbox>
         <xul:vbox class="control-container" pack="center" align="center">
-            <xul:hbox>                
+            <xul:hbox>
                 <xul:button anonid="enable-btn"  class="addon-control enable"
                             label="&settings.addons.enableAddon.label;"
                             oncommand="document.getBindingParent(this).userDisabled = false;"/>
                 <xul:button anonid="disable-btn"  class="addon-control disable"
                             label="&settings.addons.disableAddon.label;"
-                            oncommand="document.getBindingParent(this).userDisabled = true;"/>                            
+                            oncommand="document.getBindingParent(this).userDisabled = true;"/>
                 <xul:button anonid="remove-btn" class="addon-control remove"
                             label="&settings.addons.uninstallAddon.label;"
                             oncommand="document.getBindingParent(this).uninstall();"/>
@@ -575,8 +575,8 @@
         </xul:vbox>
       </xul:hbox>
     </content>
-          
-  </binding>  
-  
-  
+
+  </binding>
+
+
 </bindings>

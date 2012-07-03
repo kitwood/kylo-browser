@@ -8,12 +8,12 @@
 <?xml-stylesheet href="chrome://polo/skin/common/tabchooser.css" type="text/css"?>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <!DOCTYPE page [
     <!ENTITY % settingsDTD SYSTEM "chrome://polo/locale/settings.dtd">
     %settingsDTD;
@@ -25,8 +25,8 @@
     <script type="application/x-javascript" src="chrome://polo/content/about/moz-settings.js"/>
     <script type="application/x-javascript" src="chrome://polo/content/about/moz-sanitize.js"/>
     <script type="application/x-javascript" src="chrome://polo/content/about/settings.js"/>
-	
-	<stringbundleset id="stringbundleset">
+
+    <stringbundleset id="stringbundleset">
         <stringbundle id="strings" src="chrome://polo/locale/settings.properties"/>
         <stringbundle id="brandStrings" src="chrome://branding/locale/brand.properties"/>
     </stringbundleset>
@@ -46,7 +46,7 @@
                 <tab id="compatibilityTab" label="&settings.compatibilityTabLabel;"/>
                 <tab id="themeTab" label="&settings.themeTabLabel;"/>
                 <tab id="advancedTab" label="&settings.advancedTabLabel;"/>
-            </tabs> 
+            </tabs>
             <tabpanels id="tabPanels" orient="vertical" flex="1">
                 <tabpanel id="mainTabPanel" orient="vertical" class="pref-container" flex="1">
                     <settings>
@@ -75,19 +75,19 @@
                             <button id="browseFolderButton" label="&settings.browseButtonLabel;" oncommand="DownloadSettings.chooseFolder();"/>
                         </hbox>
                     </settings>
-					<settings>
-						<hbox align="center">
-							<description class="label-align" value="&settings.chooseSearch;"/>
-							<menulist id="searchMenu" flex="1" oncommand="SearchSettings.setDefaultSearch();">
-								<menupopup>
-									<menuitem label="&settings.google;" value="google"/>
-									<menuitem label="&settings.bing;" value="bing"/>
-									<menuitem label="&settings.yahoo;" value="yahoo"/>
-									<menuitem label="&settings.ask;" value="ask"/>
-								</menupopup>
-							</menulist>
-						</hbox>
-					</settings>
+                    <settings>
+                        <hbox align="center">
+                            <description class="label-align" value="&settings.chooseSearch;"/>
+                            <menulist id="searchMenu" flex="1" oncommand="SearchSettings.setDefaultSearch();">
+                                <menupopup>
+                                    <menuitem label="&settings.google;" value="google"/>
+                                    <menuitem label="&settings.bing;" value="bing"/>
+                                    <menuitem label="&settings.yahoo;" value="yahoo"/>
+                                    <menuitem label="&settings.ask;" value="ask"/>
+                                </menupopup>
+                            </menulist>
+                        </hbox>
+                    </settings>
                     <settings>
                         <hbox align="center">
                             <description class="label-align" value="&settings.restoreDefaultsButtonLabel;"/>
@@ -97,12 +97,12 @@
                     </settings>
                 </tabpanel>
                 <tabpanel id="controlsTabPanel" flex="1">
-                    <settings id="prefs-controls" class="pref-container" flex="1">                                                                        
+                    <settings id="prefs-controls" class="pref-container" flex="1">
                         <setting pref="controls.autoHide" type="bool" title="&settings.autoHideLabel;"/>
                         <setting pref="keyboard.autolaunch.open" type="bool" title="&settings.enableAutoLaunchLabel;" onclick="Settings.syncFocusLockPref(this);"/>
                         <setting pref="keyboard.autolaunch.zoom" type="bool" title="&settings.enableAutoZoomLabel;"/>
                         <setting pref="polo.cursor.goBackOnRightClick" type="bool" title="&settings.enableRightClickLabel;"/>
-					</settings>
+                    </settings>
                 </tabpanel>
                 <tabpanel id="privacyTabPanel" class="pref-container" orient="vertical" flex="1">
                     <settings>
@@ -121,21 +121,21 @@
                         </hbox>
                         <hbox class="setting_subitem">
                             <button id="clearDataButton" label="&settings.clearDataButtonLabel;" oncommand="Settings.sanitize(event);"/>
-                            <spacer flex="1"/>                            
+                            <spacer flex="1"/>
                         </hbox>
                     </settings>
-                </tabpanel>                
-                <tabpanel id="screenTabPanel" class="pref-container" orient="vertical" flex="1">                         
+                </tabpanel>
+                <tabpanel id="screenTabPanel" class="pref-container" orient="vertical" flex="1">
                     <vbox>
                         <description class="setting_header" value="&settings.defaultZoomLabel;"/>
                         <radiogroup id="default-zoom" class="setting_subitem" orient="horizontal" oncommand="ZoomSettings.setDefaultZoom();">
-                            <radio value="1.0" label="&settings.100Percent;&#37;"/>  
+                            <radio value="1.0" label="&settings.100Percent;&#37;"/>
                             <radio value="1.25" label="&settings.125Percent;&#37;"/>
                             <radio value="1.5" label="&settings.150Percent;&#37;"/>
                             <radio value="1.75" label="&settings.175Percent;&#37;"/>
                             <radio value="2.0" label="&settings.200Percent;&#37;"/>
-                        </radiogroup>                        
-                    </vbox> 
+                        </radiogroup>
+                    </vbox>
                     <vbox>
                         <description class="setting_header" value="&settings.screenLabel;"/>
                         <!-- TODO freebie refresh button to get new resolution/screen changes -->
@@ -177,14 +177,14 @@
                                     &settings.sampleText;
                                 </description>
                             </vbox>
-                        </hbox>                         
-                    </vbox>                    
+                        </hbox>
+                    </vbox>
                 </tabpanel>
                 <tabpanel id="compatibilityTabPanel" class="pref-container" orient="vertical" flex="1">
                 </tabpanel>
                 <tabpanel id="themeTabPanel" class="pref-container" orient="vertical" flex="1">
                     <richlistbox id="themeList" class="list" flex="1"/>
-                </tabpanel>   
+                </tabpanel>
                 <tabpanel id="advancedTabPanel" orient="vertical" class="pref-container" flex="1">
                     <setting pref="polo.pages.use_bookmark_titles" type="bool" title="&settings.advanced.useBookmarkTitlesLabel;"/>
                     <setting pref="dom.ipc.plugins.enabled" type="bool" title="&settings.advanced.ipcPluginsEnabledLabel;" onclick="Settings.promptRestart(this);"/>
@@ -201,8 +201,8 @@
                             <radio value="4" label="&settings.autoDetectLabel;"/>
                             <radio value="0" label="&settings.noProxyLabel;"/>
                         </radiogroup>
-                    </vbox>                    
-                </tabpanel>              
+                    </vbox>
+                </tabpanel>
             </tabpanels>
         </tabbox>
     </vbox>
@@ -210,15 +210,15 @@
         <description id="tab-chooser-title"/>
         <separator/>
         <richlistbox id="tab-chooser-box" flex="1"/>
-		<!--
+        <!--
         <vbox id="tab-chooser-empty" flex="1">
             <spacer flex="1"/>
             <description pack="center">
                 No open web sites to select from
             </description>
-			<spacer flex="1"/>
+            <spacer flex="1"/>
         </vbox>
-		-->
+        -->
         <hbox>
             <spacer flex="1"/>
             <button id="tab-chooser-ok"/>

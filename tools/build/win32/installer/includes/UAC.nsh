@@ -1,8 +1,8 @@
 !ifndef UAC_HDR__INC
 !verbose push
 !verbose 3
-!ifndef UAC_VERBOSE  
-	!define UAC_VERBOSE 3
+!ifndef UAC_VERBOSE
+    !define UAC_VERBOSE 3
 !endif
 !verbose ${UAC_VERBOSE}
 
@@ -12,7 +12,7 @@
 
 !macro _UAC_definemath def val1 op val2
 !ifdef ${def}
-	!undef ${def}
+    !undef ${def}
 !endif
 !define /math ${def} "${val1}" ${op} ${val2}
 !macroend
@@ -28,19 +28,19 @@
 !undef _UAC_ParseDefineFlags_orin_saveout
 !undef _UAC_ParseDefineFlags_orin_this
 !ifdef _UAC_ParseDefineFlags_orin_f1
-	!undef _UAC_ParseDefineFlags_orin_f1
-	!undef _UAC_ParseDefineFlags_orin_f2
+    !undef _UAC_ParseDefineFlags_orin_f1
+    !undef _UAC_ParseDefineFlags_orin_f2
 !endif
 !macroend
 !macro _UAC_ParseDefineFlags_Begin _outdef _in
 !define _UAC_PDF${_outdef}_parse "${_in}"
 !define _UAC_PDF${_outdef}_flags ""
 !define _UAC_PDF${_outdef}_r 0
-!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags	;0x1
-!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags	;0x2
-!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags	;0x4
-!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags	;0x8
-!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags	;0x10
+!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags    ;0x1
+!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags    ;0x2
+!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags    ;0x4
+!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags    ;0x8
+!insertmacro _UAC_ParseDefineFlags_orin _UAC_PDF${_outdef}_parse _UAC_PDF${_outdef}_flags    ;0x10
 !macroend
 !macro _UAC_ParseDefineFlags_End _outdef
 !define ${_outdef} ${_UAC_PDF${_outdef}_r}
@@ -50,7 +50,7 @@
 !macroend
 !macro _UAC_ParseDefineFlags_IncludeFlag _outdef flag
 !if ${_UAC_PDF${_outdef}_flags} & ${flag}
-	!insertmacro _UAC_definemath _UAC_PDF${_outdef}_r ${_UAC_PDF${_outdef}_r} | ${flag}
+    !insertmacro _UAC_definemath _UAC_PDF${_outdef}_r ${_UAC_PDF${_outdef}_r} | ${flag}
 !endif
 !macroend
 !macro _UAC_ParseDefineFlagsToInt _outdef _in
@@ -129,26 +129,26 @@ UAC::_
 
 !macro _UAC_AsUser_GenOpGetReg outvar op opparam1 opparam2
 !define _UAC_AUGOGR_ID _UAC_AUGOGR_OP${outvar}${op}${opparam1}${opparam2}
-!ifndef ${_UAC_AUGOGR_ID} ;Has this exact action been done before? 
-	!if ${outvar} == $0
-		!define ${_UAC_AUGOGR_ID} $1
-	!else
-		!define ${_UAC_AUGOGR_ID} $0
-	!endif
-	!if "${opparam1}" == ""
-		!define _UAC_AUGOGR_OPP1 ${${_UAC_AUGOGR_ID}}
-		!define _UAC_AUGOGR_OPP2 ${opparam2}
-	!else
-		!define _UAC_AUGOGR_OPP1 ${opparam1}
-		!define _UAC_AUGOGR_OPP2 ${${_UAC_AUGOGR_ID}}
-	!endif	
-	goto ${_UAC_AUGOGR_ID}_C
-	${_UAC_AUGOGR_ID}_F:
-		${op} ${_UAC_AUGOGR_OPP1} ${_UAC_AUGOGR_OPP2}
-		return
-	${_UAC_AUGOGR_ID}_C:
-	!undef _UAC_AUGOGR_OPP1
-	!undef _UAC_AUGOGR_OPP2
+!ifndef ${_UAC_AUGOGR_ID} ;Has this exact action been done before?
+    !if ${outvar} == $0
+        !define ${_UAC_AUGOGR_ID} $1
+    !else
+        !define ${_UAC_AUGOGR_ID} $0
+    !endif
+    !if "${opparam1}" == ""
+        !define _UAC_AUGOGR_OPP1 ${${_UAC_AUGOGR_ID}}
+        !define _UAC_AUGOGR_OPP2 ${opparam2}
+    !else
+        !define _UAC_AUGOGR_OPP1 ${opparam1}
+        !define _UAC_AUGOGR_OPP2 ${${_UAC_AUGOGR_ID}}
+    !endif
+    goto ${_UAC_AUGOGR_ID}_C
+    ${_UAC_AUGOGR_ID}_F:
+        ${op} ${_UAC_AUGOGR_OPP1} ${_UAC_AUGOGR_OPP2}
+        return
+    ${_UAC_AUGOGR_ID}_C:
+    !undef _UAC_AUGOGR_OPP1
+    !undef _UAC_AUGOGR_OPP2
 !endif
 push ${${_UAC_AUGOGR_ID}}
 !insertmacro UAC_AsUser_Call Label ${_UAC_AUGOGR_ID}_F ${UAC_SYNCREGISTERS}
@@ -171,7 +171,7 @@ pop ${${_UAC_AUGOGR_ID}}
 goto _UAC_L_E_${__UAC_L}
 _UAC_L_F_${__UAC_L}:
 /*!if "${workdir}" != ""
-	SetOutPath "${workdir}"
+    SetOutPath "${workdir}"
 !endif*/
 #MessageBox mb_ok Outer1
 #system::call 'kernel32::OutputDebugStringA(m "hello from UAC_AsUser_ExecShell >$temp|$instdir|$\n")'
@@ -180,13 +180,13 @@ ExecShell "${verb}" "${command}" ${params} ${show}
 return
 _UAC_L_E_${__UAC_L}:
 !if "${workdir}" != ""
-	push $outdir
-	SetOutPath "${workdir}"
+    push $outdir
+    SetOutPath "${workdir}"
 !endif
 !insertmacro UAC_AsUser_Call Label _UAC_L_F_${__UAC_L} ${UAC_SYNCREGISTERS}|${UAC_SYNCOUTDIR} #|${UAC_CLEARERRFLAG}
 !if "${workdir}" != ""
-	pop $outdir 
-	SetOutPath $outdir
+    pop $outdir
+    SetOutPath $outdir
 !endif
 !macroend
 

@@ -16,7 +16,7 @@ NS_DEFINE_NAMED_CID(MOUSEEVENTTOOL_CID);
 /*static nsModuleComponentInfo components[] =
 {
     {
-        MOUSEEVENTTOOL_CLASSNAME, 
+        MOUSEEVENTTOOL_CLASSNAME,
         MOUSEEVENTTOOL_CID,
         MOUSEEVENTTOOL_CONTRACTID,
         MouseEventToolConstructor,
@@ -42,5 +42,5 @@ const mozilla::Module MouseEventToolModule= {
 
 NSMODULE_DEFN(MouseEventTool-module) = &MouseEventToolModule;
 
-//NS_IMPL_NSGETMODULE("MouseEventToolModule", components) 
+//NS_IMPL_NSGETMODULE("MouseEventToolModule", components)
 

@@ -3,12 +3,12 @@
 <?xml-stylesheet href="chrome://polo/skin/overlays/dialogOverlay.css" type="text/css"?>
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
-   - You can obtain one at http://mozilla.org/MPL/2.0/.  
+   - You can obtain one at http://mozilla.org/MPL/2.0/.
    -
-   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
-   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+   - Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+   - Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
    - trademarks of Hillcrest Laboratories, Inc.
-   --> 
+   -->
 <!DOCTYPE overlay PUBLIC "-//MOZILLA//DTD XUL V1.0//EN" "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <overlay id="dialog-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <hbox id="title-bar">
@@ -18,7 +18,7 @@
     </hbox>
     <script type="text/javascript">
         <![CDATA[
-      
+
 function WindowDraggingElement(elem, window) {
   this._elem = elem;
   this._window = window;
@@ -68,7 +68,7 @@ WindowDraggingElement.prototype = {
     }
   }
 }
-        
+
 window.addEventListener("load", function(event) {
     var titleBox = document.getElementById("title-bar");
     titleBox.firstChild.textContent = document.title;
@@ -84,5 +84,5 @@ window.addEventListener("load", function(event) {
 
         ]]>
     </script>
-    
+
 </overlay>

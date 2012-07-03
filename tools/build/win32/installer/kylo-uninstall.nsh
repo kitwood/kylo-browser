@@ -1,9 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
@@ -28,7 +28,7 @@ Section -un.killApp
 SectionEnd
 
 Section -un.wmc
-    ${If} $IsWMCInstalled == 1 
+    ${If} $IsWMCInstalled == 1
     ${AndIf} ${FileExists} $INSTDIR\wmc\kylo_wmc.xml
       DetailPrint "Uninstalling WMC shortcut"
       ${If} ${UAC_IsAdmin}
@@ -36,7 +36,7 @@ Section -un.wmc
       ${Else}
         ExecWait '"$WINDIR\ehome\registermceapp.exe" /u "$INSTDIR\wmc\kylo_wmc.xml"'
       ${EndIf}
-      
+
       RMDir /r $INSTDIR\wmc
     ${EndIf}
 SectionEnd
@@ -60,17 +60,17 @@ Section -un.main
     Delete $INSTDIR\${ICO_NAME}
     Delete $INSTDIR\uninstall.exe
     RMDir $INSTDIR
-    
-    ; delete "Hillcrest Labs" from "Hillcrest Labs\Kylo" 
+
+    ; delete "Hillcrest Labs" from "Hillcrest Labs\Kylo"
     Push $INSTDIR
-    Call un.cleanDefaultLocation    
+    Call un.cleanDefaultLocation
 SectionEnd
 
-Section -un.shortcuts    
+Section -un.shortcuts
     Delete "$DESKTOP\${SHORTCUT_NAME}.lnk"
     Delete "$SMPROGRAMS\${START_MENU_GROUP}\${SHORTCUT_NAME}.lnk"
     Delete "$SMPROGRAMS\${START_MENU_GROUP}\Uninstall.lnk"
-    RMDir  "$SMPROGRAMS\${START_MENU_GROUP}"    
+    RMDir  "$SMPROGRAMS\${START_MENU_GROUP}"
 SectionEnd
 
 Section -un.reg
@@ -83,9 +83,9 @@ Section -un.deleteProfiles
         ; Delete the current user's Profile(s) explicitly
         DetailPrint "Deleting Current User Profile"
         SetShellVarContext current
-        Call un.deleteProfile    
+        Call un.deleteProfile
         SetShellVarContext all
-        
+
         ; Best effort attempt at deleting the remaing user's profiles
         ; This might fail if they have profiles in non standard dirs
         DetailPrint "Deleting remaing user's profiles"
@@ -96,8 +96,8 @@ Section -un.deleteProfiles
         ; Delete only the current user's Profile(s)
         Call un.deleteProfile
         Push $LOCALAPPDATA
-        Call un.cleanVirtualStore        
-    ${EndIf}   
+        Call un.cleanVirtualStore
+    ${EndIf}
 SectionEnd
 
 Function un.deleteProfile
@@ -109,21 +109,21 @@ FunctionEnd
 
 Function un.deleteProfileFromReg
     Pop $0
-    ; attempt to expand shell vars defined in the windows registry 
+    ; attempt to expand shell vars defined in the windows registry
     !insertmacro un.GetUserShellFolderFromRegistry "APPDATA" $0 $1
     !insertmacro un.GetUserShellFolderFromRegistry "Local AppData" $0 $2
-    
-    ; delete polo profile if exists for this user     
+
+    ; delete polo profile if exists for this user
     ${If} ${FileExists}  "$1\${INSTALL_PARENT_DIR}\${INTERNAL_NAME}"
         RMDir /r "$1\${PROFILE_PARENT_DIR}\${INTERNAL_NAME}"
         RMDir "$1\${PROFILE_PARENT_DIR}"
     ${EndIf}
-    
-    ${If} ${FileExists}  "$2\${INSTALL_PARENT_DIR}\${INTERNAL_NAME}" 
+
+    ${If} ${FileExists}  "$2\${INSTALL_PARENT_DIR}\${INTERNAL_NAME}"
         RMDir /r "$2\${PROFILE_PARENT_DIR}\${INTERNAL_NAME}"
-        RMDir "$2\${PROFILE_PARENT_DIR}"        
+        RMDir "$2\${PROFILE_PARENT_DIR}"
     ${EndIf}
-    
+
     ; push localappdata
     Push $2
     Call un.cleanVirtualStore
@@ -131,25 +131,25 @@ FunctionEnd
 
 Function un.cleanVirtualStore
     Pop $0 ; User specific LOCALAPPDATA
-    
+
     ; N/A for winxp
     ${IfNot} ${AtLeastWinVista}
         Return
     ${EndIf}
-    
+
     ; Check if $INSTDIR begins with $PROGRAMFILES
     StrLen $1 $PROGRAMFILES
     StrCpy $1 $INSTDIR $1 0
     ${If} $1 != $PROGRAMFILES
         Return
     ${EndIf}
-    
-    ; Strip the the drive letter from the full path 
+
+    ; Strip the the drive letter from the full path
     StrCpy $1 $INSTDIR "" 2
-    
+
     ; Construct the VirtualStore path
     StrCpy $1 "$0\VirtualStore$1"
-    
+
     ${If} ${FileExists} $1
         DetailPrint "Deleting VirtualStore: $1"
         RMDir /r $1
@@ -161,15 +161,15 @@ FunctionEnd
 
 Function un.cleanDefaultLocation
     Pop $R0
-       
+
     StrLen $0 "\${DEFAULT_INSTALL_DIR}"
     StrCpy $1 $R0 $0 -$0
-     
+
     ${If} "\${DEFAULT_INSTALL_DIR}" == $1
-        StrLen $0 "${INSTALL_DIR_NAME}" 
+        StrLen $0 "${INSTALL_DIR_NAME}"
         StrCpy $1 $R0 -$0
         ; this shoudld be something like c:\program files\Hillcrest Labs\
-        ; try and remove it, this fails if the dir has other files in it 
+        ; try and remove it, this fails if the dir has other files in it
         RMDir $1
     ${EndIf}
 FunctionEnd

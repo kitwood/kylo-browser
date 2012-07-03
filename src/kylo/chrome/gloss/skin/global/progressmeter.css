@@ -46,27 +46,27 @@
 progressmeter {
     -moz-appearance: none;
     background: none;
-	-moz-border-image: url("images/progress/progress_trench.png") 0 5 0 5 / 0px 5px 0px 5px;
+    -moz-border-image: url("images/progress/progress_trench.png") 0 5 0 5 / 0px 5px 0px 5px;
     padding: 0px;
-    margin: 3px 0 0 0;	
+    margin: 3px 0 0 0;
     min-width: 130px;
     min-height: 30px;
 }
 
 .progress-bar {
     -moz-appearance: none;
-	padding: 0;
-	-moz-border-image: url("images/progress/progress_fill.png") 9 6 / 9px 6px;
+    padding: 0;
+    -moz-border-image: url("images/progress/progress_fill.png") 9 6 / 9px 6px;
     min-height: 30px;
     min-width: 0px;
 }
 
 progressmeter[mode=undetermined] .progress-bar {
-	min-width: 30px;
+    min-width: 30px;
 }
 
 .progress-remainder {
-	 
+
 }
 
 

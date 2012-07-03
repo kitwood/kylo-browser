@@ -62,13 +62,13 @@ a:visited,
 a:hover {
     color: #efefef;
     text-decoration: none;
-    
+
 }
 
 #UI_goUp {
   width: 90%;
   margin: 0 auto;
-  clear: both;  
+  clear: both;
   padding: 0;
 }
 
@@ -83,7 +83,7 @@ a:hover {
 }
 
 .up:hover {
-  -moz-border-image: url("chrome://polo/skin/common/images/listitem_bg_over.png") 10 10 14 10 / 10px 10px 14px 10px;  
+  -moz-border-image: url("chrome://polo/skin/common/images/listitem_bg_over.png") 10 10 14 10 / 10px 10px 14px 10px;
 }
 
 .up:before {
@@ -133,12 +133,12 @@ td {
     font-size: 22px;
     color: #b4b4b4;
     text-shadow: 0 0 7px #000000;
-    height: 50px; 
+    height: 50px;
 }
 td:first-child {
     float: left;
     color: #EFEFEF;
-    font-size: 24px;    
+    font-size: 24px;
     height: 50px;
     width: 100%;
 }

@@ -1,23 +1,23 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. 
- * 
- * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved. 
- * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2005-2012 Hillcrest Laboratories, Inc. All rights reserved.
+ * Hillcrest Labs, the Loop, Kylo, the Kylo logo and the Kylo cursor are
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
 /*
  * Main Control Bar
  */
-#topBar {	
+#topBar {
     height: 50px;
-	background: url("images/topbar_bg.png") repeat top left;
-    -moz-border-image: url("images/topbar_shadow.png") 13 0 7 0 / 13px 0 7px 0;	
+    background: url("images/topbar_bg.png") repeat top left;
+    -moz-border-image: url("images/topbar_shadow.png") 13 0 7 0 / 13px 0 7px 0;
 }
 
-#topBar:not([open]):hover {   
-    background: url("images/topbar_bg_over.png") repeat top left;   
+#topBar:not([open]):hover {
+    background: url("images/topbar_bg_over.png") repeat top left;
 }
 
 #bottomBar {
@@ -31,9 +31,9 @@
  * Control bar in minimized state
  */
 #controlsTrigger {
-	height:20px;
+    height:20px;
     background: url("images/topbar_bg.png") repeat top left;
-	-moz-border-image: url("images/topbar_shadow.png") 13 0 7 0 / 13px 0 0 0;
+    -moz-border-image: url("images/topbar_shadow.png") 13 0 7 0 / 13px 0 0 0;
 }
 
 #controlsOverlay[loading=true] > #controlsTrigger {
@@ -45,14 +45,14 @@
  */
 #titleBox {
     padding: 0 25px;
-	margin: -13px 0 -7px 0;
+    margin: -13px 0 -7px 0;
 }
 
 #titleBox #icon {
-	background: url("images/favicon_bg.png") no-repeat top;
-	width: 36px;
-	height: 50px;
-	padding: 17px 10px;
+    background: url("images/favicon_bg.png") no-repeat top;
+    width: 36px;
+    height: 50px;
+    padding: 17px 10px;
 }
 
 #controlsOverlay[loading=true] #topBar {
@@ -64,11 +64,11 @@
 }
 
 .titleLabel {
-	padding: 8px 0 0 0;
-	font-size: 26px;
-	color: #dedede;
-	text-shadow: 2px 2px 3px #000000, 0 0 7px #000000;
-	cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
+    padding: 8px 0 0 0;
+    font-size: 26px;
+    color: #dedede;
+    text-shadow: 2px 2px 3px #000000, 0 0 7px #000000;
+    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #titleBox:hover .titleLabel {
@@ -76,7 +76,7 @@
 }
 
 
-#tabSwitcher {  
+#tabSwitcher {
     margin: -13px 0 -7px 0;
     padding: 0;
 }
@@ -86,7 +86,7 @@
     background: none;
     max-height: 299px;
     padding: 0;
-	margin: 0;
+    margin: 0;
 }
 
 richlistitem[type="tabswitch"] {
@@ -106,9 +106,9 @@ richlistitem[type="tabswitch"] > * {
 
 richlistitem[type="tabswitch"] > image.item-icon {
     background: url("images/favicon_bg.png") no-repeat bottom;
-	width: 36px;
+    width: 36px;
     max-width: 36px;
-	height: 50px;
+    height: 50px;
     max-height: 50px;
     padding: 17px 10px;
 }
@@ -118,14 +118,14 @@ richlistitem[type="tabswitch"] > vbox > description.item-title {
     color: #efefef;
     text-shadow: 0 0 7px #000000;
     margin: 0 5px;
-	cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
+    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 richlistitem[type="tabswitch"] > vbox > description.item-uri {
     font-size: 22px;
     color: #cccccc;
     margin: 0 5px;
-	cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
+    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 richlistitem[type="tabswitch"]:first-child {
@@ -146,9 +146,9 @@ richlistitem[type="tabswitch"]:not([selected=true]):hover > vbox > description.i
 
 richlistitem[type="tabswitch"] > button.closeBtn {
     width: 50px;
-	min-width: 50px;
-	background: url("../common/images/close.png") no-repeat;
-	-moz-border-image: none;
+    min-width: 50px;
+    background: url("../common/images/close.png") no-repeat;
+    -moz-border-image: none;
 }
 
 richlistitem[type="tabswitch"] > button.closeBtn > label {
@@ -160,7 +160,7 @@ richlistitem[type="tabswitch"] > button.closeBtn:not([disabled=true]):hover {
 }
 
 richlistitem[type="tabswitch"] > button[disabled=true] {
-	opacity: 0;
+    opacity: 0;
 }
 
 richlistitem[type="tabswitch"][selected=true] {
@@ -169,7 +169,7 @@ richlistitem[type="tabswitch"][selected=true] {
 
 richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
     color: #bbdd33;
-}	
+}
 
 /**
  * "Close" bar on top of tab list
@@ -180,7 +180,7 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
     padding: 0 27px;
     margin: 0;
     height: 54px;
-	background: -moz-linear-gradient(#757575,#959595 5%,#393939 50%,#2f2f2f 51%,#222222 90%,#292929);    
+    background: -moz-linear-gradient(#757575,#959595 5%,#393939 50%,#2f2f2f 51%,#222222 90%,#292929);
 }
 
 /**
@@ -212,40 +212,40 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
     -moz-box-align: center;
     font-size: 24px;
     color: #CCCCCC;
-	text-shadow: 2px 2px 3px #000000, 0 0 7px #000000;
+    text-shadow: 2px 2px 3px #000000, 0 0 7px #000000;
     height: 76px;
-	margin: 0 5px;
+    margin: 0 5px;
     padding-left: 5px;
     padding-top: 13px;
     cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #urlEntryLabel:hover {
-	color: #b5dd16;
-	text-shadow: 2px 2px 3px #000000, 0 0 7px #b5dd16;
-    -moz-border-image: url("images/controlbar_field_over.png") 12 44 12 20 / 12px 44px 12px 20px; 
+    color: #b5dd16;
+    text-shadow: 2px 2px 3px #000000, 0 0 7px #b5dd16;
+    -moz-border-image: url("images/controlbar_field_over.png") 12 44 12 20 / 12px 44px 12px 20px;
 }
 
 /**
  * Buttons
  */
 .controls-button {
-	width: 76px;
+    width: 76px;
     height: 76px;
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
 }
 
 .controls-button[disabled=true] {
-	/*opacity: 0.4;*/
+    /*opacity: 0.4;*/
 }
 
 /**
  * Top bar buttons
  */
 #showTabsButton {
-	width: 46px;
-	height: 40px;
+    width: 46px;
+    height: 40px;
     background-image: url("images/controlbar_tabs.png");
 }
 
@@ -301,7 +301,7 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
 }
 
 #backButton:not([disabled=true]):hover {
-	background-image: url("images/controlbar_back_over.png");
+    background-image: url("images/controlbar_back_over.png");
 }
 
 #backButton[disabled=true] {
@@ -325,7 +325,7 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
 }
 
 #reloadButton:not([disabled=true]):hover {
-	background-image: url("images/controlbar_reload_over.png");
+    background-image: url("images/controlbar_reload_over.png");
 }
 
 #stopButton {
@@ -374,44 +374,44 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
 
 #tools-menu {
     -moz-box-align: center;
-    -moz-box-pack: center;	
+    -moz-box-pack: center;
 }
 
 #menu-chrome {
-	-moz-border-image: url("../images/menu/menu_bg.png") 40 40 40 40 / 40px 40px 40px 40px;	
+    -moz-border-image: url("../images/menu/menu_bg.png") 40 40 40 40 / 40px 40px 40px 40px;
 }
 
 #menu-buttonGroup {
-	display: block;
+    display: block;
     min-width: 320px;
     min-height: 200px;
     max-width: 700px;
     max-height: 470px;
-	margin: -10px -30px;
-	padding: 10px 30px;
-	text-align: center;  	
+    margin: -10px -30px;
+    padding: 10px 30px;
+    text-align: center;
 }
 
 .menu-button {
-	-moz-appearance: none;
-	width: 300px;
-	height: 70px;
-	margin: 5px;
-	-moz-border-image: url("../images/menu/menu_button.png") 15 15 15 15 / 15px 15px 15px 15px;
+    -moz-appearance: none;
+    width: 300px;
+    height: 70px;
+    margin: 5px;
+    -moz-border-image: url("../images/menu/menu_button.png") 15 15 15 15 / 15px 15px 15px 15px;
 }
 
 .menu-button > .button-box {
-	margin: -6px 0;
+    margin: -6px 0;
 }
 
 .menu-button > .button-box > .button-text {
     font-size: 30px;
     font-weight: bold;
-	color: #EFEFEF;
+    color: #EFEFEF;
     text-shadow: 0 0 7px #000000;
 }
 
-.menu-button:hover {    
+.menu-button:hover {
     -moz-border-image: url("../images/menu/menu_button_over.png") 15 15 15 15 / 15px 15px 15px 15px;
 }
 
@@ -445,16 +445,16 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
 
 #homepage-chooser-menu {
     -moz-box-align: center;
-    -moz-box-pack: center;  
+    -moz-box-pack: center;
 }
 
 #homepage-chooser-buttonGroup {
     display: block;
     min-width: 320px;
     min-height: 200px;
-    max-width: 700px; 
-    text-align: center;     
+    max-width: 700px;
+    text-align: center;
     -moz-border-image: url("../images/menu/menu_bg.png") 40 40 40 40 / 40px 40px 40px 40px;
-	padding: 20px;
+    padding: 20px;
 }
 

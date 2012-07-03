@@ -55,7 +55,7 @@ checkbox {
   border: none;
   font-size: 24px;
   font-family: Helvetica, Arial, sans-serif !important;
-  color: #efefef; 
+  color: #efefef;
   text-shadow: #000000 0px 0px 7px;
 }
 
@@ -93,7 +93,7 @@ checkbox[disabled="true"] {
   height: 35px;
   background: url("images/checkbox/checkbox.png");
 }
-  
+
 checkbox:hover:active > .checkbox-check {
   background: url("images/checkbox/checkbox.png");
 }

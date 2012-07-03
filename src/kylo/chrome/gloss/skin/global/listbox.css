@@ -87,7 +87,7 @@ listbox:focus > listitem[selected="true"] {
 
 /* ::::: listheader ::::: */
 
-listheader { 
+listheader {
   -moz-appearance: treeheadercell;
   -moz-box-align: center;
   border: 2px solid;
