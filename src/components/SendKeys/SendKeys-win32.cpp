@@ -5,7 +5,7 @@
  * Copyright 2005-2012 Hillcrest Laboratories, Inc.  All rights reserved.  Hillcrest Laboratories, and the Hillcrest logo are registered trademarks of Hillcrest Laboratories, Inc.
  * */
 
-#include "SendKeys-impl.h"
+#include "SendKeys.h"
 #include "nsEmbedString.h"
 #include "nsIClassInfoImpl.h"
 #include "nsMemory.h"

@@ -7,7 +7,7 @@
 
 #include "mozilla/ModuleUtils.h"
 #include "nsIClassInfoImpl.h"
-#include "SendKeys-impl.h"
+#include "SendKeys.h"
 
 NS_GENERIC_FACTORY_CONSTRUCTOR(SendKeys)
 
