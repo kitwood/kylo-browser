@@ -99,7 +99,7 @@ def build():
                     for component in os.listdir(ext_components_dir):
                         if os.path.isdir(os.path.join(ext_components_dir, component)):
                             if not Settings.prefs.clean:
-                                    platform_build.cleanComponent(component, componentDir=os.path.join(ext_components_dir, component))
+                                platform_build.cleanComponent(component, componentDir=os.path.join(ext_components_dir, component))
                             for part in platform_build.buildComponent(component, componentDir=os.path.join(ext_components_dir, component)):
                                 shutil.copy2(part, ext_components_dir)
 
