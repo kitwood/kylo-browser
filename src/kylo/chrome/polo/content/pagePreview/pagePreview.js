@@ -30,30 +30,30 @@ function PagePreview() {
     this.active_ = {};
 
 //    window.setTimeout(this.clearOldFiles.bind(this), PagePreview.CLEAN_INIT_INTERVAL);
-    gObserverService.addObserver(this, "Browser:DocumentLoadCompleted", false);
+    gObserverService.addObserver(this, "Browser:DocumentLoadCompleted", false);    
 }
 
-PagePreview.prototype.observe = function(browserObject, topic, json) {
-    var ACTIVE_PAGE_CAPTURE_DELAY = 5000;
-
-    if (topic != "Browser:DocumentLoadCompleted") {
-        throw "Unexpected topic: " + topic;
-    }
-
-    var browser = browserObject.wrappedJSObject.getBrowserElement();
-    var uri = browser.currentURI;
-    var result = PlacesUtils.bookmarks.getBookmarkIdsForURI(uri, {});
-    if (!result || !result.length) {
+PagePreview.prototype.observe = function(subject, topic, data) {
+    if (topic == "Browser:DocumentLoadCompleted") {
+        var ACTIVE_PAGE_CAPTURE_DELAY = 5000;
+    
+        var browser = subject.wrappedJSObject.getBrowserElement();
+        var uri = browser.currentURI;
+        var result = PlacesUtils.bookmarks.getBookmarkIdsForURI(uri, {});
+        if (!result || !result.length) {
+            return;
+        }
+    
+        window.setTimeout(function () {
+            // silently update the preview
+            new PreviewGrabber(browser, uri, PagePreview.SIZES,
+                    function () {},
+                    function () {}
+            ).generate();
+        }, ACTIVE_PAGE_CAPTURE_DELAY);
+        
         return;
     }
-
-    window.setTimeout(function () {
-        // silently update the preview
-        new PreviewGrabber(browser, uri, PagePreview.SIZES,
-                function () {},
-                function () {}
-        ).generate();
-    }, ACTIVE_PAGE_CAPTURE_DELAY);
 };
 
 /**
@@ -78,8 +78,16 @@ PagePreview.prototype.getPreview = function (url, width, height, cb) {
     var key = "pagePreview/" + width + "x" + height;
     var hasAnno = PlacesUtils.annotations.pageHasAnnotation(url, key);
 
+    var getAnno_ = function (u, k) {
+        if (PlacesUtils.annotations.getPageAnnotationType(u, k) == Ci.nsIAnnotationService.TYPE_BINARY) {
+            return PlacesUtils.annotations.getAnnotationURI(u, k);
+        } else {
+            return PlacesUtils.annotations.getPageAnnotation(u, k);
+        }        
+    }
+
     if (hasAnno) {
-        cb(PlacesUtils.annotations.getAnnotationURI(url, key));
+        cb(getAnno_(url, key))
         return;
     }
 
@@ -87,7 +95,7 @@ PagePreview.prototype.getPreview = function (url, width, height, cb) {
         var prev = this.active_[url.spec];
         this.active_[url.spec] = function (success) {
             prev(success);
-            cb(success ? PlacesUtils.annotations.getAnnotationURI(url, key) : null);
+            cb(success ? getAnno_(url, key) : null);
         }
         return;
     }
@@ -95,7 +103,7 @@ PagePreview.prototype.getPreview = function (url, width, height, cb) {
     var self = this;
     this.active_[url.spec] = function (success) {
         delete self.active_[url.spec];
-        cb(success ? PlacesUtils.annotations.getAnnotationURI(url, key) : null);
+        cb(success ? getAnno_(url, key) : null);
     }
 
 
@@ -109,6 +117,11 @@ PagePreview.prototype.getPreview = function (url, width, height, cb) {
 }
 
 PagePreview.prototype.generatePreviews = function (url) {
+    if (PagePreview.NUM_GENERATORS < 1) {
+        this.active_[url.spec](false);
+        return;
+    }
+    
     var gen = this.freeGenerators_.pop();
     if (gen) {
         this.busyGenerators_.push(gen);
@@ -144,6 +157,7 @@ PagePreview.prototype.dequeue = function (gen) {
 }
 
 PagePreview.prototype.generatePreviewsFromActiveBrowser = function (browser, url) {
+    debug("Generating preview from active browser: " + url.spec);
     new PreviewGrabber(browser, url, PagePreview.SIZES,
             function () {
                 this.active_[url.spec](true);
@@ -161,7 +175,9 @@ PagePreview.prototype.isPreviewContentWindow = function (win) {
 
     for (var i = 0; i < this.backgroundBrowsers_.length; i++) {
         var el = this.backgroundBrowsers_[i];
-        if (el.contentWindow == win) {
+        if (el.contentWindow == win || 
+            el.contentWindow == win.parent || 
+            el.contentWindow == win.top) {
             return true;
         }
     }
@@ -210,6 +226,20 @@ PagePreview.capture = function (pageWin, canvas,  w, h) {
     return canvas;
 }
 
+PagePreview.isMIMETypeSupported = function (sType) {
+    // mime type expected in format like:
+    //    {directory}/{type}[; charset={charset}]
+    if (!sType) {
+        return true; // Go ahead and support null mimetypes
+    }
+    
+    var dirRE = /^\w+/;
+    var dir = dirRE.exec(sType);
+    
+    // Only support text/* and image/* for now...
+    return (dir == "text" || dir == "image");
+}
+
 PagePreview.init = function () {
     if (PagePreview.init_) {
         return;
@@ -217,27 +247,6 @@ PagePreview.init = function () {
     PagePreview.init_ = true;
     var p = gPrefService.getBranch("pagePreview.");
     PagePreview.NUM_GENERATORS = p.getIntPref("numGenerators");
-
-    // TODO deprecated
-    PagePreview.DIR_NAME = p.getCharPref("dir");
-
-    /**
-     * How long to keep a screenshot of a  site.
-     * TODO deprecated
-     */
-    PagePreview.CACHE_DUR = p.getIntPref("cache.dur");
-
-    /**
-     * How long to delay flushing old cached images on initial startup.
-     * TODO deprecated
-     */
-    PagePreview.CACHE_FLUSH_STARTUP_DELAY = p.getIntPref("cache.flush.init");
-
-    /**
-     * Interval to flush cached images while running.
-     * TODO deprecated
-     */
-    PagePreview.CACHE_FLUSH_REPEAT_DUR = p.getIntPref("cache.flush.repeat");
 
     /**
      * Use some computed CSS magic to get preview sizes
@@ -290,7 +299,28 @@ function PreviewCreator() {
 
 //  this.browser_.addProgressListener(this, Ci.nsIWebProgress.NOTIFY_STATE_DOCUMENT);
 
-    this.browser_.addEventListener("load", this, true);
+    this.channel_ = null;
+    gObserverService.addObserver(this, "http-on-examine-response", false);
+    this.browser_.addEventListener("DOMContentLoaded", this, true);
+}
+
+PreviewCreator.prototype.observe = function (subject, topic, data) {
+    if (topic == "http-on-examine-response") {
+        subject.QueryInterface(Components.interfaces.nsIHttpChannel);
+        if (this.active_ && subject.URI.spec == this.url_.spec) {
+            this.channel_ = subject;
+            var contentType = null;
+            try {
+                contentType = subject.getResponseHeader("Content-Type");
+            } catch (ex) {
+                // Throws an error if header isn't found
+            }
+            if (!PagePreview.isMIMETypeSupported(contentType)) {
+                subject.cancel(Components.results.NS_ERROR_FAILURE);
+                this.skip("Unsupported MIME type for previews: " + contentType);
+            }
+        }        
+    }    
 }
 
 PreviewCreator.prototype.getBrowserElement = function () {
@@ -299,7 +329,7 @@ PreviewCreator.prototype.getBrowserElement = function () {
 
 PreviewCreator.prototype.handleEvent = function (evt) {
     if (this.active_ &&
-        evt.type == "load" &&
+        evt.type == "DOMContentLoaded" &&
         evt.target == this.browser_.contentDocument) {
 
         this.documentLoaded();
@@ -315,6 +345,9 @@ PreviewCreator.prototype.documentLoaded = function () {
         if (!this.url_.equals(this.browser_.currentURI)) {
             debug("[PreviewCreator] Navigated away while loading page, loaded [", this.url_ && this.url_.spec, "] now on [", this.browser_.currentURI && this.browser_.currentURI.spec, "]");
         }
+        
+        this.browser_.contentDocument.stop();
+        this.channel_.cancel(Components.results.NS_ERROR_FAILURE);
 
         var size = this.sizes_[i++];
         this.capture(size[0], size[1]);
@@ -336,6 +369,7 @@ PreviewCreator.prototype.documentLoaded = function () {
                 this.success_ = null;
                 this.fail_ = null;
                 this.active_ = false;
+                this.channel_ = null;
 
                 f();
             }.bind(this), 0);
@@ -345,11 +379,52 @@ PreviewCreator.prototype.documentLoaded = function () {
     this.taskTimerId_ = window.setTimeout(f, 0);
 }
 
+// Call this instead of "abort" to return a success condition with a blank preview image...
+// prevents future calls to unsupported URLs/MIME types
+PreviewCreator.prototype.skip = function (msg) {
+    debug("[PreviewCreator] Skipping preview (" + msg + ") for ", this.url_.spec);
+    
+    var i = 0;
+    var bytes = []; // Empty jpeg
+    var f = (function () {
+        var size = this.sizes_[i++];
+        var key = "pagePreview/" + size[0] + "x" + size[1];
+
+        PlacesUtils.annotations.removePageAnnotation(this.url_, key);
+        PlacesUtils.annotations.setPageAnnotation(this.url_, key, "", 0, Ci.nsIAnnotationService.EXPIRE_WITH_HISTORY);
+
+        if (i < this.sizes_.length) {
+            // yield before doing next one
+            window.setTimeout(f, 0);
+        } else {
+            window.clearTimeout(this.timerId_);
+            // setPageAnnotation seems to require some time before being done.
+            this.taskTimerId_ = window.setTimeout(function () {
+                var f = this.success_;
+
+                this.timerId_ = null;
+                this.taskTimerId_ = null;
+                this.url_ = null;
+                this.sizes_  = null;
+                this.success_ = null;
+                this.fail_ = null;
+                this.active_ = false;
+                this.channel_ = null;
+
+                f();
+            }.bind(this), 0);
+        }
+    }.bind(this));
+    f();
+}
+
 PreviewCreator.prototype.abort = function (msg) {
 
-    //debug(" *** Failed grabbing preview (" + msg + ") for ", this.url_.spec);
+    debug(" *** Failed grabbing preview (" + msg + ") for ", this.url_.spec);
 
     window.clearTimeout(this.taskTimerId_);
+    window.clearTimeout(this.timerId_);
+    
     var f = this.fail_;
 
     this.timerId_ = null;
@@ -359,6 +434,7 @@ PreviewCreator.prototype.abort = function (msg) {
     this.success_ = null;
     this.fail_ = null;
     this.active_ = false;
+    this.channel_ = null;
 
     f();
 }
@@ -380,7 +456,7 @@ PreviewCreator.prototype.annotate = function (cb) {
     var key = "pagePreview/" + canvas.width + "x" + canvas.height;
 
     PlacesUtils.annotations.removePageAnnotation(this.url_, key);
-    PlacesUtils.annotations.setPageAnnotationBinary(this.url_, key, bytes, bytes.length, "image/jpeg", 0, Ci.nsIAnnotationService.EXPIRE_WEEKS);
+    PlacesUtils.annotations.setPageAnnotationBinary(this.url_, key, bytes, bytes.length, "image/jpeg", 0, Ci.nsIAnnotationService.EXPIRE_WITH_HISTORY);
 }
 
 PreviewCreator.prototype.generate = function (url, sizes, success, fail) {
@@ -401,7 +477,37 @@ PreviewCreator.prototype.generate = function (url, sizes, success, fail) {
     this.success_ = success;
     this.fail_ = fail;
 
+    // First check if we support preview images of the provided protocol 
+    // (ie. avoid taking preview image of mms, mailto, etc.)
+    if (!url.schemeIs("http") && 
+        !url.schemeIs("https") &&
+        !url.schemeIs("about") &&
+        !url.schemeIs("file")) {
+        this.skip("Previews not available for " + url.scheme + " protocol");
+        return;
+    }
+    
+    // If we're actually talking to a server, it's best to determine content type from
+    // the response headers, but with local files, we'll have to take a guess from
+    // extension. We can do this pre-load...
+    if (url.schemeIs("file")) {
+        if (!this.mimeSvc_) {
+            this.mimeSvc_ = Cc["@mozilla.org/mime;1"].getService(Ci.nsIMIMEService);
+        }
+        var mimeType = null;
+        try {
+            this.mimeSvc_.getTypeFromURI(url);
+        } catch (ex) {
+            // Go ahead and default to null mime type if we hit a snag
+        }
+        if (!PagePreview.isMIMETypeSupported(mimeType)) {
+            this.skip("Unsupported MIME type for previews: " + mimeType);
+            return;
+        }
+    }
+
     try {
+        this.channel_ = null;
         this.browser_.loadURI(url.spec);
     } catch (ex) {
         this.abort("Failed loading URI\n" + ex);
@@ -417,9 +523,11 @@ PreviewCreator.prototype.reset = function () {
     this.fail_ = null;
 
     this.active_ = false;
+    this.channel_ = null;
 }
 
 PreviewCreator.prototype.discard = function () {
+    this.channel_ = null;
     this.browser_.loadURI("about:blank")
 }
 

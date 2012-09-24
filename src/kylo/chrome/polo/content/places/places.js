@@ -991,4 +991,5 @@ function places_onload(){
 }
 
 function places_onunload() {
+    // TODO: Stop active thumbnail generators
 }
