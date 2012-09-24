@@ -36,6 +36,7 @@ function LayoutManager() {
         right: document.getElementById("overscan-right"),
     }
 
+    this.state_ = "STARTUP";
     this.selectedTheme_ = null;
     this.selectedThemeResolution_ = null;
     this.themes720_ = {};
@@ -195,8 +196,17 @@ LayoutManager.prototype.checkFullScreen = function () {
  * @name checkOnStartup
  */
 LayoutManager.prototype.checkOnStartup = function () {
+    this.state_ = "RUNNING";
+    
     this.checkFullScreen();
+    
+    if (this.resolutionOverride_) {
+        this.setResolution.apply(this, this.resolutionOverride_);
+        delete this.resolutionOverride_;
+    }
+    
     this.resize();
+    
     //TODO: Horrible hack for Mac not being able to minimize when fullscreen
     if (platform_ == "osx" || platform_ == "x11") {
         document.getElementById("polo-main").addEventListener("click", this.checkFullScreen.bind(this), false);
@@ -224,7 +234,7 @@ LayoutManager.prototype.checkOnStartup = function () {
            }
        }
        self.checkResolution();
-    });
+    });    
 }
 
 /**
@@ -564,9 +574,23 @@ LayoutManager.prototype.getContentBounds = function () {
 }
 
 /**
+ * Overrides the screen size. Used by command line "res" flag and the resolution
+ * debug dialog. 
+ * @name setResolution
+ */
+LayoutManager.prototype.setResolution = function (w, h) {
+    if (this.state_ == "STARTUP") {
+        this.resolutionOverride_ = [w, h];
+        return;
+    }
+    window.innerWidth = w;
+    window.innerHeight = h;
+}
+
+/**
  * Returns the width of the applications content viewing area.
  * @name getInnerWidth
- * @reutrns {Number} clientWidth of the content area.
+ * @returns {Number} clientWidth of the content area.
  */
 LayoutManager.prototype.getInnerWidth = function () {
     return this.contentBox_.clientWidth;

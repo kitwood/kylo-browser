@@ -67,8 +67,7 @@ var gDebugTools = {
 
                 if (params.newRes && params.newRes.match(/^\d+x\d+$/)) {
                     var wh = params.newRes.split("x");
-                    window.innerWidth = parseInt(wh[0]);
-                    window.innerHeight = parseInt(wh[1]);
+                    gLayoutManager.setResolution(parseInt(wh[0]), parseInt(wh[1]));
                 }
                 break;
 

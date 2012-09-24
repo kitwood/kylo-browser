@@ -142,6 +142,22 @@ PoloCommandLine.prototype = {
         } catch (ex) {
             debug(ex);
         }
+        
+        try {
+            // support -size {width}x{height} to force a resolution
+            var size = cmdLine.handleFlagWithParam("size", true);
+            debug(firstLaunch + ", " + size);
+            if (size) {
+                if (firstLaunch) {
+                    opts.push("size="+size);
+                } else {
+                    var wh = res.split("x");
+                    win.gLayoutManager.resize(parseInt(wh[0]), parseInt(wh[1]));
+                }
+            }
+        } catch (ex) {
+            debug(ex);
+        }
 
         /**
          * Open the remaining args as urls, to support:

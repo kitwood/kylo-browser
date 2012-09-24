@@ -1029,6 +1029,11 @@ BrowserManager.prototype.initBrowser = function () {
             case "debug":
                 gDebugTools.enable();
                 break;
+            
+            case "size":
+                var wh = val.split("x");
+                gLayoutManager.setResolution(wh[0],wh[1]);
+                break;
 
             default:
                 debug("unexpected command line option: " + opt);
