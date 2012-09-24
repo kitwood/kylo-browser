@@ -28,14 +28,6 @@ pref("layout.overscan.top", 36);
 pref("polo.bookmarks.upgrade", "-1");
 
 pref("pagePreview.numGenerators", 3);
-pref("pagePreview.dir", "previewCache");
-// two weeks
-pref("pagePreview.cache.dur", 1209600000);
-// 10 minutes
-pref("pagePreview.cache.flush.init", 600000);
-// 24h
-pref("pagePreview.cache.flush.repeat", 86400000);
-
 
 // pref("controls.promptOnExit", true); in distro-prefs.js
 pref("controls.autoHide", false);
