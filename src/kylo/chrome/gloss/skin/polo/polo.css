@@ -7,13 +7,6 @@
  * trademarks of Hillcrest Laboratories, Inc.
  * */
 
-window,
-html,
-page,
-panel {
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-}
-
 panel {
     border: none;
     background: none;
@@ -53,7 +46,6 @@ panel {
     min-height: 100px;
     padding: 0;
     margin: 0 50px 0 0;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #zoomIn {

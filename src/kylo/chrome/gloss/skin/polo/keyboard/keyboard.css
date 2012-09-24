@@ -21,10 +21,6 @@
     max-width: 50px;
 }
 
-description {
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-}
-
 .kb-key-small,
 .kb-key-large,
 .kb-key-large-special,

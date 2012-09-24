@@ -2,7 +2,6 @@
     -moz-appearance: none;
     background-color: #000000;
     background-image: url('chrome://polo/skin/places/images/places_bg.jpg');
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 body {

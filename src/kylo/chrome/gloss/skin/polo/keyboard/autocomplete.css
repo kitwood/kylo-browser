@@ -54,10 +54,6 @@ autocompleteresult {
     background: none;
 }
 
-autocompleteresult description {
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-}
-
 autocompleteresult[type=auto_search] {
     -moz-border-image: url("chrome://polo/skin/common/images/listitem_bg_selected.png") 10 10 14 10 / 10px 10px 14px 10px;
 }

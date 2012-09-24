@@ -1,6 +1,5 @@
 window {
     -moz-appearance: none;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 page {

@@ -17,10 +17,6 @@
 @namespace html url(http://www.w3.org/1999/xhtml);
 @namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 
-html|* {
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-}
-
 @-moz-document url("about:blank") {
     * {
         background: url('images/pointer_bg.png') repeat-x #000000;

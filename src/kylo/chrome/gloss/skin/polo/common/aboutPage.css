@@ -13,11 +13,6 @@ page {
     background-image: url('images/about_bg.jpg');
     font-size: 22px;
     color: #efefef;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-}
-
-description {
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 progressmeter[mode=undetermined][os=mac] {

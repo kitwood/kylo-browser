@@ -69,16 +69,6 @@ window,
 page,
 dialog,
 wizard,
-prefwindow,
-label,
-description {
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
-}
-
-window,
-page,
-dialog,
-wizard,
 prefwindow {
   /*
   -moz-appearance: window;

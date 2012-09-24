@@ -68,7 +68,6 @@
     font-size: 26px;
     color: #dedede;
     text-shadow: 2px 2px 3px #000000, 0 0 7px #000000;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #titleBox:hover .titleLabel {
@@ -118,14 +117,12 @@ richlistitem[type="tabswitch"] > vbox > description.item-title {
     color: #efefef;
     text-shadow: 0 0 7px #000000;
     margin: 0 5px;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 richlistitem[type="tabswitch"] > vbox > description.item-uri {
     font-size: 22px;
     color: #cccccc;
     margin: 0 5px;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 richlistitem[type="tabswitch"]:first-child {
@@ -217,7 +214,6 @@ richlistitem[type="tabswitch"][selected=true] > vbox > description.item-uri {
     margin: 0 5px;
     padding-left: 5px;
     padding-top: 13px;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #urlEntryLabel:hover {

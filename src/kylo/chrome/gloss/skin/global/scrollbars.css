@@ -3,7 +3,6 @@
 
 scrollbar {
     -moz-binding: url("chrome://polo/content/bindings/polo-scrollbar.xml#scrollbar");
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
     min-height: 22px;
 }
 
@@ -59,7 +58,6 @@ scrollcorner {
   width: 16px;
   height: 16px;
   background: none;
-  cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 /* ::::: scrollbar button ::::: */

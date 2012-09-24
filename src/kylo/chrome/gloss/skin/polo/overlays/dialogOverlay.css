@@ -51,7 +51,6 @@ dialog {
 
 #info\.body {
     max-height: 400px;
-    cursor: url("chrome://polo-contentaccessible/content/arrow-cursor.png"), auto !important;
 }
 
 #infoContainer[forcescroll=true] {
